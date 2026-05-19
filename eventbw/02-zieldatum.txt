@@ -1,491 +1,347 @@
 02 ZIELDATUM - lokaler Datumsfilter
-Zieldatum: 2026-05-17
-Treffer: 61
+Zieldatum: 2026-05-24
+Treffer: 43
 
-1. Elton John Tribute Dinner Konzert - The Musical Sound of Elton John
-   Kategorie: feste
-   Ort: unbekannt
-   Datum: 2026-05-17 | 18:00 - 20:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/elton-john-tribute-dinner-konzert-the-musical-sound-of-elton-john/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-2. Internationaler Museumstag
-   Kategorie: feste
-   Ort: unbekannt
-   Datum: 2026-05-17 | 14:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-4/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-3. Internationaler Museumstag 2026
-   Kategorie: feste
-   Ort: unbekannt
-   Datum: 2026-05-17
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-2026-3/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-4. Mir sollten sämtliche Wunder begegnen
-   Kategorie: feste
-   Ort: unbekannt
-   Datum: 2026-05-17 | 20:00 - 21:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/mir-sollten-samtliche-wunder-begegnen/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-5. PFINGSTFESTSPIELE 2026
-   Kategorie: feste
-   Ort: unbekannt
-   Datum: 2026-05-17 | 16:00 - 19:15 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstfestspiele-2026/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-6. Philosophie und Musik
-   Kategorie: feste
-   Ort: unbekannt
-   Datum: 2026-05-17 | 19:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/philosophie-und-musik/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-7. Richard Strauss: Der Rosenkavalier | Pfingstfestspiele
-   Kategorie: feste
-   Ort: unbekannt
-   Datum: 2026-05-17 | 16:00 - 19:15 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/richard-strauss-der-rosenkavalier-pfingstfestspiele/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-8. Oldtimer-Schlepper-Treffen
-   Kategorie: feste
-   Ort: Bad Schussenried-Kürnbach
-   Datum: 2026-05-17 | 10:00 - 16:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/oldtimer-schlepper-treffen-2/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-9. Großes Fest zur Erweiterung des Biosphärengebiets
-   Kategorie: feste
-   Ort: Bad Urach
-   Datum: 2026-05-17 | 11:15 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/groses-fest-zur-erweiterung-des-biospharengebiets/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/5/
-   Seite: 5
-
-10. Baiersbronner Bike- & Wanderhimmel-Fest
-   Kategorie: feste
-   Ort: Baiersbronn
-   Datum: 2026-05-17 | 09:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/baiersbronner-bike-wanderhimmel-fest/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-11. Rangerführung zum Buhlbachsee
-   Kategorie: feste
-   Ort: Baiersbronn
-   Datum: 2026-05-17 | 10:30 - 15:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/rangerfuhrung-zum-buhlbachsee/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-12. Wein, Wandern & Genuss | WeinWanderEvent
-   Kategorie: feste
-   Ort: Beilstein
-   Datum: 2026-05-17 | 11:00 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/wein-wandern-genuss-weinwanderevent/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-13. Internationaler Museumstag im Hans-Thoma-Kunstmuseum
-   Kategorie: feste
-   Ort: Bernau im Schwarzwald
-   Datum: 2026-05-17
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-im-hans-thoma-kunstmuseum/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-14. Internationaler Museumstag im Resenhof
-   Kategorie: feste
-   Ort: Bernau im Schwarzwald
-   Datum: 2026-05-17
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-im-resenhof/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-15. Gutenbergs Geopoints
-   Kategorie: feste
-   Ort: Biosphärengebiet Schwäbische Alb
-   Datum: 2026-05-17 | 10:00 - 13:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/gutenbergs-geopoints/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-16. Schwarzwaldhof-Ingenieurfahrt
-   Kategorie: feste
-   Ort: Blumberg
-   Datum: 2026-05-17 | 09:45 - 16:34 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/schwarzwaldhof-ingenieurfahrt/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-17. Internationaler Museumstag im Heimatmuseum
-   Kategorie: feste
-   Ort: Brackenheim
-   Datum: 2026-05-17 | 11:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-mit-kleiner-bewirtung-heimatmuseum-brackenheim-botenheim/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-18. Internationaler Museumstag 2026
-   Kategorie: feste
-   Ort: Calw
-   Datum: 2026-05-17 | 11:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-2026/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-19. Tag des Wanderns: Auf den Spuren der DonauWelle
-   Kategorie: feste
-   Ort: Donaubergland
-   Datum: 2026-05-17 | 13:00 - 16:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/tag-des-wanderns-auf-den-spuren-der-donauwelle/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-20. Kaffee und Kuchen-Fahrt im Überlinger See
+1. Pasta mit Seeblick
    Kategorie: feste
    Ort: Echt Bodensee
-   Datum: 2026-05-17 - 2026-09-13 | 12:15 - 16:10 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/kaffee-und-kuchen-fahrt-im-uberlinger-see/
+   Datum: 2026-05-19 - 2026-09-08 | 12:30 - 16:25 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pasta-mit-seeblick/
    Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
    Seite: 1
 
-21. Wein & Wiese | WeinWanderEvent
+2. Abendrundfahrt mit der MS Seestern
    Kategorie: feste
-   Ort: Flein
-   Datum: 2026-05-17 | 11:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/wein-wiese-weinwanderevent/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
+   Ort: Gaienhofen
+   Datum: 2026-05-19 - 2026-05-26 | 19:00 - 20:30 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/abendrundfahrt-mit-der-ms-seestern/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
+   Seite: 1
 
-22. Internationaler Museumstag im Murgtalmuseum Bermersbach
+3. Yoga im Kurhaus Freiamt – Irmgard Dufner
    Kategorie: feste
-   Ort: Forbach
-   Datum: 2026-05-17 | 13:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-im-murgtalmuseum-bermersbach/
+   Ort: Freiamt
+   Datum: 2026-05-20 - 2026-09-30 | 19:00 - 20:30 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/yoga-im-kurhaus-freiamt-irmgard-dufner/
    Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
    Seite: 4
 
-23. Traktorenfest der Kolpingsfamilie Rotzingen
+4. Ulmer Zelt
    Kategorie: feste
-   Ort: Görwihl
-   Datum: 2026-05-17 | 10:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/traktorenfest-der-kolpingsfamilie-rotzingen/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-24. Albtag - der Familientag
-   Kategorie: feste
-   Ort: Hohenstein
-   Datum: 2026-05-17 | 10:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/albtag-der-familientag/
+   Ort: Ulm
+   Datum: 2026-05-20 - 2026-07-04
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/ulmer-zelt/
    Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
    Seite: 2
 
-25. Internationaler Museumstag in Hüfingen
+5. Stuhlyoga im Kurhaus Freiamt – Irmgard Dufner
    Kategorie: feste
-   Ort: Hüfingen
-   Datum: 2026-05-17 | 11:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-in-hufingen/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
+   Ort: Freiamt
+   Datum: 2026-05-21 - 2026-09-24 | 16:00 - 17:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/stuhlyoga-im-kurhaus-freiamt-irmgard-dufner/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/6/
+   Seite: 6
 
-26. Besuch bei der DS Hohentwiel und der MS Österreich
+6. Kleinbrauermarkt
    Kategorie: feste
-   Ort: Immenstaad
-   Datum: 2026-05-17 | 10:40 - 18:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/feuerwerksfahrt-zum-seehasenfest/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-27. Tag des offenen Ateliers
-   Kategorie: feste
-   Ort: Kandern
-   Datum: 2026-05-17 | 10:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/tag-des-offenen-ateliers/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-28. A Midsummer Night’s Dream (Premiere)
-   Kategorie: feste
-   Ort: Karlsruhe
-   Datum: 2026-05-17 | 19:00 - 21:45 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/a-midsummer-nights-dream-vor-der-premiere/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-29. dragfruit (Nur noch wenige Male)
-   Kategorie: feste
-   Ort: Karlsruhe
-   Datum: 2026-05-17 | 18:00 - 19:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/dragfruit-2/
+   Ort: Ulm/Neu-Ulm
+   Datum: 2026-05-21 - 2026-05-24
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/kleinbrauermarkt/
    Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
    Seite: 4
 
-30. Internationaler Museumstag - Freier Eintritt
+7. PLAYMOBIL-Schwarzwald Marie auf Weltreise
+   Kategorie: feste
+   Ort: Baiersbronn
+   Datum: 2026-05-22 - 2026-09-13 | 13:00 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/playmobil-schwarzwald-marie-auf-weltreise/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/7/
+   Seite: 7
+
+8. Kaiserstühler Kirschenfest in Königschaffhausen
+   Kategorie: feste
+   Ort: Endingen
+   Datum: 2026-05-22 - 2026-05-25
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/kaiserstuehler-kirschenfest-in-koenigschaffhausen/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/6/
+   Seite: 6
+
+9. Little Kumba Festival
+   Kategorie: feste
+   Ort: Illmensee
+   Datum: 2026-05-22 - 2026-05-24
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/little-kumba-festival/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/7/
+   Seite: 7
+
+10. Schnupperpilgern über Pfingsten
+   Kategorie: feste
+   Ort: Oberdischingen
+   Datum: 2026-05-22 - 2026-05-25
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/schnupperpilgern-uber-pfingsten/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/8/
+   Seite: 8
+
+11. Der Webstuhl – eine geniale Erfindung der Jungsteinzeit
+   Kategorie: feste
+   Ort: Uhldingen-Mühlhofen
+   Datum: 2026-05-22 - 2026-05-29 | 09:30 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/der-webstuhl-eine-geniale-erfindung-der-jungsteinzeit/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/7/
+   Seite: 7
+
+12. Pfingstmarkt
+   Kategorie: feste
+   Ort: Braunsbach
+   Datum: 2026-05-23 - 2026-05-25
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstmarkt-2/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/10/
+   Seite: 10
+
+13. Distelhäuser Pfingsttage mit Wolfgangsritt in Distelhausen
+   Kategorie: feste
+   Ort: Distelhausen
+   Datum: 2026-05-23 - 2026-05-25 | 00:00 - 23:59 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/distelhauser-pfingsttage-mit-wolfgangsritt-in-distelhausen/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/10/
+   Seite: 10
+
+14. Balamba RE-Opening 23. MAI 2026
+   Kategorie: feste
+   Ort: Singen
+   Datum: 2026-05-23 - 2026-05-24 | 11:00 - 23:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/balamba-re-opening-23-mai-2026/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/12/
+   Seite: 12
+
+15. Pfingstmarkt Angelbachtal
+   Kategorie: feste
+   Ort: Sinsheimer Erlebnisregion
+   Datum: 2026-05-23 - 2026-05-25
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstmarkt-angelbachtal/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/12/
+   Seite: 12
+
+16. KinderWerkstatt „Mit Hammer und Amboss“
+   Kategorie: feste
+   Ort: Bad Schussenried-Kürnbach
+   Datum: 2026-05-24 | 10:00 - 16:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/kinderwerkstatt-mit-hammer-und-amboss/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
+
+17. Kulinarische Wildpflanzenwanderung Baiersbronn
+   Kategorie: feste
+   Ort: Baiersbronn
+   Datum: 2026-05-24 | 10:15 - 14:15 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/kulinarische-wildpflanzenwanderung-baiersbronn/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+18. Pfingstfest der Murgtalmusikanten
+   Kategorie: feste
+   Ort: Baiersbronn
+   Datum: 2026-05-24 | 11:00 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstfest-der-murgtalmusikanten/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+19. Konzert mit dem Musikverein-Trachtenkapelle Mitteltal
+   Kategorie: feste
+   Ort: Baiersbronn Mitteltal
+   Datum: 2026-05-24 | 11:00 - 12:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/kurkonzert-mit-dem-musikverein-trachtenkapelle-mitteltal/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+20. Gottesdienst zur Saisoneröffnung
+   Kategorie: feste
+   Ort: Baiersbronn-Mitteltal
+   Datum: 2026-05-24 | 10:00 - 12:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/gottesdienst-zur-saisoneroffnung/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+21. Pfingstausflug auf dem Attilafelsen
+   Kategorie: feste
+   Ort: Breisach
+   Datum: 2026-05-24
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstausflug-auf-dem-attilafelsen/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+22. Mühlenfest – Schillingerhofmühle
+   Kategorie: feste
+   Ort: Freiamt
+   Datum: 2026-05-24 | 11:00 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/muhlenfest-schillingerhofmuhle/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+23. Summer Spirit - Klang-Entspannung
+   Kategorie: feste
+   Ort: Friedrichshafen (Kluftern)
+   Datum: 2026-05-24 | 19:00 - 20:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/summer-spirit-klang-entspannung/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+24. Hoffest und Tag des offenen Bauernhofs | Gläserne Produktion 2026
+   Kategorie: feste
+   Ort: Gundelsheim
+   Datum: 2026-05-24 | 11:00 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/hoffest-und-tag-des-offenen-bauernhofs-glaserne-produktion-2026/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
+
+25. Der Rosenkavalier
    Kategorie: feste
    Ort: Karlsruhe
-   Datum: 2026-05-17 | 11:00 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-freier-eintritt/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
+   Datum: 2026-05-24 | 17:00 - 21:25 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/der-rosenkavalier-wiederaufnahme/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
 
-31. Staatskapelle entspannt (Staatstheater entspannt)
+26. Jazz Night meets Science: Loreen Sima Trio feat. Jakob Bänsch. Thomas Bosch. (Und jetzt! Wochen der Nachhaltigkeit)
    Kategorie: feste
    Ort: Karlsruhe
-   Datum: 2026-05-17 | 11:00 - 12:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/staatskapelle-entspannt-staatstheater-entspannt/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
+   Datum: 2026-05-24 | 19:00 - 23:25 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/jazz-night-meets-science-loreen-sima-trio-feat-jakob-bansch-thomas-bosch-und-jetzt-wochen-der-nachhaltigkeit/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
 
-32. Wie das Kuscheln erfunden wurde
+27. Karlsruhe am Wasser (Und jetzt! Wochen der Nachhaltigkeit)
    Kategorie: feste
    Ort: Karlsruhe
-   Datum: 2026-05-17 | 16:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/wie-das-kuscheln-erfunden-wurde/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/5/
-   Seite: 5
+   Datum: 2026-05-24 | 11:00 - 12:45 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/karlsruhe-am-wasser-und-jetzt-wochen-der-nachhaltigkeit/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
 
-33. Summer Spirit - Geschichte in Bewegung
+28. NEU: SUP-Schnupperkurs: Trockenen Fußes über‘s Wasser
    Kategorie: feste
-   Ort: Lindau
-   Datum: 2026-05-17 | 10:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/summer-spirit-geschichte-in-bewegung/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
+   Ort: Konstanz
+   Datum: 2026-05-24 | 14:00 - 16:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/neu-sup-schnupperkurs-trockenen-fuses-ubers-wasser/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
 
-34. Oldtimertreffen
-   Kategorie: feste
-   Ort: Meßkirch
-   Datum: 2026-05-17 | 10:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/oldtimertreffen-2/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-35. Museen "Historische Messerschmiede" und "Rechenmacherhaus" geöffnet
-   Kategorie: feste
-   Ort: Mössingen
-   Datum: 2026-05-17 | 14:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/museen-historische-messerschmiede-und-rechenmacherhaus-geoffnet/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/5/
-   Seite: 5
-
-36. Chorprojekt Klingende Kirche 2026
-   Kategorie: feste
-   Ort: Müllheim
-   Datum: 2026-05-17 | 15:30 - 19:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/chorprojekt-klingende-kirche-2026/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-37. Internationaler Museumstag und Tag der offenen Ateliers in Müllheim
-   Kategorie: feste
-   Ort: Müllheim
-   Datum: 2026-05-17 | 11:00 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-und-tag-der-offenen-ateliers-in-mullheim/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-38. Reitwochen für Erwachsene
+29. Pfingsttreffen in Gruorn auf dem ehemaligen Truppenübungsplatz
    Kategorie: feste
    Ort: Münsingen
-   Datum: 2026-05-17 - 2026-05-22 | 00:00 - 00:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/reitwochen-fur-erwachsene/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
+   Datum: 2026-05-24 | 11:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingsttreffen-in-gruorn-auf-dem-ehemaligen-truppenubungsplatz/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
 
-39. Naturpark-Markt Neckargemünd
-   Kategorie: feste
-   Ort: Naturpark Neckartal-Odenwald
-   Datum: 2026-05-17 | 11:00 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/naturpark-markt-neckargemund/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-40. Internationaler Museumstag: Ganz die alte Schule!?
+30. Mit der Magd durchs Dorf - eine Zeitreise ins Jahr 1900
    Kategorie: feste
    Ort: Neuhausen ob Eck
-   Datum: 2026-05-17 | 11:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-ganz-die-alte-schule/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
+   Datum: 2026-05-24 | 13:30 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/mit-der-magd-durchs-dorf-eine-zeitreise-ins-jahr-1900/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
 
-41. Translationsfest St. Genesius in Schienen
-   Kategorie: feste
-   Ort: Öhningen
-   Datum: 2026-05-17 | 10:30 - 12:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/translationsfest-st-genesius-in-schienen/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-42. Internationaler Museumstag - Römerfest
+31. Jubiläum Ohrntalradweg
    Kategorie: feste
    Ort: Öhringen
-   Datum: 2026-05-17 | 11:00 - 16:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-romerfest/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
+   Datum: 2026-05-24 | 11:00 - 19:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/jubilaum-ohrntalradweg/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
 
-43. Tag des offenen Gartens im Hofgut Cappel
+32. Pfingstverkostung Weingut Fürst Hohenlohe-Oehringen
    Kategorie: feste
-   Ort: Öhringen-Cappel
-   Datum: 2026-05-17 | 11:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/tag-des-offenen-gartens-im-hofgut-cappel/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
+   Ort: Öhringen
+   Datum: 2026-05-24 | 11:00 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/jahrgangsprasentation-weingut-furst-hohenlohe-oehringen/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
 
-44. Tag der Museen
+33. Pfingstverkostung
    Kategorie: feste
-   Ort: Pfullendorf
-   Datum: 2026-05-17 | 14:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/tag-der-museen/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
+   Ort: Östringen
+   Datum: 2026-05-24 | 11:00 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstverkostung/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
 
-45. Jugendvorspiel der Nachwuchstalente des Musikvereins Seebach
+34. Pfingstverkostung - Weingut Heitlinger & Weingut Burg Ravensburg
    Kategorie: feste
-   Ort: Seebach
-   Datum: 2026-05-17 | 10:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/jugendvorspiel-der-nachwuchstalente-des-musikvereins-seebach/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
+   Ort: Östringen-Tiefenbach
+   Datum: 2026-05-24 | 11:00 - 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstverkostung-weingut-heitlinger-weingut-burg-ravensburg/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
 
-46. Pilates auf der Liegewiese im Donaubad
+35. Historischer Schäfertanz
    Kategorie: feste
-   Ort: Sigmaringen
-   Datum: 2026-05-17 - 2026-09-20 | 10:00 - 11:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pilates-auf-der-liegewiese-im-donaubad/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
+   Ort: Rothenburg ob der Tauber
+   Datum: 2026-05-24 | 11:30 - 12:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/historischer-schafertanz/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
 
-47. Sigmaringer Rathausplatzkonzert
+36. Brandmatter Waldfest
    Kategorie: feste
-   Ort: Sigmaringen
-   Datum: 2026-05-17 | 18:00 - 19:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/sigmaringer-rathausplatzkonzert-9/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
+   Ort: Sasbachwalden
+   Datum: 2026-05-24 | 11:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/brandmatter-waldfest/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
 
-48. Tag der Vereine
+37. Rock am Bach 2026
    Kategorie: feste
-   Ort: Sigmaringen- Jungnau
-   Datum: 2026-05-17 | 14:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/tag-der-vereine/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
+   Ort: Urloffen
+   Datum: 2026-05-24 | 18:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/rock-am-bach-2026/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
 
-49. Vergleichsschießen Simonswald - Gütenbach
-   Kategorie: feste
-   Ort: Simonswald
-   Datum: 2026-05-17 | 10:00 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/vergleichsschiesen-simonswald-gutenbach/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-50. Open vineyard
-   Kategorie: feste
-   Ort: Stuttgart
-   Datum: 2026-05-17 - 2026-08-09 | 14:00 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/open-vineyard/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/5/
-   Seite: 5
-
-51. WeinZeit im Dobel
-   Kategorie: feste
-   Ort: Sulzfeld
-   Datum: 2026-05-17 | 13:00 - 18:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/weinzeit-im-dobel/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-52. SINFONIE IM INNENHOF - Kammerphilharmonie Bodensee-Oberschwaben
-   Kategorie: feste
-   Ort: Tettnang
-   Datum: 2026-05-17 | 18:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/sinfonie-im-innenhof-kammerphilharmonie-bodensee-oberschwaben/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-53. Tüftler, Denker und Macher - 70 Jahre Elektronik in Tettnang
-   Kategorie: feste
-   Ort: Tettnang
-   Datum: 2026-05-17 | 13:00 - 16:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/tuftler-denker-und-macher-70-jahre-elektronik-in-tettnang/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-54. Internationaler Museumstag
-   Kategorie: feste
-   Ort: Tübingen
-   Datum: 2026-05-17
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-3/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-55. Wassertreten für alle
-   Kategorie: feste
-   Ort: Überlingen am Bodensee
-   Datum: 2026-05-17 - 2026-09-30 | 17:00 - 17:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/wassertreten-fur-alle/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
-   Seite: 1
-
-56. Offene Werkstatt für Familien: Lirum Larum Löffelstiel
+38. Begegnungen: Brüder, zur Freiheit
    Kategorie: feste
    Ort: Vogtsbauernhof
-   Datum: 2026-05-17 | 11:00 - 16:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/offene-werkstatt-fur-familien-lirum-larum-loffelstiel/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/
+   Datum: 2026-05-24 | 11:00 - 17:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/begegnungen-bruder-zur-freiheit/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/13/
+   Seite: 13
+
+39. Burgfantasie zu Pfingsten
+   Kategorie: feste
+   Ort: Waldburg
+   Datum: 2026-05-24 - 2026-05-25
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/pfingstferienprogramm-mit-burgfantasie/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/14/
+   Seite: 14
+
+40. Michelstädter Bienenmarkt
+   Kategorie: maerkte
+   Ort: Michelstadt
+   Datum: 2026-05-22 - 2026-05-31
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/michelstaedter-bienenmarkt/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/maerkte/
    Seite: 1
 
-57. Internationaler Museumstag im Elztalmuseum
-   Kategorie: feste
-   Ort: Waldkirch
-   Datum: 2026-05-17 | 11:00 - 17:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/internationaler-museumstag-im-elztalmuseum/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-58. Die Klosterbäckerin - Eine köstliche Kostümführung
-   Kategorie: feste
-   Ort: Weingarten
-   Datum: 2026-05-17 | 15:00 - 16:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/die-klosterbackerin-eine-kostliche-kostumfuhrung/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/3/
-   Seite: 3
-
-59. WeinBar SteilLage vom Weingut Wissmann-Stilz
-   Kategorie: feste
-   Ort: Weinstadt
-   Datum: 2026-05-17 | 13:00 - 19:00 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/weinbar-steillage-vom-weingut-wissmann-stilz/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/4/
-   Seite: 4
-
-60. Sommerfest des Imkervereins Kirnbach
-   Kategorie: feste
-   Ort: Wolfach
-   Datum: 2026-05-17 | 10:30 Uhr
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/sommerfest-des-imkervereins-kirnbach/
-   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/2/
-   Seite: 2
-
-61. Muttertagsmarkt
+41. Mittelaltermarkt mit Ritterturnier und Feuershow
    Kategorie: maerkte
-   Ort: Hausach
-   Datum: 2026-05-17
-   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/muttertagsmarkt/
+   Ort: Dischingen
+   Datum: 2026-05-23 - 2026-05-25
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/mittelaltermarkt-mit-ritterturnier-und-feuershow/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/maerkte/
+   Seite: 1
+
+42. Naturparkmarkt
+   Kategorie: maerkte
+   Ort: Löwenstein
+   Datum: 2026-05-24
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/naturparkmarkt-3/
+   Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/maerkte/
+   Seite: 1
+
+43. Naturparkmarkt Löwenstein
+   Kategorie: maerkte
+   Ort: Löwenstein
+   Datum: 2026-05-24 | 11:00 - 17:00 Uhr
+   Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/naturparkmarkt-lowenstein/
    Quelle: https://www.veranstaltung-baden-wuerttemberg.de/kategorie/maerkte/
    Seite: 1

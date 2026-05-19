@@ -10,44 +10,44 @@ Filter:
 - Geo: für alle Zieldatum-Events
 - km/Radius: live im Browser
 
-Zieldatum: 2026-05-17
+Zieldatum: 2026-05-24
 
 Counts:
 {
-  "pages": 234,
-  "rawCollectedIncludingDuplicates": 3236,
-  "rawUnique": 3236,
-  "targetDateMatches": 61,
-  "targetDateWithGeo": 61,
-  "targetDateWithoutGeo": 0,
-  "targetDateGeoEstimated": 61,
-  "targetDateGeoEstimatedFromCity": 46,
-  "targetDateGeoManualLocality": 1,
+  "pages": 231,
+  "rawCollectedIncludingDuplicates": 3194,
+  "rawUnique": 3194,
+  "targetDateMatches": 43,
+  "targetDateWithGeo": 42,
+  "targetDateWithoutGeo": 1,
+  "targetDateGeoEstimated": 42,
+  "targetDateGeoEstimatedFromCity": 40,
+  "targetDateGeoManualLocality": 0,
   "targetDateGeoFromEventBwDetailCoordinates": 0,
-  "targetDateGeoEstimatedFromDetail": 12,
-  "targetDateGeoEstimatedFromCompoundCity": 1,
+  "targetDateGeoEstimatedFromDetail": 2,
+  "targetDateGeoEstimatedFromCompoundCity": 0,
   "targetDateGeoEstimatedFromTitle": 0,
-  "targetDateGeoEstimatedFromBodenseeRegion": 1,
-  "targetDateDetailCoordinateGeoChecked": 60,
+  "targetDateGeoEstimatedFromBodenseeRegion": 0,
+  "targetDateDetailCoordinateGeoChecked": 43,
   "targetDateDetailCoordinateGeoRecovered": 0,
   "targetDateDetailCoordinateGeoFailed": 0,
-  "targetDateDetailGoogleMapsQueries": 13,
-  "targetDateDetailGeoChecked": 13,
-  "targetDateDetailGeoRecovered": 12,
-  "targetDateCompoundCityGeoChecked": 1,
-  "targetDateCompoundCityGeoRecovered": 1,
+  "targetDateDetailGoogleMapsQueries": 2,
+  "targetDateDetailGeoChecked": 2,
+  "targetDateDetailGeoRecovered": 2,
+  "targetDateCompoundCityGeoChecked": 0,
+  "targetDateCompoundCityGeoRecovered": 0,
   "targetDateTitleGeoChecked": 0,
   "targetDateTitleGeoRecovered": 0,
-  "targetDateBodenseeRegionGeoChecked": 1,
-  "targetDateBodenseeRegionGeoRecovered": 1,
-  "nonRegionalTargetDateMatches": 55,
+  "targetDateBodenseeRegionGeoChecked": 0,
+  "targetDateBodenseeRegionGeoRecovered": 0,
+  "nonRegionalTargetDateMatches": 39,
   "rawMaerkte": 137,
-  "rawFeste": 3099,
-  "targetDateMaerkte": 1,
-  "targetDateFeste": 60,
-  "targetDateWithGeoMaerkte": 1,
-  "targetDateWithGeoFeste": 60,
-  "targetDateWithoutGeoMaerkte": 0,
+  "rawFeste": 3057,
+  "targetDateMaerkte": 4,
+  "targetDateFeste": 39,
+  "targetDateWithGeoMaerkte": 3,
+  "targetDateWithGeoFeste": 39,
+  "targetDateWithoutGeoMaerkte": 1,
   "targetDateWithoutGeoFeste": 0
 }
 
@@ -141,31 +141,23 @@ Regionale Ortsliste:
 Ortsstatistik vor Ortsfilter:
 [
   {
-    "city": "unbekannt",
-    "count": 7
+    "city": "Baiersbronn",
+    "count": 3
+  },
+  {
+    "city": "Freiamt",
+    "count": 3
   },
   {
     "city": "Karlsruhe",
-    "count": 5
+    "count": 3
   },
   {
-    "city": "Baiersbronn",
+    "city": "Löwenstein",
     "count": 2
   },
   {
-    "city": "Bernau im Schwarzwald",
-    "count": 2
-  },
-  {
-    "city": "Müllheim",
-    "count": 2
-  },
-  {
-    "city": "Sigmaringen",
-    "count": 2
-  },
-  {
-    "city": "Tettnang",
+    "city": "Öhringen",
     "count": 2
   },
   {
@@ -173,31 +165,27 @@ Ortsstatistik vor Ortsfilter:
     "count": 1
   },
   {
-    "city": "Bad Urach",
+    "city": "Baiersbronn Mitteltal",
     "count": 1
   },
   {
-    "city": "Beilstein",
+    "city": "Baiersbronn-Mitteltal",
     "count": 1
   },
   {
-    "city": "Biosphärengebiet Schwäbische Alb",
+    "city": "Braunsbach",
     "count": 1
   },
   {
-    "city": "Blumberg",
+    "city": "Breisach",
     "count": 1
   },
   {
-    "city": "Brackenheim",
+    "city": "Dischingen",
     "count": 1
   },
   {
-    "city": "Calw",
-    "count": 1
-  },
-  {
-    "city": "Donaubergland",
+    "city": "Distelhausen",
     "count": 1
   },
   {
@@ -205,47 +193,31 @@ Ortsstatistik vor Ortsfilter:
     "count": 1
   },
   {
-    "city": "Flein",
+    "city": "Endingen",
     "count": 1
   },
   {
-    "city": "Forbach",
+    "city": "Friedrichshafen (Kluftern)",
     "count": 1
   },
   {
-    "city": "Görwihl",
+    "city": "Gaienhofen",
     "count": 1
   },
   {
-    "city": "Hausach",
+    "city": "Gundelsheim",
     "count": 1
   },
   {
-    "city": "Hohenstein",
+    "city": "Illmensee",
     "count": 1
   },
   {
-    "city": "Hüfingen",
+    "city": "Konstanz",
     "count": 1
   },
   {
-    "city": "Immenstaad",
-    "count": 1
-  },
-  {
-    "city": "Kandern",
-    "count": 1
-  },
-  {
-    "city": "Lindau",
-    "count": 1
-  },
-  {
-    "city": "Meßkirch",
-    "count": 1
-  },
-  {
-    "city": "Mössingen",
+    "city": "Michelstadt",
     "count": 1
   },
   {
@@ -253,55 +225,51 @@ Ortsstatistik vor Ortsfilter:
     "count": 1
   },
   {
-    "city": "Naturpark Neckartal-Odenwald",
-    "count": 1
-  },
-  {
     "city": "Neuhausen ob Eck",
     "count": 1
   },
   {
-    "city": "Öhningen",
+    "city": "Oberdischingen",
     "count": 1
   },
   {
-    "city": "Öhringen",
+    "city": "Östringen",
     "count": 1
   },
   {
-    "city": "Öhringen-Cappel",
+    "city": "Östringen-Tiefenbach",
     "count": 1
   },
   {
-    "city": "Pfullendorf",
+    "city": "Rothenburg ob der Tauber",
     "count": 1
   },
   {
-    "city": "Seebach",
+    "city": "Sasbachwalden",
     "count": 1
   },
   {
-    "city": "Sigmaringen- Jungnau",
+    "city": "Singen",
     "count": 1
   },
   {
-    "city": "Simonswald",
+    "city": "Sinsheimer Erlebnisregion",
     "count": 1
   },
   {
-    "city": "Stuttgart",
+    "city": "Uhldingen-Mühlhofen",
     "count": 1
   },
   {
-    "city": "Sulzfeld",
+    "city": "Ulm",
     "count": 1
   },
   {
-    "city": "Tübingen",
+    "city": "Ulm/Neu-Ulm",
     "count": 1
   },
   {
-    "city": "Überlingen am Bodensee",
+    "city": "Urloffen",
     "count": 1
   },
   {
@@ -309,19 +277,7 @@ Ortsstatistik vor Ortsfilter:
     "count": 1
   },
   {
-    "city": "Waldkirch",
-    "count": 1
-  },
-  {
-    "city": "Weingarten",
-    "count": 1
-  },
-  {
-    "city": "Weinstadt",
-    "count": 1
-  },
-  {
-    "city": "Wolfach",
+    "city": "Waldburg",
     "count": 1
   }
 ]
@@ -420,7 +376,7 @@ Pages:
     "page": 1,
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/",
     "ok": true,
-    "reportedCount": 3099,
+    "reportedCount": 3057,
     "parsedCount": 14
   },
   {
@@ -2165,36 +2121,12 @@ Pages:
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/219/",
     "ok": true,
     "reportedCount": null,
-    "parsedCount": 14
+    "parsedCount": 5
   },
   {
     "category": "feste",
     "page": 220,
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/220/",
-    "ok": true,
-    "reportedCount": null,
-    "parsedCount": 14
-  },
-  {
-    "category": "feste",
-    "page": 221,
-    "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/221/",
-    "ok": true,
-    "reportedCount": null,
-    "parsedCount": 14
-  },
-  {
-    "category": "feste",
-    "page": 222,
-    "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/222/",
-    "ok": true,
-    "reportedCount": null,
-    "parsedCount": 5
-  },
-  {
-    "category": "feste",
-    "page": 223,
-    "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/223/",
     "ok": false,
     "error": "HTTP 404 Not Found"
   }
