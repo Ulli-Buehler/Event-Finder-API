@@ -1,0 +1,81 @@
+name: EventBW Import
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: Optionales Zieldatum YYYY-MM-DD; leer = heute Sonntag sonst kommender Sonntag
+        required: false
+        type: string
+      radius_km:
+        description: Aktuell noch nicht genutzt; echter Radius kommt später mit Geo
+        required: false
+        default: '40'
+        type: string
+      debug_list_geos:
+        description: EventBW Listen-Geos debuggen
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '0 5-18 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  eventbw-import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Debug EventBW list geos
+        if: ${{ inputs.debug_list_geos == true }}
+        working-directory: eventbw
+        run: |
+          node check-list-geos.cjs
+
+      - name: Run EventBW importer
+        env:
+          EVENTBW_TARGET_DATE: ${{ inputs.target_date }}
+          EVENTBW_RADIUS_KM: ${{ inputs.radius_km || '40' }}
+          EVENTBW_MAX_PAGES_PER_CATEGORY: '300'
+          EVENTBW_FETCH_TIMEOUT_MS: '15000'
+        run: |
+          node eventbw/import-eventbw.cjs
+
+      - name: Commit updated EventBW outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add eventbw/01-raw-import.json
+          git add eventbw/01-raw-import.txt
+          git add eventbw/02-zieldatum.json
+          git add eventbw/02-zieldatum.txt
+          git add eventbw/03-ortsfilter.json
+          git add eventbw/03-ortsfilter.txt
+          git add eventbw/debug-output.json
+          git add eventbw/debug-output.txt
+          git add eventbw/debug-gutenbergs-geopoints.html
+          git add eventbw/debug-gutenbergs-geopoints.txt
+          git add eventbw/feste-maerkte.json
+          git add eventbw/feste-maerkte.txt
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git commit -m "Update EventBW import outputs"
+            git push
+          else
+            echo "No EventBW output changes."
+          fi

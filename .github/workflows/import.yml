@@ -1,0 +1,57 @@
+name: Import Events
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fast-import:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Node installieren
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Dependencies installieren
+        run: npm install
+
+      - name: Playwright Browser installieren
+        run: npx playwright install chromium --only-shell
+
+      - name: Fast Importer starten
+        run: node import-fast.js
+
+      - name: Upload import files
+        uses: actions/upload-artifact@v4
+        with:
+          name: import-files
+          path: |
+            debug-output.txt
+            debug-output.json
+            feste-maerkte.txt
+            feste-maerkte.json
+            fast-raw-cards.txt
+            fast-raw-cards.json
+
+      - name: Import Dateien committen
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add debug-output.txt
+          git add debug-output.json
+          git add feste-maerkte.txt
+          git add feste-maerkte.json
+          git add fast-raw-cards.txt
+          git add fast-raw-cards.json
+
+          git commit -m "update fast import output" || echo "Keine Änderungen"
+
+          git push

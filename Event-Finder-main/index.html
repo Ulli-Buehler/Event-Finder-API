@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  />
+
+  <title>Lokalevents</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="style.css?v=8030"
+  />
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <div class="top compact">
+
+    <div class="top-header">
+      <div class="top-title-block">
+        <h1>Lokalevents</h1>
+
+        <p id="status">
+          Zeigt Märkte und Feste für den aktuellen Sonntag
+        </p>
+
+        <div class="creator-credit">
+          by Ulli Bühler
+        </div>
+      </div>
+
+      <button id="filterToggle" class="filter-toggle" aria-label="Filter anzeigen">
+        ☰
+      </button>
+    </div>
+
+    <div id="filterPanel" class="filter-panel">
+
+      <div class="radius-control full">
+
+        <div id="radiusLabel">
+          40 km
+        </div>
+
+        <input
+          type="range"
+          id="radiusSlider"
+          min="5"
+          max="200"
+          value="40"
+        />
+
+      </div>
+
+      <div id="lastUpdateInfo" class="last-update-info">
+        Letztes Update: unbekannt
+      </div>
+
+    </div>
+
+  </div>
+
+  <div
+    id="cards"
+    class="cards"
+  ></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="app.js?v=8030"></script>
+
+</body>
+</html>

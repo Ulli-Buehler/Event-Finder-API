@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.local
+.vercel
+playwright-report/
+test-results/
+.DS_Store
+debug-events.html
+geo-cache.json

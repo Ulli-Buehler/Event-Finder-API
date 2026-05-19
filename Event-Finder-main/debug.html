@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Debug</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    pre {
+      background: white;
+      padding: 16px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
+    h1 { font-size: 28px; }
+  </style>
+</head>
+<body>
+  <h1>Event Debug</h1>
+
+  <h2>Erstes Event roh</h2>
+  <pre id="raw"></pre>
+
+  <h2>Genutzte Werte in der App</h2>
+  <pre id="converted"></pre>
+
+  <script src="events.js"></script>
+
+  <script>
+    const event = EVENTS[0];
+
+    document.getElementById("raw").innerText =
+      JSON.stringify(event, null, 2);
+
+    const userPos = [48.6167, 9.45];
+
+    function distanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+
+      const a =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) ** 2;
+
+      return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
+    const converted = {
+      title: event.title,
+      place: event.place,
+      date: event.date,
+      lat: event.lat,
+      lng: event.lng,
+      distanceFromDettingenKm: distanceKm(
+        userPos[0],
+        userPos[1],
+        event.lat,
+        event.lng
+      ),
+      description: event.description
+    };
+
+    document.getElementById("converted").innerText =
+      JSON.stringify(converted, null, 2);
+  </script>
+</body>
+</html>

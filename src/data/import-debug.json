@@ -1,0 +1,36 @@
+{
+  "source": "https://www.wasgehtapp.de/index.php?geo_id=15546&ort=Dettingen%20unter%20Teck&x=9.45&y=48.6167&einwohner=5603&region=01&select_ort=1&radius=40",
+  "totalContainers": 291,
+  "processedContainers": 220,
+  "imported": 213,
+  "duplicates": 1,
+  "failed": 6,
+  "withoutGeo": 0,
+  "failures": [
+    {
+      "index": 215,
+      "listText": "571 Rahmet Peygamberi Hz. Muhammed pin Capitol-Filmtheater, Kornwestheim : 14:30 Uhr pin CinemaxX, Sindelfingen : 17:45 Uhr (OmU)"
+    },
+    {
+      "index": 216,
+      "listText": "Ach, diese Lücke, diese entsetzliche Lücke DE 2025 Drama, Komödie FSK 6 pin Kinothek, Stuttgart : 20:00 Uhr"
+    },
+    {
+      "index": 217,
+      "listText": "American Sweatshop Thriller / Mystery | 2025 pin Dietrich Theater, Neu-Ulm : 17:15 Uhr"
+    },
+    {
+      "index": 218,
+      "listText": "Babystar Drama | 2026 pin Obscura, Ulm : 16:55 Uhr"
+    },
+    {
+      "index": 219,
+      "listText": "Bibi Blocksberg - Das große Hexentreffen Abenteuer / Komödie / Familie / Fan.. pin Traumpalast, Leonberg : 12:30 Uhr pin Dietrich Theater, Neu-Ulm : 15:45 Uhr"
+    },
+    {
+      "index": 220,
+      "listText": "Billie Eilish - Hit Me Hard And Soft: The Tour Musik / Dokumentarfilm | 2026 pin Cinemaxx Stuttgart-Liederhalle, Stuttgart : 11:15 Uhr (3D, OmU) 14:00 Uhr (3D, OmU) 17:00 Uhr (3D, OmU) 19:30 Uhr (3D, OmU) 22:10 Uhr (3D, OmU) pin CinemaxX, Sindelfingen : 11:30 Uhr (3D, OmU) 14:40 Uhr (3D, OmU) 17:00 Uhr (3D, OmU) 19:30 Uhr (3D, OmU) pin Filmzentrum Bären, Böblingen : 16:45 Uhr 19:45 Uhr pin Blaue Brücke, Tübingen : 18:00 Uhr (3D) 20:00 Uhr (3D) pin Xinedome, Ulm : 19:30 Uhr pin Kino Universum, Backnang : 19:50 Uhr pin Traumpalast, Waiblingen : 20:00 Uhr pin Central-Theater, Ludwigsburg : 20:00 Uhr pin Traumpalast, Nürtingen : 20:00 Uhr pin Traumpalast, Leonberg : 20:00 Uhr pin Traumpalast, Schorndorf : 20:00 Uhr pin Traumpalast, Backnang : 20:00 Uhr pin Staufen-Movieplex, Göppingen : 20:00 Uhr (3D) 22:45 Uhr (3D) pin Burgtheater, Hechingen : 20:00 Uhr pin Traumpalast, Schwäbisch Gmünd : 20:00 Uhr pin Traumpalast, Esslingen am Neckar : 20:15 Uhr pin Cineplex Planie, Reutlingen : 20:30 Uhr (3D) pin METROPOL – Traumpalast, Stuttgart : 20:30 Uhr pin Dietrich Theater, Neu-Ulm : 20:45 Uhr (3D)"
+    }
+  ],
+  "durationSeconds": 206.7
+}

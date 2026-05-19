@@ -1,0 +1,44 @@
+Titel: Gutenbergs Geopoints
+Ort: Biosphärengebiet Schwäbische Alb
+Detail: https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/gutenbergs-geopoints/
+HTML bytes: 79767
+
+Koordinaten-/Map-Hinweise:
+1. Gutenbergs Geopoints - Veranstaltungen Baden-Württemberg
+2. ="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.veranstaltung-baden-wuerttemberg.de/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.veranstaltung-baden-wuerttemberg.de%2Fveranstaltung%2Fgutenbergs-geopoints%2F" />
+3. 
+4. wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black)!important;}.has-cyan-bluish-gray
+5. <link rel="EditURI" type="applic
+6. 
+7. "name": "Gutenbergs Geopoints",
+8. "url": "https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/gutenbergs-geopoints/",
+9. "name": "Parkplatz Ortseinfahrt Gutenberg von Oberlenningen kommend",
+10. "url": "https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/gutenbergs-geopoints/"
+11. "url": "https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/gutenbergs-geopoints/",
+12. "name": "Gutenbergs Geopoints"
+13. 
+14. 
+15. 
+16. enter gap-1"> Gutenbergs Geopoints
+17. 
+18. 
+19. <i data-lucide="navigation" clas
+20. Teilen
+21. Gutenbergs Geopoints
+22. Am Geopoint Höllsternbröller erfahren wir, wie wichtig solche Quellen für die Wasserversorgung des Dorfes waren und welche Schwierigkeiten die Dörfer auf der Albhochfläche hatten, sich m
+23. 
+24. Parkplatz Ortseinfahrt Gutenberg von Oberlenningen kommend Biosphärengebiet Schwäbische Alb
+25. <a href="https://www.google.com/maps/search/?api=1&query=Parkplatz+Ortseinfahrt+Gutenberg+von+Oberlenningen+kommend%2C+Biosph%C3%A4rengebiet+Schw%C3%A4bische+Alb" target="_blank" rel="noopener" class="text-sm text-accent-blue hover:underline fle
+26. Auf Google Maps anzeigen
+27. g-canvas-muted rounded-lg h-[90px] flex items-center justify-center text-txt-tertiary text-sm">728 x 90 — Premium-Werbeplatz
+28. Veranstaltungen in Biosphärengebiet Schwäbische Alb
+29. 
+30. Manage options
+31. Manage services
+32. Manage {vendor_count} vendors
+33. Einstellungen anzeigen
+34. {title}
+35. {title}
+36. {title}
+37. 
+38. banner_version":"7","version":"7.4.5","store_consent":"","do_not_track_enabled":"","consenttype":"optin","region":"eu","geoip":"","dismiss_timeout":"","disable_cookiebanner":"","soft_cookiewall":"","dismiss_on_scroll":"","cookie_expiry":"365","url":"https://www.veranstaltung-baden-wuerttemberg.de/wp-js

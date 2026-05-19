@@ -1,0 +1,228 @@
+{
+  "generatedAt": "2026-05-12T02:27:31.617Z",
+  "note": "Debug scan only: checks raw HTML for possible geo/km data without parsing or calculating distance.",
+  "listGeoKmScans": [
+    {
+      "name": "list-maerkte-page1.html",
+      "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/maerkte/?post_type=event&ort=Dettingen+Teck&region=&von=2026-05-17&bis=2026-05-17",
+      "length": 110186,
+      "hits": [
+        {
+          "pattern": "lat",
+          "index": 10053,
+          "snippet": "lay: grid;}.is-layout-grid >:is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black)!important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray)!important;}.has-white-color{color: var(--wp--preset--color--white)!important;}.has-pale-pink-color{color: var(--wp--pr"
+        },
+        {
+          "pattern": "geo",
+          "index": 103705,
+          "snippet": "er_banner_id\":\"1\",\"set_cookies\":[],\"block_ajax_content\":\"\",\"banner_version\":\"7\",\"version\":\"7.4.5\",\"store_consent\":\"\",\"do_not_track_enabled\":\"\",\"consenttype\":\"optin\",\"region\":\"eu\",\"geoip\":\"\",\"dismiss_timeout\":\"\",\"disable_cookiebanner\":\"\",\"soft_cookiewall\":\"\",\"dismiss_on_scroll\":\"\",\"cookie_expiry\":\"365\",\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/wp-json/complianz/v1/\",\"locale\":\"lang=en&locale=en_US\",\"set_cookies_on_root\":\"\",\"cookie_domain\":\"\",\"current_policy_id\":\"1\",\"cookie_path\":\"/\",\"categories\":{\"statistics\":\"statistics\",\""
+        },
+        {
+          "pattern": "google",
+          "index": 108284,
+          "snippet": "; //# sourceURL=https://www.veranstaltung-baden-wuerttemberg.de/wp-includes/js/wp-emoji-loader.min.js window['gtag_enable_tcf_support'] = false; window.dataLayer = window.dataLayer || []; function gtag(){ dataLayer.push(arguments); } gtag('set', 'dYWVlZG', true); gtag('set', 'ads_data_redaction', false); gtag("
+        },
+        {
+          "pattern": "km",
+          "index": 40870,
+          "snippet": "uershow/\",\"name\":\"Mittelaltermarkt mit Ritterturnier und Feuershow\"},{\"@type\":\"ListItem\",\"position\":11,\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/naturparkmarkt-3/\",\"name\":\"Naturparkmarkt\"},{\"@type\":\"ListItem\",\"position\":12,\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/naturparkmarkt-lowenstein/\",\"name\":\"Naturparkmarkt Löwenstein\"},{\"@type\":\"ListItem\",\"position\":13,\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/trossinger-pfingstmarkt/\",\"name\":\"Trossinger Pfingstma"
+        },
+        {
+          "pattern": "schema.org",
+          "index": 17480,
+          "snippet": "name=\"generator\" content=\"WordPress 6.9.4\" /> { \"@context\": \"https://schema.org\", \"@type\": \"BreadcrumbList\", \"itemListElement\": [ { \"@type\": \"ListItem\", \"position\": 1, \"name\": \"Startseite\", \"item\": \"https://www.veranstaltung-baden-wuerttemberg.de/\" }, { \"@type\": \"ListItem\", \"position\": 2, \"name\": \"Märkte\""
+        }
+      ]
+    },
+    {
+      "name": "list-feste-page1.html",
+      "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/?post_type=event&ort=Dettingen+Teck&region=&von=2026-05-17&bis=2026-05-17",
+      "length": 112623,
+      "hits": [
+        {
+          "pattern": "lat",
+          "index": 10045,
+          "snippet": "lay: grid;}.is-layout-grid >:is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black)!important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray)!important;}.has-white-color{color: var(--wp--preset--color--white)!important;}.has-pale-pink-color{color: var(--wp--pr"
+        },
+        {
+          "pattern": "geo",
+          "index": 106142,
+          "snippet": "er_banner_id\":\"1\",\"set_cookies\":[],\"block_ajax_content\":\"\",\"banner_version\":\"7\",\"version\":\"7.4.5\",\"store_consent\":\"\",\"do_not_track_enabled\":\"\",\"consenttype\":\"optin\",\"region\":\"eu\",\"geoip\":\"\",\"dismiss_timeout\":\"\",\"disable_cookiebanner\":\"\",\"soft_cookiewall\":\"\",\"dismiss_on_scroll\":\"\",\"cookie_expiry\":\"365\",\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/wp-json/complianz/v1/\",\"locale\":\"lang=en&locale=en_US\",\"set_cookies_on_root\":\"\",\"cookie_domain\":\"\",\"current_policy_id\":\"1\",\"cookie_path\":\"/\",\"categories\":{\"statistics\":\"statistics\",\""
+        },
+        {
+          "pattern": "google",
+          "index": 110721,
+          "snippet": "; //# sourceURL=https://www.veranstaltung-baden-wuerttemberg.de/wp-includes/js/wp-emoji-loader.min.js window['gtag_enable_tcf_support'] = false; window.dataLayer = window.dataLayer || []; function gtag(){ dataLayer.push(arguments); } gtag('set', 'dYWVlZG', true); gtag('set', 'ads_data_redaction', false); gtag("
+        },
+        {
+          "pattern": "km",
+          "index": 86483,
+          "snippet": "w-full px-3 py-2 rounded-xl border border-border-medium bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent/20\"> nur Ort 5 km 10 km 20 km 30 km 50 km Region <select name=\"region\" class=\"w-full px-3 py-2 rounded-xl bor"
+        },
+        {
+          "pattern": "schema.org",
+          "index": 17471,
+          "snippet": "name=\"generator\" content=\"WordPress 6.9.4\" /> { \"@context\": \"https://schema.org\", \"@type\": \"BreadcrumbList\", \"itemListElement\": [ { \"@type\": \"ListItem\", \"position\": 1, \"name\": \"Startseite\", \"item\": \"https://www.veranstaltung-baden-wuerttemberg.de/\" }, { \"@type\": \"ListItem\", \"position\": 2, \"name\": \"Feste\""
+        }
+      ]
+    }
+  ],
+  "detailGeoKmScans": [
+    {
+      "name": "detail-sample-1.html",
+      "url": "https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/frauengesprachskreis-geh-aus-mein-herz-und-suche-freud/",
+      "length": 83874,
+      "hits": [
+        {
+          "pattern": "lat",
+          "index": 9608,
+          "snippet": "lay: grid;}.is-layout-grid >:is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black)!important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray)!important;}.has-white-color{color: var(--wp--preset--color--white)!important;}.has-pale-pink-color{color: var(--wp--pr"
+        },
+        {
+          "pattern": "geo",
+          "index": 77391,
+          "snippet": "er_banner_id\":\"1\",\"set_cookies\":[],\"block_ajax_content\":\"\",\"banner_version\":\"7\",\"version\":\"7.4.5\",\"store_consent\":\"\",\"do_not_track_enabled\":\"\",\"consenttype\":\"optin\",\"region\":\"eu\",\"geoip\":\"\",\"dismiss_timeout\":\"\",\"disable_cookiebanner\":\"\",\"soft_cookiewall\":\"\",\"dismiss_on_scroll\":\"\",\"cookie_expiry\":\"365\",\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/wp-json/complianz/v1/\",\"locale\":\"lang=en&locale=en_US\",\"set_cookies_on_root\":\"\",\"cookie_domain\":\"\",\"current_policy_id\":\"1\",\"cookie_path\":\"/\",\"categories\":{\"statistics\":\"statistics\",\""
+        },
+        {
+          "pattern": "maps",
+          "index": 36814,
+          "snippet": "white border-b border-border-light\"> Route planen Fahrplanausk"
+        },
+        {
+          "pattern": "google",
+          "index": 36803,
+          "snippet": "class=\"bg-white border-b border-border-light\"> Route planen F"
+        },
+        {
+          "pattern": "map",
+          "index": 36814,
+          "snippet": "white border-b border-border-light\"> Route planen Fahrplanausk"
+        },
+        {
+          "pattern": "km",
+          "index": 57724,
+          "snippet": "w-full px-3 py-2 rounded-xl border border-border-medium bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent/20\"> nur Ort 5 km 10 km 20 km 30 km 50 km Region <select name=\"region\" class=\"w-full px-3 py-2 rounded-xl bor"
+        },
+        {
+          "pattern": "schema.org",
+          "index": 17275,
+          "snippet": "anstaltung-baden-wuerttemberg.de/?p=135354' /> { \"@context\": \"https://schema.org\", \"@type\": \"Event\", \"name\": \"Frauengesprächskreis – Geh aus mein Herz und suche Freud\", \"url\": \"https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/frauengesprachskreis-geh-aus-mein-herz-und-suche-freud/\", \"startDate\": \"2026-05-12T09:00:00\", \"endDate\": \"2026-05-12T11:30:00\", \"description\": \"Frauengesprächskreis\","
+        },
+        {
+          "pattern": "location",
+          "index": 17640,
+          "snippet": "engesprachskreis-geh-aus-mein-herz-und-suche-freud/\", \"startDate\": \"2026-05-12T09:00:00\", \"endDate\": \"2026-05-12T11:30:00\", \"description\": \"Frauengesprächskreis\", \"location\": { \"@type\": \"Place\", \"name\": \"Kreuzkirche\", \"address\": { \"@type\": \"PostalAddress\", \"streetAddress\": \"Binger Str. 9\", \"addressLocality\": \"Sigmaringen\", \"postalCode\": \"72488\", \"addressRegion\": \"Baden-Württemberg\", \"addressCountry\": \"DE\" } },"
+        },
+        {
+          "pattern": "address",
+          "index": 17719,
+          "snippet": "-12T09:00:00\", \"endDate\": \"2026-05-12T11:30:00\", \"description\": \"Frauengesprächskreis\", \"location\": { \"@type\": \"Place\", \"name\": \"Kreuzkirche\", \"address\": { \"@type\": \"PostalAddress\", \"streetAddress\": \"Binger Str. 9\", \"addressLocality\": \"Sigmaringen\", \"postalCode\": \"72488\", \"addressRegion\": \"Baden-Württemberg\", \"addressCountry\": \"DE\" } }, \"organizer\": { \"@type\": \"Organization\", \"name\": \"Sigmaringen\""
+        }
+      ]
+    },
+    {
+      "name": "detail-sample-2.html",
+      "url": "https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/morgenrunde/",
+      "length": 84087,
+      "hits": [
+        {
+          "pattern": "lat",
+          "index": 9471,
+          "snippet": "lay: grid;}.is-layout-grid >:is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black)!important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray)!important;}.has-white-color{color: var(--wp--preset--color--white)!important;}.has-pale-pink-color{color: var(--wp--pr"
+        },
+        {
+          "pattern": "geo",
+          "index": 77604,
+          "snippet": "er_banner_id\":\"1\",\"set_cookies\":[],\"block_ajax_content\":\"\",\"banner_version\":\"7\",\"version\":\"7.4.5\",\"store_consent\":\"\",\"do_not_track_enabled\":\"\",\"consenttype\":\"optin\",\"region\":\"eu\",\"geoip\":\"\",\"dismiss_timeout\":\"\",\"disable_cookiebanner\":\"\",\"soft_cookiewall\":\"\",\"dismiss_on_scroll\":\"\",\"cookie_expiry\":\"365\",\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/wp-json/complianz/v1/\",\"locale\":\"lang=en&locale=en_US\",\"set_cookies_on_root\":\"\",\"cookie_domain\":\"\",\"current_policy_id\":\"1\",\"cookie_path\":\"/\",\"categories\":{\"statistics\":\"statistics\",\""
+        },
+        {
+          "pattern": "maps",
+          "index": 36402,
+          "snippet": "white border-b border-border-light\"> Route planen Fahrplanauskunft"
+        },
+        {
+          "pattern": "google",
+          "index": 36391,
+          "snippet": "class=\"bg-white border-b border-border-light\"> Route planen Fahrp"
+        },
+        {
+          "pattern": "map",
+          "index": 36402,
+          "snippet": "white border-b border-border-light\"> Route planen Fahrplanauskunft"
+        },
+        {
+          "pattern": "km",
+          "index": 38713,
+          "snippet": "andere Karsee angefahren. Auf Wunsch können auch leichtere oder mittelschwere Trails eingeplant werden. Schwierigkeit: Die Streckenlänge beträgt ca. 20-30 km, 300-400 Höhenmeter müssen überwunden werden. Der konditionelle und technische Anspruch ist auf leichtem Niveau, Singetrail-Skala S0. Geeignet für: Auch für E-MTBs geeignet. Voraussetzungen: Eine Anmeldung ist erforderlich bis 13:30 Uhr zum Vortag der Veranstaltung. Die Buchung kann auch online erfolgen. Ausrüst"
+        },
+        {
+          "pattern": "schema.org",
+          "index": 17095,
+          "snippet": "anstaltung-baden-wuerttemberg.de/?p=129083' /> { \"@context\": \"https://schema.org\", \"@type\": \"Event\", \"name\": \"Morgenrunde\", \"url\": \"https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/morgenrunde/\", \"startDate\": \"2026-05-12T09:30:00\", \"endDate\": \"2026-05-12T12:30:00\", \"description\": \"Geführte Mountainbike-Tour\", \"location\": { \"@type\": \"Place\", \"name\": \"Rosenplatz\","
+        },
+        {
+          "pattern": "location",
+          "index": 17378,
+          "snippet": "en-wuerttemberg.de/veranstaltung/morgenrunde/\", \"startDate\": \"2026-05-12T09:30:00\", \"endDate\": \"2026-05-12T12:30:00\", \"description\": \"Geführte Mountainbike-Tour\", \"location\": { \"@type\": \"Place\", \"name\": \"Rosenplatz\", \"address\": { \"@type\": \"PostalAddress\", \"streetAddress\": \"Rosenplatz\", \"addressLocality\": \"Baiersbronn\", \"postalCode\": \"72270\", \"addressRegion\": \"Baden-Württemberg\", \"addressCountry\": \"DE\" } }, \"o"
+        },
+        {
+          "pattern": "address",
+          "index": 17456,
+          "snippet": "9:30:00\", \"endDate\": \"2026-05-12T12:30:00\", \"description\": \"Geführte Mountainbike-Tour\", \"location\": { \"@type\": \"Place\", \"name\": \"Rosenplatz\", \"address\": { \"@type\": \"PostalAddress\", \"streetAddress\": \"Rosenplatz\", \"addressLocality\": \"Baiersbronn\", \"postalCode\": \"72270\", \"addressRegion\": \"Baden-Württemberg\", \"addressCountry\": \"DE\" } }, \"organizer\": { \"@type\": \"Organization\", \"name\": \"Baiersbronn\","
+        }
+      ]
+    },
+    {
+      "name": "detail-sample-3.html",
+      "url": "https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/baiersbronner-schatze-grindeschinken-karreespeck/",
+      "length": 84660,
+      "hits": [
+        {
+          "pattern": "lat",
+          "index": 9590,
+          "snippet": "lay: grid;}.is-layout-grid >:is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black)!important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray)!important;}.has-white-color{color: var(--wp--preset--color--white)!important;}.has-pale-pink-color{color: var(--wp--pr"
+        },
+        {
+          "pattern": "geo",
+          "index": 78177,
+          "snippet": "er_banner_id\":\"1\",\"set_cookies\":[],\"block_ajax_content\":\"\",\"banner_version\":\"7\",\"version\":\"7.4.5\",\"store_consent\":\"\",\"do_not_track_enabled\":\"\",\"consenttype\":\"optin\",\"region\":\"eu\",\"geoip\":\"\",\"dismiss_timeout\":\"\",\"disable_cookiebanner\":\"\",\"soft_cookiewall\":\"\",\"dismiss_on_scroll\":\"\",\"cookie_expiry\":\"365\",\"url\":\"https://www.veranstaltung-baden-wuerttemberg.de/wp-json/complianz/v1/\",\"locale\":\"lang=en&locale=en_US\",\"set_cookies_on_root\":\"\",\"cookie_domain\":\"\",\"current_policy_id\":\"1\",\"cookie_path\":\"/\",\"categories\":{\"statistics\":\"statistics\",\""
+        },
+        {
+          "pattern": "maps",
+          "index": 36808,
+          "snippet": "white border-b border-border-light\"> Route planen <i data"
+        },
+        {
+          "pattern": "google",
+          "index": 36797,
+          "snippet": "class=\"bg-white border-b border-border-light\"> Route planen <a href=\"https://www.bahn.de/buchung/start\" target=\"_blank\" rel=\"noopener\" class=\"action-b"
+        },
+        {
+          "pattern": "map",
+          "index": 36808,
+          "snippet": "white border-b border-border-light\"> Route planen <i data"
+        },
+        {
+          "pattern": "km",
+          "index": 39277,
+          "snippet": "n zu kulinarischen Schätzen verarbeitet. Die Spezialitäten sind herausragend und prämiert. Kostproben bieten den Beweis. Schwierigkeit: Die Streckenlänge beträgt ca. 8 km. Der Anspruch ist auf leichtem Niveau. Geeignet für: Die Tour ist nicht geeignet für Kinderwagen. Vorbehaltlich der Verfügbarkeit kann eine Kindertrage ausgeliehen werden. Voraussetzungen: Die Tour findet statt, sobald die Mindestteilnehmerzahl erreicht ist. Ist dies nicht der Fall, setzen wir uns am Tag vor der Tour mit Ihnen in V"
+        },
+        {
+          "pattern": "schema.org",
+          "index": 17251,
+          "snippet": "anstaltung-baden-wuerttemberg.de/?p=129045' /> { \"@context\": \"https://schema.org\", \"@type\": \"Event\", \"name\": \"Baiersbronner Schätze: Grindeschinken & Karreespeck\", \"url\": \"https://www.veranstaltung-baden-wuerttemberg.de/veranstaltung/baiersbronner-schatze-grindeschinken-karreespeck/\", \"startDate\": \"2026-05-12T11:00:00\", \"endDate\": \"2026-05-12T16:00:00\", \"description\": \"Geführte Wanderung\", \"location"
+        },
+        {
+          "pattern": "location",
+          "index": 17603,
+          "snippet": "ung/baiersbronner-schatze-grindeschinken-karreespeck/\", \"startDate\": \"2026-05-12T11:00:00\", \"endDate\": \"2026-05-12T16:00:00\", \"description\": \"Geführte Wanderung\", \"location\": { \"@type\": \"Place\", \"name\": \"Wander-Informationszentrum der Baiersbronn Touristik\", \"address\": { \"@type\": \"PostalAddress\", \"streetAddress\": \"Freudenstädter Str. 40\", \"addressLocality\": \"Baiersbronn\", \"postalCode\": \"72270\", \"addressRegion\": \"Baden-Württemberg\","
+        },
+        {
+          "pattern": "address",
+          "index": 17723,
+          "snippet": "12T16:00:00\", \"description\": \"Geführte Wanderung\", \"location\": { \"@type\": \"Place\", \"name\": \"Wander-Informationszentrum der Baiersbronn Touristik\", \"address\": { \"@type\": \"PostalAddress\", \"streetAddress\": \"Freudenstädter Str. 40\", \"addressLocality\": \"Baiersbronn\", \"postalCode\": \"72270\", \"addressRegion\": \"Baden-Württemberg\", \"addressCountry\": \"DE\" } }, \"organizer\": { \"@type\": \"Organization\", \"name\": \"Bai"
+        }
+      ]
+    }
+  ]
+}

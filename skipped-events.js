@@ -1,0 +1,1 @@
+const SKIPPED_EVENTS = [];
