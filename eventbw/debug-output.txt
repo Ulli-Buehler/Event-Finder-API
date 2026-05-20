@@ -14,39 +14,39 @@ Zieldatum: 2026-05-24
 
 Counts:
 {
-  "pages": 231,
-  "rawCollectedIncludingDuplicates": 3194,
-  "rawUnique": 3194,
-  "targetDateMatches": 43,
-  "targetDateWithGeo": 42,
+  "pages": 232,
+  "rawCollectedIncludingDuplicates": 3217,
+  "rawUnique": 3217,
+  "targetDateMatches": 42,
+  "targetDateWithGeo": 41,
   "targetDateWithoutGeo": 1,
-  "targetDateGeoEstimated": 42,
+  "targetDateGeoEstimated": 41,
   "targetDateGeoEstimatedFromCity": 40,
   "targetDateGeoManualLocality": 0,
   "targetDateGeoFromEventBwDetailCoordinates": 0,
-  "targetDateGeoEstimatedFromDetail": 2,
+  "targetDateGeoEstimatedFromDetail": 1,
   "targetDateGeoEstimatedFromCompoundCity": 0,
   "targetDateGeoEstimatedFromTitle": 0,
   "targetDateGeoEstimatedFromBodenseeRegion": 0,
-  "targetDateDetailCoordinateGeoChecked": 43,
+  "targetDateDetailCoordinateGeoChecked": 42,
   "targetDateDetailCoordinateGeoRecovered": 0,
   "targetDateDetailCoordinateGeoFailed": 0,
-  "targetDateDetailGoogleMapsQueries": 2,
-  "targetDateDetailGeoChecked": 2,
-  "targetDateDetailGeoRecovered": 2,
+  "targetDateDetailGoogleMapsQueries": 1,
+  "targetDateDetailGeoChecked": 1,
+  "targetDateDetailGeoRecovered": 1,
   "targetDateCompoundCityGeoChecked": 0,
   "targetDateCompoundCityGeoRecovered": 0,
   "targetDateTitleGeoChecked": 0,
   "targetDateTitleGeoRecovered": 0,
   "targetDateBodenseeRegionGeoChecked": 0,
   "targetDateBodenseeRegionGeoRecovered": 0,
-  "nonRegionalTargetDateMatches": 39,
+  "nonRegionalTargetDateMatches": 38,
   "rawMaerkte": 137,
-  "rawFeste": 3057,
+  "rawFeste": 3080,
   "targetDateMaerkte": 4,
-  "targetDateFeste": 39,
+  "targetDateFeste": 38,
   "targetDateWithGeoMaerkte": 3,
-  "targetDateWithGeoFeste": 39,
+  "targetDateWithGeoFeste": 38,
   "targetDateWithoutGeoMaerkte": 1,
   "targetDateWithoutGeoFeste": 0
 }
@@ -189,19 +189,11 @@ Ortsstatistik vor Ortsfilter:
     "count": 1
   },
   {
-    "city": "Echt Bodensee",
-    "count": 1
-  },
-  {
     "city": "Endingen",
     "count": 1
   },
   {
     "city": "Friedrichshafen (Kluftern)",
-    "count": 1
-  },
-  {
-    "city": "Gaienhofen",
     "count": 1
   },
   {
@@ -254,6 +246,10 @@ Ortsstatistik vor Ortsfilter:
   },
   {
     "city": "Sinsheimer Erlebnisregion",
+    "count": 1
+  },
+  {
+    "city": "Sonnenbühl",
     "count": 1
   },
   {
@@ -376,7 +372,7 @@ Pages:
     "page": 1,
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/",
     "ok": true,
-    "reportedCount": 3057,
+    "reportedCount": 3080,
     "parsedCount": 14
   },
   {
@@ -2121,12 +2117,20 @@ Pages:
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/219/",
     "ok": true,
     "reportedCount": null,
-    "parsedCount": 5
+    "parsedCount": 14
   },
   {
     "category": "feste",
     "page": 220,
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/220/",
+    "ok": true,
+    "reportedCount": null,
+    "parsedCount": 14
+  },
+  {
+    "category": "feste",
+    "page": 221,
+    "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/221/",
     "ok": false,
     "error": "HTTP 404 Not Found"
   }
