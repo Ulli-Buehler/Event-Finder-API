@@ -2,83 +2,131 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
-  />
-
-  <title>Lokalevents</title>
+  <title>Lokalevents GPT</title>
 
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
 
-  <link
-    rel="stylesheet"
-    href="style.css?v=8030"
-  />
+  <style>
+    html,
+    body{
+      margin:0;
+      padding:0;
+      height:100%;
+      font-family:Arial, sans-serif;
+      background:#111;
+      color:#fff;
+    }
+
+    #map{
+      height:55vh;
+      width:100%;
+    }
+
+    .top{
+      padding:16px;
+      background:#111;
+    }
+
+    h1{
+      margin:0 0 8px 0;
+      font-size:32px;
+    }
+
+    .hint{
+      opacity:0.75;
+      margin-bottom:14px;
+    }
+
+    input[type="file"]{
+      width:100%;
+      box-sizing:border-box;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid #444;
+      background:#1e1e1e;
+      color:#fff;
+      font-size:16px;
+    }
+
+    #events{
+      padding:16px;
+      display:grid;
+      gap:14px;
+    }
+
+    .event-card{
+      background:#1e1e1e;
+      border:1px solid #333;
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .event-card h3{
+      margin:0 0 8px 0;
+      font-size:22px;
+    }
+
+    .meta{
+      opacity:0.75;
+      margin-bottom:8px;
+    }
+
+    .distance{
+      font-weight:bold;
+      margin-bottom:8px;
+    }
+
+    .event-card p{
+      margin:8px 0;
+      line-height:1.4;
+    }
+
+    .event-card a{
+      display:inline-block;
+      margin-top:10px;
+      color:#fff;
+      background:#007aff;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+    }
+  </style>
 </head>
 
 <body>
 
-  <div id="map"></div>
+  <div class="top">
+    <h1>Lokalevents GPT</h1>
 
-  <div class="top compact">
-
-    <div class="top-header">
-      <div class="top-title-block">
-        <h1>Lokalevents</h1>
-
-        <p id="status">
-          Zeigt Märkte und Feste für den aktuellen Sonntag
-        </p>
-
-        <div class="creator-credit">
-          by Ulli Bühler
-        </div>
-      </div>
-
-      <button id="filterToggle" class="filter-toggle" aria-label="Filter anzeigen">
-        ☰
-      </button>
+    <div class="hint">
+      Lade hier die von ChatGPT erzeugte events.json hoch.
     </div>
 
-    <div id="filterPanel" class="filter-panel">
-
-      <div class="radius-control full">
-
-        <div id="radiusLabel">
-          40 km
-        </div>
-
-        <input
-          type="range"
-          id="radiusSlider"
-          min="5"
-          max="200"
-          value="40"
-        />
-
-      </div>
-
-      <div id="lastUpdateInfo" class="last-update-info">
-        Letztes Update: unbekannt
-      </div>
-
-    </div>
-
+    <input
+      id="jsonFile"
+      type="file"
+      accept=".json,application/json"
+    />
   </div>
 
-  <div
-    id="cards"
-    class="cards"
-  ></div>
+  <div id="map"></div>
+
+  <div id="events">
+    <div class="event-card">
+      <h3>Noch keine GPT-Events geladen</h3>
+      <p>
+        Wähle oben deine events.json aus.
+      </p>
+    </div>
+  </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <script src="app.js?v=8030"></script>
+  <script src="app.js?v=1"></script>
 
 </body>
 </html>
