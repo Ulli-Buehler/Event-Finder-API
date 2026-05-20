@@ -7,7 +7,6 @@
 <title>GPT Event Import</title>
 
 <style>
-
 body{
   font-family:sans-serif;
   background:#111;
@@ -100,7 +99,6 @@ a{
   opacity:0.7;
   font-size:13px;
 }
-
 </style>
 </head>
 
@@ -109,19 +107,14 @@ a{
 <h1>GPT Event Import</h1>
 
 <div class="small">
-GPT-Tabelle hier einfügen
+GPT-Tabelle oder events.json hier einfügen
 </div>
 
 <textarea id="input"></textarea>
 
 <div>
-<button onclick="convert()">
-Importieren
-</button>
-
-<button onclick="downloadJson()">
-JSON herunterladen
-</button>
+  <button onclick="convert()">Importieren</button>
+  <button onclick="downloadJson()">JSON herunterladen</button>
 </div>
 
 <div id="status"></div>
@@ -131,14 +124,198 @@ JSON herunterladen
 <div id="preview"></div>
 
 <script>
-
 let parsedEvents = [];
 
-function clean(v){
-  return v
-    ?.replace(/\*\*/g,"")
-    ?.replace(/`/g,"")
-    ?.trim() || "";
+function clean(value){
+  return String(value ?? "")
+    .replace(/\*\*/g, "")
+    .replace(/`/g, "")
+    .trim();
+}
+
+function normalizeDistance(value){
+  if(typeof value === "number") return value;
+
+  const normalized = clean(value)
+    .replace(",", ".")
+    .replace(/[^0-9.]/g, "");
+
+  const number = Number(normalized);
+
+  return Number.isFinite(number)
+    ? number
+    : null;
+}
+
+function normalizeEvent(raw){
+  return {
+    distance_km: normalizeDistance(
+      raw.distance_km ??
+      raw["Entfernung km"] ??
+      raw.entfernung ??
+      ""
+    ),
+
+    title: clean(
+      raw.title ??
+      raw.Veranstaltung ??
+      raw.name ??
+      ""
+    ),
+
+    date: clean(
+      raw.date ??
+      raw.Datum ??
+      ""
+    ),
+
+    time: clean(
+      raw.time ??
+      raw.Uhrzeit ??
+      "nicht angegeben"
+    ) || "nicht angegeben",
+
+    location: clean(
+      raw.location ??
+      raw.Ort ??
+      raw.city ??
+      ""
+    ),
+
+    description: clean(
+      raw.description ??
+      raw.Kurzbeschreibung ??
+      raw.summary ??
+      ""
+    ),
+
+    address: clean(
+      raw.address ??
+      raw["Adresse / Koordinaten"] ??
+      raw.adresse ??
+      ""
+    ),
+
+    maps: clean(
+      raw.maps ??
+      raw.Kartenlink ??
+      raw.map ??
+      ""
+    ),
+
+    source: clean(
+      raw.source ??
+      raw.Quelle ??
+      ""
+    )
+  };
+}
+
+function extractJsonText(text){
+
+  const trimmed = text.trim();
+
+  const firstArray = trimmed.indexOf("[");
+  const lastArray = trimmed.lastIndexOf("]");
+
+  if(
+    firstArray !== -1 &&
+    lastArray !== -1 &&
+    lastArray > firstArray
+  ){
+    return trimmed.slice(
+      firstArray,
+      lastArray + 1
+    );
+  }
+
+  const firstObject = trimmed.indexOf("{");
+  const lastObject = trimmed.lastIndexOf("}");
+
+  if(
+    firstObject !== -1 &&
+    lastObject !== -1 &&
+    lastObject > firstObject
+  ){
+    return "[" +
+      trimmed.slice(
+        firstObject,
+        lastObject + 1
+      ) +
+    "]";
+  }
+
+  return "";
+}
+
+function parseJsonInput(text){
+
+  const jsonText = extractJsonText(text);
+
+  if(!jsonText){
+    return [];
+  }
+
+  const data = JSON.parse(jsonText);
+
+  const list = Array.isArray(data)
+    ? data
+    : [data];
+
+  return list
+    .map(normalizeEvent)
+    .filter(event =>
+      event.title ||
+      event.location ||
+      event.source
+    );
+}
+
+function parseTableInput(text){
+
+  const rows = text
+    .split("\n")
+    .filter(line => line.includes("|"));
+
+  const events = [];
+
+  for(const row of rows){
+
+    const cols = row
+      .split("|")
+      .map(v => clean(v))
+      .filter(Boolean);
+
+    if(cols.length < 8) continue;
+
+    if(
+      cols[0]
+      .toLowerCase()
+      .includes("entfernung")
+    ){
+      continue;
+    }
+
+    if(cols[0].includes("---")){
+      continue;
+    }
+
+    events.push(
+      normalizeEvent({
+        distance_km: cols[0],
+        title: cols[1],
+        date: cols[2],
+        time: cols[3],
+        location: cols[4],
+        description: cols[5],
+        address: cols[6],
+        maps: cols[7],
+        source: cols[8] || ""
+      })
+    );
+  }
+
+  return events;
 }
 
 function convert(){
@@ -146,50 +323,20 @@ function convert(){
   const text =
     document.getElementById("input").value;
 
-  const rows =
-    text.split("\n")
-      .filter(line =>
-        line.includes("|")
-      );
-
   parsedEvents = [];
 
-  for(const row of rows){
+  try{
+    parsedEvents = parseJsonInput(text);
+  }
+  catch(error){
+    console.warn(
+      "JSON konnte nicht gelesen werden:",
+      error
+    );
+  }
 
-    const cols =
-      row.split("|")
-        .map(v => clean(v))
-        .filter(Boolean);
-
-    if(cols.length < 8){
-      continue;
-    }
-
-    if(
-      cols[0].toLowerCase().includes("entfernung")
-    ){
-      continue;
-    }
-
-    if(
-      cols[0].includes("---")
-    ){
-      continue;
-    }
-
-    const event = {
-      distance_km: cols[0] || "",
-      title: cols[1] || "",
-      date: cols[2] || "",
-      time: cols[3] || "",
-      location: cols[4] || "",
-      description: cols[5] || "",
-      address: cols[6] || "",
-      maps: cols[7] || "",
-      source: cols[8] || ""
-    };
-
-    parsedEvents.push(event);
+  if(parsedEvents.length === 0){
+    parsedEvents = parseTableInput(text);
   }
 
   renderResult();
@@ -208,10 +355,11 @@ function renderResult(){
 
   if(parsedEvents.length === 0){
 
-    status.innerHTML =
-      `<div class="error">
-      Keine gültigen Events erkannt
-      </div>`;
+    status.innerHTML = `
+      <div class="error">
+        Keine gültigen Events erkannt
+      </div>
+    `;
 
     output.textContent = "";
     preview.innerHTML = "";
@@ -219,49 +367,61 @@ function renderResult(){
     return;
   }
 
-  status.innerHTML =
-    `<div class="success">
-    ${parsedEvents.length} Events erkannt
-    </div>`;
+  status.innerHTML = `
+    <div class="success">
+      ${parsedEvents.length} Events erkannt
+    </div>
+  `;
 
   output.textContent =
-    JSON.stringify(parsedEvents,null,2);
+    JSON.stringify(parsedEvents, null, 2);
 
-  let html =
-    `<table>
+  let html = `
+    <table>
       <tr>
         <th>km</th>
         <th>Event</th>
         <th>Ort</th>
         <th>Karte</th>
-      </tr>`;
+      </tr>
+  `;
 
-  for(const e of parsedEvents){
+  for(const event of parsedEvents){
 
     html += `
       <tr>
-        <td>${e.distance_km}</td>
+
         <td>
-          <b>${e.title}</b><br>
-          ${e.date}<br>
-          ${e.time}
+          ${event.distance_km ?? ""}
         </td>
+
         <td>
-          ${e.location}<br>
+          <b>${event.title}</b><br>
+          ${event.date}<br>
+          ${event.time}
+        </td>
+
+        <td>
+          ${event.location}<br>
+
           <span class="small">
-          ${e.address}
+            ${event.address}
           </span>
         </td>
+
         <td>
-          <a href="${e.maps}" target="_blank">
-          Karte
-          </a>
+          ${
+            event.maps
+            ? `<a href="${event.maps}" target="_blank">Karte</a>`
+            : ""
+          }
         </td>
+
       </tr>
     `;
   }
 
-  html += `</table>`;
+  html += "</table>";
 
   preview.innerHTML = html;
 }
@@ -269,19 +429,24 @@ function renderResult(){
 function downloadJson(){
 
   if(parsedEvents.length === 0){
+
     alert("Keine Daten vorhanden");
+
     return;
   }
 
-  const blob =
-    new Blob(
-      [
-        JSON.stringify(parsedEvents,null,2)
-      ],
-      {
-        type:"application/json"
-      }
-    );
+  const blob = new Blob(
+    [
+      JSON.stringify(
+        parsedEvents,
+        null,
+        2
+      )
+    ],
+    {
+      type:"application/json"
+    }
+  );
 
   const url =
     URL.createObjectURL(blob);
@@ -290,15 +455,12 @@ function downloadJson(){
     document.createElement("a");
 
   a.href = url;
-
-  a.download =
-    "gpt-events.json";
+  a.download = "events.json";
 
   a.click();
 
   URL.revokeObjectURL(url);
 }
-
 </script>
 
 </body>
