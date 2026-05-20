@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>GPT Event Import</title>
+
+<style>
+
+body{
+  font-family:sans-serif;
+  background:#111;
+  color:#fff;
+  margin:0;
+  padding:20px;
+  max-width:1200px;
+  margin:auto;
+}
+
+h1{
+  margin-bottom:20px;
+}
+
+textarea{
+  width:100%;
+  height:320px;
+  background:#1e1e1e;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:12px;
+  padding:14px;
+  font-size:14px;
+  line-height:1.5;
+  box-sizing:border-box;
+}
+
+button{
+  margin-top:14px;
+  margin-right:10px;
+  padding:14px 20px;
+  border:none;
+  border-radius:12px;
+  background:#007aff;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+pre{
+  margin-top:20px;
+  background:#1e1e1e;
+  padding:14px;
+  border-radius:12px;
+  overflow:auto;
+  white-space:pre-wrap;
+}
+
+.success{
+  margin-top:16px;
+  padding:12px;
+  border-radius:12px;
+  background:#133d1e;
+  color:#7dff9a;
+}
+
+.error{
+  margin-top:16px;
+  padding:12px;
+  border-radius:12px;
+  background:#471717;
+  color:#ff9a9a;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:24px;
+}
+
+th,td{
+  border:1px solid #333;
+  padding:10px;
+  vertical-align:top;
+}
+
+th{
+  background:#222;
+}
+
+a{
+  color:#4ea1ff;
+}
+
+.small{
+  opacity:0.7;
+  font-size:13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>GPT Event Import</h1>
+
+<div class="small">
+GPT-Tabelle hier einfügen
+</div>
+
+<textarea id="input"></textarea>
+
+<div>
+<button onclick="convert()">
+Importieren
+</button>
+
+<button onclick="downloadJson()">
+JSON herunterladen
+</button>
+</div>
+
+<div id="status"></div>
+
+<pre id="output"></pre>
+
+<div id="preview"></div>
+
+<script>
+
+let parsedEvents = [];
+
+function clean(v){
+  return v
+    ?.replace(/\*\*/g,"")
+    ?.replace(/`/g,"")
+    ?.trim() || "";
+}
+
+function convert(){
+
+  const text =
+    document.getElementById("input").value;
+
+  const rows =
+    text.split("\n")
+      .filter(line =>
+        line.includes("|")
+      );
+
+  parsedEvents = [];
+
+  for(const row of rows){
+
+    const cols =
+      row.split("|")
+        .map(v => clean(v))
+        .filter(Boolean);
+
+    if(cols.length < 8){
+      continue;
+    }
+
+    if(
+      cols[0].toLowerCase().includes("entfernung")
+    ){
+      continue;
+    }
+
+    if(
+      cols[0].includes("---")
+    ){
+      continue;
+    }
+
+    const event = {
+      distance_km: cols[0] || "",
+      title: cols[1] || "",
+      date: cols[2] || "",
+      time: cols[3] || "",
+      location: cols[4] || "",
+      description: cols[5] || "",
+      address: cols[6] || "",
+      maps: cols[7] || "",
+      source: cols[8] || ""
+    };
+
+    parsedEvents.push(event);
+  }
+
+  renderResult();
+}
+
+function renderResult(){
+
+  const status =
+    document.getElementById("status");
+
+  const output =
+    document.getElementById("output");
+
+  const preview =
+    document.getElementById("preview");
+
+  if(parsedEvents.length === 0){
+
+    status.innerHTML =
+      `<div class="error">
+      Keine gültigen Events erkannt
+      </div>`;
+
+    output.textContent = "";
+    preview.innerHTML = "";
+
+    return;
+  }
+
+  status.innerHTML =
+    `<div class="success">
+    ${parsedEvents.length} Events erkannt
+    </div>`;
+
+  output.textContent =
+    JSON.stringify(parsedEvents,null,2);
+
+  let html =
+    `<table>
+      <tr>
+        <th>km</th>
+        <th>Event</th>
+        <th>Ort</th>
+        <th>Karte</th>
+      </tr>`;
+
+  for(const e of parsedEvents){
+
+    html += `
+      <tr>
+        <td>${e.distance_km}</td>
+        <td>
+          <b>${e.title}</b><br>
+          ${e.date}<br>
+          ${e.time}
+        </td>
+        <td>
+          ${e.location}<br>
+          <span class="small">
+          ${e.address}
+          </span>
+        </td>
+        <td>
+          <a href="${e.maps}" target="_blank">
+          Karte
+          </a>
+        </td>
+      </tr>
+    `;
+  }
+
+  html += `</table>`;
+
+  preview.innerHTML = html;
+}
+
+function downloadJson(){
+
+  if(parsedEvents.length === 0){
+    alert("Keine Daten vorhanden");
+    return;
+  }
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(parsedEvents,null,2)
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.download =
+    "gpt-events.json";
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+</script>
+
+</body>
+</html>
