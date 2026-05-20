@@ -9,6 +9,16 @@ L.tileLayer(
 
 const markersLayer = L.layerGroup().addTo(map);
 
+const center = [48.616, 9.45];
+
+L.circle(center, {
+  radius: 50000,
+  color: '#007aff',
+  fill:false
+}).addTo(map);
+
+L.marker(center).addTo(map);
+
 const fileInput =
   document.getElementById("jsonFile");
 
@@ -22,35 +32,7 @@ fileInput?.addEventListener(
   handleFileUpload
 );
 
-async function loadDefaultData(){
-
-  try{
-
-    const response =
-      await fetch("./events.json");
-
-    if(!response.ok){
-      throw new Error("Keine events.json gefunden");
-    }
-
-    const data =
-      await response.json();
-
-    allEvents = data;
-
-    renderEvents(allEvents);
-
-  }
-  catch(error){
-
-    console.warn(
-      "Keine Standarddaten geladen:",
-      error
-    );
-  }
-}
-
-function handleFileUpload(event){
+async function handleFileUpload(event){
 
   const file =
     event.target.files[0];
@@ -60,7 +42,7 @@ function handleFileUpload(event){
   const reader =
     new FileReader();
 
-  reader.onload = e => {
+  reader.onload = async e => {
 
     try{
 
@@ -68,6 +50,8 @@ function handleFileUpload(event){
         JSON.parse(e.target.result);
 
       allEvents = data;
+
+      await enrichEvents(allEvents);
 
       renderEvents(allEvents);
 
@@ -85,6 +69,55 @@ function handleFileUpload(event){
   reader.readAsText(file);
 }
 
+async function enrichEvents(events){
+
+  for(const event of events){
+
+    if(
+      typeof event.lat === "number" &&
+      typeof event.lng === "number"
+    ){
+      continue;
+    }
+
+    const query =
+      encodeURIComponent(
+        event.address ||
+        event.location ||
+        ""
+      );
+
+    if(!query) continue;
+
+    try{
+
+      const response =
+        await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${query}`
+        );
+
+      const results =
+        await response.json();
+
+      if(results?.length){
+
+        event.lat =
+          parseFloat(results[0].lat);
+
+        event.lng =
+          parseFloat(results[0].lon);
+      }
+    }
+    catch(error){
+
+      console.warn(
+        "Geocoding fehlgeschlagen:",
+        event.title
+      );
+    }
+  }
+}
+
 function renderEvents(events){
 
   markersLayer.clearLayers();
@@ -95,14 +128,16 @@ function renderEvents(events){
 
   for(const event of events){
 
-    const latlng =
-      getLatLng(event);
-
-    if(latlng){
+    if(
+      typeof event.lat === "number" &&
+      typeof event.lng === "number"
+    ){
 
       const marker =
-        L.marker(latlng)
-          .addTo(markersLayer);
+        L.marker([
+          event.lat,
+          event.lng
+        ]).addTo(markersLayer);
 
       marker.bindPopup(`
         <b>${event.title || ""}</b><br>
@@ -117,18 +152,6 @@ function renderEvents(events){
   fitMap(events);
 }
 
-function getLatLng(event){
-
-  if(
-    typeof event.lat === "number" &&
-    typeof event.lng === "number"
-  ){
-    return [event.lat, event.lng];
-  }
-
-  return null;
-}
-
 function renderEventCard(event){
 
   const card =
@@ -141,18 +164,18 @@ function renderEventCard(event){
       ${event.title || ""}
     </h3>
 
-    <div>
+    <div class="meta">
       ${event.date || ""}
       ${event.time || ""}
     </div>
 
-    <div>
-      ${event.location || ""}
-    </div>
-
-    <div>
+    <div class="distance">
       ${event.distance_km || "?"} km
     </div>
+
+    <p>
+      ${event.location || ""}
+    </p>
 
     <p>
       ${event.description || ""}
@@ -192,7 +215,7 @@ function fitMap(events){
     }
   }
 
-  if(bounds.length > 0){
+  if(bounds.length){
 
     map.fitBounds(
       bounds,
@@ -202,5 +225,3 @@ function fitMap(events){
     );
   }
 }
-
-loadDefaultData();
