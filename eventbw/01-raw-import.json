@@ -2,8 +2,8 @@
   "meta": {
     "source": "https://www.veranstaltung-baden-wuerttemberg.de",
     "targetDate": "2026-05-24",
-    "startedAt": "2026-05-20T11:47:13.649Z",
-    "finishedAt": "2026-05-20T11:50:14.274Z",
+    "startedAt": "2026-05-20T14:54:20.531Z",
+    "finishedAt": "2026-05-20T14:57:09.996Z",
     "maxPagesPerCategory": 300,
     "regionalCities": [
       "Dettingen unter Teck",
@@ -2064,8 +2064,8 @@
       "page": 12,
       "geoDetailCoordinateChecked": true,
       "geoDetailCoordinateFound": false,
-      "lat": 47.688082,
-      "lng": 9.4095761,
+      "lat": 47.6882714,
+      "lng": 9.4094634,
       "geoEstimated": true,
       "geoSource": "derived",
       "geoQuery": "Friedrichshafen (Kluftern), Baden-Württemberg, Germany"
@@ -2190,8 +2190,8 @@
       "page": 12,
       "geoDetailCoordinateChecked": true,
       "geoDetailCoordinateFound": false,
-      "lat": 47.9713008,
-      "lng": 8.9284465,
+      "lat": 47.9713529,
+      "lng": 8.9283473,
       "geoEstimated": true,
       "geoSource": "derived",
       "geoQuery": "Neuhausen ob Eck, Baden-Württemberg, Germany"
