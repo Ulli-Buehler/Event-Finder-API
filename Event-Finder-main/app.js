@@ -132,4 +132,452 @@ async function loadSavedEvents(){
 
 function handleFileUpload(event){
 
-  const file = event.target.files[0
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = e => {
+
+    try{
+
+      selectedEventsFileText =
+        String(e.target.result || "");
+
+      const data =
+        JSON.parse(selectedEventsFileText);
+
+      allEvents =
+        Array.isArray(data)
+        ? data
+        : [];
+
+      renderEvents(allEvents);
+
+      setStatus(
+        adminStatus,
+        allEvents.length +
+        " Events geladen. Noch nicht gespeichert.",
+        "ok"
+      );
+
+    }catch(error){
+
+      selectedEventsFileText = "";
+
+      setStatus(
+        adminStatus,
+        "JSON-Datei konnte nicht gelesen werden.",
+        "error"
+      );
+
+      console.error(error);
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+async function saveEventsForEveryone(){
+
+  if(!selectedEventsFileText){
+
+    setStatus(
+      adminStatus,
+      "Bitte zuerst eine events.json auswählen.",
+      "error"
+    );
+
+    return;
+  }
+
+  try{
+
+    setStatus(
+      adminStatus,
+      "Speichere Events zentral…",
+      ""
+    );
+
+    const response = await fetch(
+      "/api/save-events",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: selectedEventsFileText
+      }
+    );
+
+    const result = await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        result.error ||
+        "Speichern fehlgeschlagen"
+      );
+    }
+
+    setStatus(
+      adminStatus,
+      "Events gespeichert. Seite gleich neu laden.",
+      "ok"
+    );
+
+    setTimeout(() => {
+
+      location.reload();
+
+    }, 3000);
+
+  }catch(error){
+
+    setStatus(
+      adminStatus,
+      error.message,
+      "error"
+    );
+
+    console.error(error);
+  }
+}
+
+async function loadPrompt(){
+
+  try{
+
+    const response = await fetch(
+      "prompt.txt?v=" + Date.now(),
+      {
+        cache: "no-store"
+      }
+    );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Noch kein prompt.txt vorhanden"
+      );
+    }
+
+    promptText.value =
+      await response.text();
+
+    setStatus(
+      promptStatus,
+      "Suchtext geladen.",
+      "ok"
+    );
+
+  }catch(error){
+
+    promptText.value = "";
+
+    setStatus(
+      promptStatus,
+      "Noch kein Suchtext gespeichert.",
+      ""
+    );
+  }
+}
+
+async function savePrompt(){
+
+  try{
+
+    const text =
+      promptText.value || "";
+
+    if(!text.trim()){
+
+      setStatus(
+        promptStatus,
+        "Suchtext ist leer.",
+        "error"
+      );
+
+      return;
+    }
+
+    setStatus(
+      promptStatus,
+      "Neue Suche wird übernommen…",
+      ""
+    );
+
+    const response = await fetch(
+      "/api/save-prompt",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "text/plain; charset=utf-8"
+        },
+        body: text
+      }
+    );
+
+    const result = await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        result.error ||
+        "Suchtext konnte nicht gespeichert werden"
+      );
+    }
+
+    setStatus(
+      promptStatus,
+      "Neue Suche gespeichert.",
+      "ok"
+    );
+
+  }catch(error){
+
+    setStatus(
+      promptStatus,
+      error.message,
+      "error"
+    );
+
+    console.error(error);
+  }
+}
+
+async function sharePrompt(){
+
+  const text =
+    promptText.value || "";
+
+  if(!text.trim()){
+
+    setStatus(
+      promptStatus,
+      "Kein Suchtext vorhanden.",
+      "error"
+    );
+
+    return;
+  }
+
+  try{
+
+    if(navigator.share){
+
+      await navigator.share({
+        title: "Suchanfrage Events",
+        text: text
+      });
+
+      setStatus(
+        promptStatus,
+        "ChatGPT Teilen geöffnet.",
+        "ok"
+      );
+
+      return;
+    }
+
+    await navigator.clipboard.writeText(text);
+
+    setStatus(
+      promptStatus,
+      "Teilen nicht möglich. Suchtext wurde kopiert.",
+      "ok"
+    );
+
+  }catch(error){
+
+    setStatus(
+      promptStatus,
+      "Teilen abgebrochen.",
+      ""
+    );
+  }
+}
+
+function hasCoords(event){
+
+  return (
+    typeof event.lat === "number" &&
+    typeof event.lng === "number" &&
+    Number.isFinite(event.lat) &&
+    Number.isFinite(event.lng)
+  );
+}
+
+function renderEvents(events){
+
+  markersLayer.clearLayers();
+
+  eventsContainer.innerHTML = "";
+
+  if(
+    !Array.isArray(events) ||
+    events.length === 0
+  ){
+
+    eventsContainer.innerHTML = `
+      <div class="event-card">
+        <h3>Keine Events geladen</h3>
+        <p>
+          Öffne den Adminbereich und lade
+          eine events.json hoch.
+        </p>
+      </div>
+    `;
+
+    map.setView(CENTER, 9);
+
+    return;
+  }
+
+  const bounds = [];
+
+  const sortedEvents =
+    [...events].sort((a, b) => {
+
+      const da =
+        Number(a.distance_km ?? 9999);
+
+      const db =
+        Number(b.distance_km ?? 9999);
+
+      return da - db;
+    });
+
+  for(const event of sortedEvents){
+
+    if(hasCoords(event)){
+
+      const marker = L.marker([
+        event.lat,
+        event.lng
+      ]).addTo(markersLayer);
+
+      marker.bindPopup(`
+        <b>${escapeHtml(event.title || "")}</b><br>
+        ${escapeHtml(event.location || "")}<br>
+        ${escapeHtml(event.date || "")}
+      `);
+
+      bounds.push([
+        event.lat,
+        event.lng
+      ]);
+    }
+
+    renderEventCard(event);
+  }
+
+  if(bounds.length > 0){
+
+    map.fitBounds(bounds, {
+      padding:[40,40]
+    });
+
+  }else{
+
+    map.setView(CENTER, 9);
+  }
+}
+
+function renderEventCard(event){
+
+  const card =
+    document.createElement("div");
+
+  card.className = "event-card";
+
+  const hasPoint =
+    hasCoords(event);
+
+  card.innerHTML = `
+    <h3>
+      ${escapeHtml(event.title || "")}
+    </h3>
+
+    <div class="meta">
+      ${escapeHtml(event.date || "")}
+      ${escapeHtml(event.time || "")}
+    </div>
+
+    <div class="distance">
+      ${event.distance_km ?? "?"} km
+    </div>
+
+    <p>
+      ${escapeHtml(event.location || "")}
+    </p>
+
+    <p>
+      ${escapeHtml(event.description || "")}
+    </p>
+
+    ${
+      hasPoint
+      ? `
+        <p class="meta">
+          ${event.lat},
+          ${event.lng}
+        </p>
+      `
+      : `
+        <p class="meta">
+          Kein Kartenpunkt vorhanden
+        </p>
+      `
+    }
+
+    ${
+      event.maps
+      ? `
+        <a
+          href="${escapeAttribute(event.maps)}"
+          target="_blank"
+          rel="noopener"
+        >
+          Karte öffnen
+        </a>
+      `
+      : ""
+    }
+  `;
+
+  eventsContainer.appendChild(card);
+}
+
+function setStatus(
+  element,
+  text,
+  type
+){
+
+  element.textContent = text;
+
+  element.className = "status";
+
+  if(type){
+
+    element.classList.add(type);
+  }
+}
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function escapeAttribute(value){
+
+  return escapeHtml(value);
+}
