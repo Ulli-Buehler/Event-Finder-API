@@ -52,7 +52,6 @@
       margin:0;
       font-size:18px;
       font-weight:700;
-      letter-spacing:0.2px;
       line-height:1.1;
     }
 
@@ -157,28 +156,33 @@
     #map{
       flex:1 1 auto;
       width:100%;
-      min-height:42vh;
+      min-height:0;
     }
 
     #events{
-      flex:0 0 38vh;
+      flex:0 0 28vh;
       width:100%;
       padding:10px;
-      display:grid;
+      display:flex;
       gap:10px;
-      overflow-y:auto;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       background:#111;
       border-top:1px solid #222;
     }
 
     .event-card{
-      width:100%;
+      flex:0 0 calc(100vw - 20px);
+      max-width:calc(100vw - 20px);
+      height:100%;
+      overflow-y:auto;
+      scroll-snap-align:center;
       background:#1e1e1e;
       border:1px solid #333;
       border-radius:14px;
       padding:13px;
-      overflow:hidden;
     }
 
     .event-card.active{
@@ -299,7 +303,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 
 </body>
 </html>
