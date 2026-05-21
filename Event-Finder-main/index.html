@@ -2,9 +2,12 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
 
-  <title>Lokalevents GPT</title>
+  <title>KI Eventfinder</title>
 
   <link
     rel="stylesheet"
@@ -12,88 +15,133 @@
   />
 
   <style>
+    *{
+      box-sizing:border-box;
+    }
+
     html,
     body{
       margin:0;
       padding:0;
-      min-height:100%;
-      font-family:Arial, sans-serif;
+      width:100%;
+      max-width:100%;
+      height:100%;
+      overflow:hidden;
       background:#111;
       color:#fff;
+      font-family:Arial,sans-serif;
     }
 
-    #map{
-      height:58vh;
-      width:100%;
+    body{
+      display:flex;
+      flex-direction:column;
     }
 
     .top{
-      padding:10px 12px 6px;
+      flex:0 0 auto;
+      width:100%;
+      padding:7px 10px 5px;
       background:#111;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      gap:8px;
     }
 
     h1{
-      margin:0 0 4px 0;
-      font-size:22px;
+      margin:0;
+      font-size:18px;
       font-weight:700;
       letter-spacing:0.2px;
+      line-height:1.1;
     }
 
-    .hint{
-      opacity:0.65;
-      margin-bottom:8px;
-      line-height:1.3;
-      font-size:13px;
-    }
-
-    button,
-    input[type="file"]{
-      width:100%;
-      box-sizing:border-box;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid #444;
-      background:#1e1e1e;
-      color:#fff;
-      font-size:15px;
-      margin:4px 0;
-    }
-
-    button{
-      background:#007aff;
-      border:none;
-      font-weight:600;
+    .status-line{
+      grid-column:1 / 2;
+      opacity:0.62;
+      font-size:12px;
+      line-height:1.2;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     details{
-      margin-top:8px;
-      background:#181818;
-      border:1px solid #2a2a2a;
-      border-radius:12px;
-      padding:10px;
+      grid-column:2 / 3;
+      grid-row:1 / 3;
+      position:relative;
     }
 
     summary{
-      font-size:13px;
-      font-weight:600;
+      width:34px;
+      height:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background:#1e1e1e;
+      border:1px solid #333;
       cursor:pointer;
-      opacity:0.58;
-      user-select:none;
       list-style:none;
+      font-size:17px;
+      user-select:none;
     }
 
     summary::-webkit-details-marker{
       display:none;
     }
 
-    .status{
-      margin-top:8px;
+    details[open] summary{
+      background:#292929;
+    }
+
+    .admin-panel{
+      position:absolute;
+      right:0;
+      top:42px;
+      width:min(330px, calc(100vw - 20px));
+      z-index:1000;
+      background:#181818;
+      border:1px solid #333;
+      border-radius:14px;
       padding:10px;
-      border-radius:10px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+      display:grid;
+      gap:7px;
+    }
+
+    button,
+    input[type="file"]{
+      width:100%;
+      max-width:100%;
+      display:block;
+      padding:11px;
+      border-radius:11px;
+      border:1px solid #444;
+      background:#1e1e1e;
+      color:#fff;
+      font-size:14px;
+    }
+
+    button{
+      border:none;
+      background:#007aff;
+      font-weight:600;
+    }
+
+    textarea{
+      display:none;
+    }
+
+    .status{
+      width:100%;
+      padding:9px;
+      border-radius:9px;
       background:#222;
       color:#ddd;
-      line-height:1.35;
-      font-size:13px;
+      line-height:1.3;
+      font-size:12px;
+      overflow-wrap:break-word;
     }
 
     .status.ok{
@@ -106,52 +154,85 @@
       color:#ff9a9a;
     }
 
+    #map{
+      flex:1 1 auto;
+      width:100%;
+      min-height:42vh;
+    }
+
     #events{
-      padding:12px;
+      flex:0 0 38vh;
+      width:100%;
+      padding:10px;
       display:grid;
       gap:10px;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+      background:#111;
+      border-top:1px solid #222;
     }
 
     .event-card{
+      width:100%;
       background:#1e1e1e;
       border:1px solid #333;
       border-radius:14px;
-      padding:14px;
+      padding:13px;
+      overflow:hidden;
+    }
+
+    .event-card.active{
+      border-color:#ff3b30;
+      box-shadow:0 0 0 1px #ff3b30 inset;
     }
 
     .event-card h3{
       margin:0 0 6px 0;
-      font-size:18px;
+      font-size:17px;
       line-height:1.25;
+      overflow-wrap:break-word;
     }
 
     .meta{
       opacity:0.72;
       margin-bottom:6px;
-      font-size:14px;
+      font-size:13px;
+      line-height:1.3;
     }
 
     .distance{
       font-weight:bold;
       margin-bottom:6px;
-      font-size:14px;
+      font-size:13px;
     }
 
     .event-card p{
       margin:6px 0;
       line-height:1.35;
       font-size:14px;
+      overflow-wrap:break-word;
+    }
+
+    .event-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
     }
 
     .event-card a{
       display:inline-block;
-      margin-top:8px;
       color:#fff;
       background:#007aff;
-      padding:9px 12px;
+      padding:8px 11px;
       border-radius:10px;
       text-decoration:none;
-      font-size:14px;
+      font-size:13px;
+      max-width:100%;
+    }
+
+    .event-card a.source-link{
+      background:#333;
     }
   </style>
 </head>
@@ -160,25 +241,19 @@
 
   <div class="top">
 
-    <h1>Lokalevents GPT</h1>
+    <h1>KI Eventfinder</h1>
 
-    <div class="hint" id="dataStatus">
+    <div class="status-line" id="dataStatus">
       Lade gespeicherte Events…
     </div>
 
     <details>
 
-      <summary>
-        ⚙️ Admin
+      <summary title="Einstellungen">
+        ⚙️
       </summary>
 
-      <div
-        style="
-          margin-top:10px;
-          display:grid;
-          gap:6px;
-        "
-      >
+      <div class="admin-panel">
 
         <input
           id="jsonFile"
@@ -198,10 +273,7 @@
           💾 Neue Suche speichern
         </button>
 
-        <textarea
-          id="promptText"
-          style="display:none;"
-        ></textarea>
+        <textarea id="promptText"></textarea>
 
         <div id="adminStatus" class="status">
           Noch keine neue Datei ausgewählt.
@@ -227,7 +299,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=8"></script>
 
 </body>
 </html>
