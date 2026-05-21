@@ -1,7 +1,9 @@
 const CENTER = [48.616, 9.45];
-const RADIUS_METERS = 50000;
+const RADIUS_KM = 50;
 
-const map = L.map("map").setView(CENTER, 9);
+const map = L.map("map", {
+  zoomControl: true
+});
 
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -10,265 +12,300 @@ L.tileLayer(
   }
 ).addTo(map);
 
-const markersLayer = L.layerGroup().addTo(map);
-
-const activeLayer = L.layerGroup().addTo(map);
-
-L.circle(CENTER, {
-  radius: RADIUS_METERS,
-  color: "#007aff",
-  fill: false,
-  weight: 3
+const radiusCircle = L.circle(CENTER, {
+  radius: RADIUS_KM * 1000,
+  color: "#008cff",
+  weight: 4,
+  fillOpacity: 0
 }).addTo(map);
 
-L.circleMarker(CENTER, {
-  radius: 6,
-  color: "#007aff",
-  fillColor: "#007aff",
-  fillOpacity: 1
-})
-.addTo(map)
-.bindPopup("Dettingen unter Teck");
+const homeMarker = L.circleMarker(CENTER, {
+  radius: 10,
+  color: "#008cff",
+  fillColor: "#008cff",
+  fillOpacity: 1,
+  weight: 2
+}).addTo(map);
 
-const fileInput =
-  document.getElementById("jsonFile");
+map.fitBounds(radiusCircle.getBounds(), {
+  padding: [10, 10]
+});
 
-const saveEventsBtn =
-  document.getElementById("saveEventsBtn");
+const eventsContainer = document.getElementById("events");
+const dataStatus = document.getElementById("dataStatus");
 
-const eventsContainer =
-  document.getElementById("events");
+const adminStatus = document.getElementById("adminStatus");
+const promptStatus = document.getElementById("promptStatus");
 
-const adminStatus =
-  document.getElementById("adminStatus");
+const jsonFileInput = document.getElementById("jsonFile");
 
-const dataStatus =
-  document.getElementById("dataStatus");
+const saveEventsBtn = document.getElementById("saveEventsBtn");
+const sharePromptBtn = document.getElementById("sharePromptBtn");
+const updatePromptBtn = document.getElementById("updatePromptBtn");
 
-const promptText =
-  document.getElementById("promptText");
+const promptTextarea = document.getElementById("promptText");
 
-const sharePromptBtn =
-  document.getElementById("sharePromptBtn");
-
-const updatePromptBtn =
-  document.getElementById("updatePromptBtn");
-
-const promptStatus =
-  document.getElementById("promptStatus");
-
-let allEvents = [];
-
-let selectedEventsFileText = "";
-
+let uploadedEvents = [];
+let mapMarkers = [];
 let activeMarker = null;
 
-fileInput?.addEventListener(
-  "change",
-  handleFileUpload
-);
+function setStatus(element, text, type = "") {
+  element.textContent = text;
+  element.className = "status";
 
-saveEventsBtn?.addEventListener(
-  "click",
-  saveEventsForEveryone
-);
-
-sharePromptBtn?.addEventListener(
-  "click",
-  sharePrompt
-);
-
-updatePromptBtn?.addEventListener(
-  "click",
-  savePrompt
-);
-
-init();
-
-async function init(){
-
-  await loadSavedEvents();
-
-  await loadPrompt();
+  if (type) {
+    element.classList.add(type);
+  }
 }
 
-async function loadSavedEvents(){
+function clearMarkers() {
+  mapMarkers.forEach(marker => {
+    map.removeLayer(marker);
+  });
 
-  try{
+  mapMarkers = [];
 
-    const response = await fetch(
-      "events.json?v=" + Date.now(),
-      {
-        cache:"no-store"
-      }
-    );
+  if (activeMarker) {
+    map.removeLayer(activeMarker);
+    activeMarker = null;
+  }
+}
 
-    if(!response.ok){
+function createMarker(event, index) {
+  if (
+    typeof event.lat !== "number" ||
+    typeof event.lng !== "number"
+  ) {
+    return null;
+  }
 
-      throw new Error(
-        "Keine gespeicherte events.json gefunden"
-      );
+  const marker = L.marker([event.lat, event.lng]).addTo(map);
+
+  marker.on("click", () => {
+    scrollToCard(index);
+    highlightEvent(index);
+  });
+
+  return marker;
+}
+
+function createActiveMarker(event) {
+  if (
+    typeof event.lat !== "number" ||
+    typeof event.lng !== "number"
+  ) {
+    return;
+  }
+
+  if (activeMarker) {
+    map.removeLayer(activeMarker);
+  }
+
+  activeMarker = L.circleMarker(
+    [event.lat, event.lng],
+    {
+      radius: 12,
+      color: "#ff3b30",
+      fillColor: "#ff3b30",
+      fillOpacity: 1,
+      weight: 3
+    }
+  ).addTo(map);
+}
+
+function scrollToCard(index) {
+  const cards = document.querySelectorAll(".event-card");
+
+  if (!cards[index]) {
+    return;
+  }
+
+  cards[index].scrollIntoView({
+    behavior: "smooth",
+    inline: "center"
+  });
+}
+
+function highlightEvent(index) {
+  const cards = document.querySelectorAll(".event-card");
+
+  cards.forEach(card => {
+    card.classList.remove("active");
+  });
+
+  if (cards[index]) {
+    cards[index].classList.add("active");
+  }
+
+  const event = uploadedEvents[index];
+
+  if (event) {
+    createActiveMarker(event);
+  }
+}
+
+function renderEvents(events) {
+  clearMarkers();
+
+  uploadedEvents = events || [];
+
+  eventsContainer.innerHTML = "";
+
+  if (!uploadedEvents.length) {
+    eventsContainer.innerHTML = `
+      <div class="event-card">
+        <h3>Keine Events geladen</h3>
+        <p>Öffne das Zahnrad und lade eine events.json hoch.</p>
+      </div>
+    `;
+
+    dataStatus.textContent = "0 gespeicherte Events geladen.";
+
+    return;
+  }
+
+  dataStatus.textContent =
+    `${uploadedEvents.length} gespeicherte Events geladen.`;
+
+  uploadedEvents.forEach((event, index) => {
+
+    const card = document.createElement("div");
+    card.className = "event-card";
+
+    card.innerHTML = `
+      <h3>${event.title || "Unbenanntes Event"}</h3>
+
+      <div class="meta">
+        ${event.date || ""}
+        ${event.time ? " • " + event.time : ""}
+      </div>
+
+      <div class="distance">
+        ${event.distance_km || "?"} km
+      </div>
+
+      <p>
+        ${event.location || ""}
+      </p>
+
+      <p>
+        ${event.description || ""}
+      </p>
+
+      <div class="event-actions">
+        ${
+          event.link
+            ? `
+              <a
+                href="${event.link}"
+                target="_blank"
+              >
+                Event öffnen
+              </a>
+            `
+            : ""
+        }
+
+        ${
+          event.source
+            ? `
+              <a
+                class="source-link"
+                href="${event.source}"
+                target="_blank"
+              >
+                Quelle
+              </a>
+            `
+            : ""
+        }
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      highlightEvent(index);
+    });
+
+    eventsContainer.appendChild(card);
+
+    const marker = createMarker(event, index);
+
+    if (marker) {
+      mapMarkers.push(marker);
+    }
+  });
+
+  highlightEvent(0);
+
+  eventsContainer.addEventListener(
+    "scroll",
+    handleCardScroll,
+    { passive: true }
+  );
+}
+
+function handleCardScroll() {
+  const cards = document.querySelectorAll(".event-card");
+
+  let bestIndex = 0;
+  let bestDistance = Infinity;
+
+  cards.forEach((card, index) => {
+
+    const rect = card.getBoundingClientRect();
+
+    const center =
+      rect.left + rect.width / 2;
+
+    const distance =
+      Math.abs(center - window.innerWidth / 2);
+
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestIndex = index;
+    }
+  });
+
+  highlightEvent(bestIndex);
+}
+
+async function loadStoredEvents() {
+
+  try {
+
+    const response =
+      await fetch("events.json?v=" + Date.now());
+
+    if (!response.ok) {
+      throw new Error("events.json nicht gefunden");
     }
 
     const data = await response.json();
 
-    allEvents =
-      Array.isArray(data)
-      ? data
-      : [];
+    renderEvents(data);
 
-    renderEvents(allEvents);
+  } catch (error) {
 
-    dataStatus.textContent =
-      allEvents.length +
-      " gespeicherte Events geladen.";
-
-  }catch(error){
-
-    console.warn(error);
-
-    dataStatus.textContent =
-      "Noch keine gespeicherten Events vorhanden.";
+    console.error(error);
 
     renderEvents([]);
   }
 }
 
-function handleFileUpload(event){
+async function loadPrompt() {
 
-  const file = event.target.files[0];
+  try {
 
-  if(!file) return;
+    const response =
+      await fetch("prompt.txt?v=" + Date.now());
 
-  const reader = new FileReader();
-
-  reader.onload = e => {
-
-    try{
-
-      selectedEventsFileText =
-        String(e.target.result || "");
-
-      const data =
-        JSON.parse(selectedEventsFileText);
-
-      allEvents =
-        Array.isArray(data)
-        ? data
-        : [];
-
-      renderEvents(allEvents);
-
-      setStatus(
-        adminStatus,
-        allEvents.length +
-        " Events geladen. Noch nicht gespeichert.",
-        "ok"
-      );
-
-    }catch(error){
-
-      selectedEventsFileText = "";
-
-      setStatus(
-        adminStatus,
-        "JSON-Datei konnte nicht gelesen werden.",
-        "error"
-      );
-
-      console.error(error);
-    }
-  };
-
-  reader.readAsText(file);
-}
-
-async function saveEventsForEveryone(){
-
-  if(!selectedEventsFileText){
-
-    setStatus(
-      adminStatus,
-      "Bitte zuerst eine events.json auswählen.",
-      "error"
-    );
-
-    return;
-  }
-
-  try{
-
-    setStatus(
-      adminStatus,
-      "Speichere Events zentral…",
-      ""
-    );
-
-    const response = await fetch(
-      "/api/save-events",
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:selectedEventsFileText
-      }
-    );
-
-    const result = await response.json();
-
-    if(!response.ok){
-
-      throw new Error(
-        result.error ||
-        "Speichern fehlgeschlagen"
-      );
+    if (!response.ok) {
+      throw new Error("prompt.txt fehlt");
     }
 
-    setStatus(
-      adminStatus,
-      "Events gespeichert. Seite lädt neu.",
-      "ok"
-    );
+    const text = await response.text();
 
-    setTimeout(() => {
-
-      location.reload();
-
-    }, 2500);
-
-  }catch(error){
-
-    setStatus(
-      adminStatus,
-      error.message,
-      "error"
-    );
-
-    console.error(error);
-  }
-}
-
-async function loadPrompt(){
-
-  try{
-
-    const response = await fetch(
-      "prompt.txt?v=" + Date.now(),
-      {
-        cache:"no-store"
-      }
-    );
-
-    if(!response.ok){
-
-      throw new Error(
-        "Noch kein prompt.txt vorhanden"
-      );
-    }
-
-    promptText.value =
-      await response.text();
+    promptTextarea.value = text;
 
     setStatus(
       promptStatus,
@@ -276,367 +313,169 @@ async function loadPrompt(){
       "ok"
     );
 
-  }catch(error){
+  } catch (error) {
 
-    promptText.value = "";
+    console.error(error);
 
     setStatus(
       promptStatus,
-      "Noch kein Suchtext gespeichert.",
-      ""
+      "prompt.txt konnte nicht geladen werden.",
+      "error"
     );
   }
 }
 
-async function savePrompt(){
+saveEventsBtn.addEventListener(
+  "click",
+  async () => {
 
-  try{
+    const file = jsonFileInput.files[0];
 
-    const text =
-      promptText.value || "";
-
-    if(!text.trim()){
+    if (!file) {
 
       setStatus(
-        promptStatus,
-        "Suchtext ist leer.",
+        adminStatus,
+        "Bitte zuerst eine events.json auswählen.",
         "error"
       );
 
       return;
     }
 
-    setStatus(
-      promptStatus,
-      "Neue Suche wird übernommen…",
-      ""
-    );
+    try {
 
-    const response = await fetch(
-      "/api/save-prompt",
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":
-            "text/plain; charset=utf-8"
-        },
-        body:text
-      }
-    );
+      const text = await file.text();
 
-    const result = await response.json();
+      JSON.parse(text);
 
-    if(!response.ok){
+      const blob = new Blob(
+        [text],
+        { type: "application/json" }
+      );
 
-      throw new Error(
-        result.error ||
-        "Suchtext konnte nicht gespeichert werden"
+      const url =
+        URL.createObjectURL(blob);
+
+      const link =
+        document.createElement("a");
+
+      link.href = url;
+      link.download = "events.json";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      URL.revokeObjectURL(url);
+
+      setStatus(
+        adminStatus,
+        "Neue events.json gespeichert. Jetzt in GitHub hochladen und überschreiben.",
+        "ok"
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      setStatus(
+        adminStatus,
+        "Ungültige JSON-Datei.",
+        "error"
       );
     }
-
-    setStatus(
-      promptStatus,
-      "Neue Suche gespeichert.",
-      "ok"
-    );
-
-  }catch(error){
-
-    setStatus(
-      promptStatus,
-      error.message,
-      "error"
-    );
-
-    console.error(error);
   }
-}
+);
 
-async function sharePrompt(){
+sharePromptBtn.addEventListener(
+  "click",
+  async () => {
 
-  const text =
-    promptText.value || "";
+    const text =
+      promptTextarea.value.trim();
 
-  if(!text.trim()){
-
-    setStatus(
-      promptStatus,
-      "Kein Suchtext vorhanden.",
-      "error"
-    );
-
-    return;
-  }
-
-  try{
-
-    if(navigator.share){
-
-      await navigator.share({
-        title:"Eventsuche",
-        text:text
-      });
+    if (!text) {
 
       setStatus(
         promptStatus,
-        "Teilen geöffnet.",
-        "ok"
+        "Kein Suchtext vorhanden.",
+        "error"
       );
 
       return;
     }
 
-    await navigator.clipboard.writeText(text);
+    try {
 
-    setStatus(
-      promptStatus,
-      "Suchtext kopiert.",
-      "ok"
-    );
+      if (navigator.share) {
 
-  }catch(error){
+        await navigator.share({
+          text
+        });
 
-    setStatus(
-      promptStatus,
-      "Teilen abgebrochen.",
-      ""
-    );
-  }
-}
+      } else {
 
-function hasCoords(event){
+        await navigator.clipboard.writeText(text);
 
-  return (
-    typeof event.lat === "number" &&
-    typeof event.lng === "number" &&
-    Number.isFinite(event.lat) &&
-    Number.isFinite(event.lng)
-  );
-}
+        alert("Suchtext kopiert.");
+      }
 
-function renderEvents(events){
+    } catch (error) {
 
-  markersLayer.clearLayers();
-
-  activeLayer.clearLayers();
-
-  eventsContainer.innerHTML = "";
-
-  if(
-    !Array.isArray(events) ||
-    events.length === 0
-  ){
-
-    eventsContainer.innerHTML = `
-      <div class="event-card">
-        <h3>Keine Events geladen</h3>
-      </div>
-    `;
-
-    map.setView(CENTER, 9);
-
-    return;
-  }
-
-  const bounds = [];
-
-  const sortedEvents =
-    [...events].sort((a, b) => {
-
-      const da =
-        Number(a.distance_km ?? 9999);
-
-      const db =
-        Number(b.distance_km ?? 9999);
-
-      return da - db;
-    });
-
-  for(const event of sortedEvents){
-
-    if(hasCoords(event)){
-
-      const marker = L.marker([
-        event.lat,
-        event.lng
-      ]).addTo(markersLayer);
-
-      marker.bindPopup(`
-        <b>${escapeHtml(event.title || "")}</b><br>
-        ${escapeHtml(event.location || "")}
-      `);
-
-      marker.on("click", () => {
-
-        highlightEvent(event);
-      });
-
-      bounds.push([
-        event.lat,
-        event.lng
-      ]);
-
-      event._marker = marker;
+      console.error(error);
     }
-
-    renderEventCard(event);
   }
+);
 
-  if(bounds.length > 0){
+updatePromptBtn.addEventListener(
+  "click",
+  () => {
 
-    map.fitBounds(bounds, {
-      padding:[35,35]
-    });
+    const text =
+      promptTextarea.value.trim();
 
-  }else{
+    if (!text) {
 
-    map.setView(CENTER, 9);
-  }
-}
-
-function renderEventCard(event){
-
-  const card =
-    document.createElement("div");
-
-  card.className = "event-card";
-
-  card.addEventListener("click", () => {
-
-    highlightEvent(event);
-
-    if(hasCoords(event)){
-
-      map.flyTo(
-        [event.lat, event.lng],
-        14,
-        {
-          duration:0.8
-        }
+      setStatus(
+        promptStatus,
+        "Kein Suchtext vorhanden.",
+        "error"
       );
 
-      event._marker?.openPopup();
+      return;
     }
-  });
 
-  const hasPoint =
-    hasCoords(event);
+    const blob = new Blob(
+      [text],
+      { type: "text/plain" }
+    );
 
-  card.innerHTML = `
-    <h3>
-      ${escapeHtml(event.title || "")}
-    </h3>
+    const url =
+      URL.createObjectURL(blob);
 
-    <div class="meta">
-      ${escapeHtml(event.date || "")}
-      ${escapeHtml(event.time || "")}
-    </div>
+    const link =
+      document.createElement("a");
 
-    <div class="distance">
-      ${event.distance_km ?? "?"} km
-    </div>
+    link.href = url;
+    link.download = "prompt.txt";
 
-    <p>
-      ${escapeHtml(event.location || "")}
-    </p>
+    document.body.appendChild(link);
 
-    <p>
-      ${escapeHtml(event.description || "")}
-    </p>
+    link.click();
 
-    <div class="event-actions">
+    link.remove();
 
-      ${
-        event.maps
-        ? `
-          <a
-            href="${escapeAttribute(event.maps)}"
-            target="_blank"
-            rel="noopener"
-          >
-            Karte
-          </a>
-        `
-        : ""
-      }
+    URL.revokeObjectURL(url);
 
-      ${
-        event.url
-        ? `
-          <a
-            class="source-link"
-            href="${escapeAttribute(event.url)}"
-            target="_blank"
-            rel="noopener"
-          >
-            Quelle
-          </a>
-        `
-        : ""
-      }
-
-    </div>
-  `;
-
-  event._card = card;
-
-  eventsContainer.appendChild(card);
-}
-
-function highlightEvent(event){
-
-  document
-    .querySelectorAll(".event-card")
-    .forEach(card => {
-      card.classList.remove("active");
-    });
-
-  event._card?.classList.add("active");
-
-  activeLayer.clearLayers();
-
-  if(hasCoords(event)){
-
-    activeMarker = L.circleMarker(
-      [event.lat, event.lng],
-      {
-        radius:12,
-        color:"#ff3b30",
-        fillColor:"#ff3b30",
-        fillOpacity:0.35,
-        weight:3
-      }
-    ).addTo(activeLayer);
+    setStatus(
+      promptStatus,
+      "Neue prompt.txt gespeichert. Jetzt in GitHub hochladen und überschreiben.",
+      "ok"
+    );
   }
-}
+);
 
-function setStatus(
-  element,
-  text,
-  type
-){
-
-  element.textContent = text;
-
-  element.className = "status";
-
-  if(type){
-
-    element.classList.add(type);
-  }
-}
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function escapeAttribute(value){
-
-  return escapeHtml(value);
-}
+loadStoredEvents();
+loadPrompt();
