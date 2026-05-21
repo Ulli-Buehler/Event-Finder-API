@@ -28,28 +28,46 @@ const homeMarker = L.circleMarker(CENTER, {
 }).addTo(map);
 
 map.fitBounds(radiusCircle.getBounds(), {
-  padding: [10, 10]
+  padding: [20, 20]
 });
 
-const eventsContainer = document.getElementById("events");
-const dataStatus = document.getElementById("dataStatus");
+const eventsContainer =
+  document.getElementById("events");
 
-const adminStatus = document.getElementById("adminStatus");
-const promptStatus = document.getElementById("promptStatus");
+const dataStatus =
+  document.getElementById("dataStatus");
 
-const jsonFileInput = document.getElementById("jsonFile");
+const adminStatus =
+  document.getElementById("adminStatus");
 
-const saveEventsBtn = document.getElementById("saveEventsBtn");
-const sharePromptBtn = document.getElementById("sharePromptBtn");
-const updatePromptBtn = document.getElementById("updatePromptBtn");
+const promptStatus =
+  document.getElementById("promptStatus");
 
-const promptTextarea = document.getElementById("promptText");
+const jsonFileInput =
+  document.getElementById("jsonFile");
+
+const saveEventsBtn =
+  document.getElementById("saveEventsBtn");
+
+const sharePromptBtn =
+  document.getElementById("sharePromptBtn");
+
+const updatePromptBtn =
+  document.getElementById("updatePromptBtn");
+
+const promptTextarea =
+  document.getElementById("promptText");
 
 let uploadedEvents = [];
 let mapMarkers = [];
 let activeMarker = null;
 
-function setStatus(element, text, type = "") {
+function setStatus(
+  element,
+  text,
+  type = ""
+) {
+
   element.textContent = text;
   element.className = "status";
 
@@ -59,6 +77,7 @@ function setStatus(element, text, type = "") {
 }
 
 function clearMarkers() {
+
   mapMarkers.forEach(marker => {
     map.removeLayer(marker);
   });
@@ -72,6 +91,7 @@ function clearMarkers() {
 }
 
 function createMarker(event, index) {
+
   if (
     typeof event.lat !== "number" ||
     typeof event.lng !== "number"
@@ -79,9 +99,13 @@ function createMarker(event, index) {
     return null;
   }
 
-  const marker = L.marker([event.lat, event.lng]).addTo(map);
+  const marker = L.marker([
+    event.lat,
+    event.lng
+  ]).addTo(map);
 
   marker.on("click", () => {
+
     scrollToCard(index);
     highlightEvent(index);
   });
@@ -90,6 +114,7 @@ function createMarker(event, index) {
 }
 
 function createActiveMarker(event) {
+
   if (
     typeof event.lat !== "number" ||
     typeof event.lng !== "number"
@@ -114,7 +139,9 @@ function createActiveMarker(event) {
 }
 
 function scrollToCard(index) {
-  const cards = document.querySelectorAll(".event-card");
+
+  const cards =
+    document.querySelectorAll(".event-card");
 
   if (!cards[index]) {
     return;
@@ -127,7 +154,9 @@ function scrollToCard(index) {
 }
 
 function highlightEvent(index) {
-  const cards = document.querySelectorAll(".event-card");
+
+  const cards =
+    document.querySelectorAll(".event-card");
 
   cards.forEach(card => {
     card.classList.remove("active");
@@ -137,7 +166,8 @@ function highlightEvent(index) {
     cards[index].classList.add("active");
   }
 
-  const event = uploadedEvents[index];
+  const event =
+    uploadedEvents[index];
 
   if (event) {
     createActiveMarker(event);
@@ -145,6 +175,7 @@ function highlightEvent(index) {
 }
 
 function renderEvents(events) {
+
   clearMarkers();
 
   uploadedEvents = events || [];
@@ -152,14 +183,19 @@ function renderEvents(events) {
   eventsContainer.innerHTML = "";
 
   if (!uploadedEvents.length) {
+
     eventsContainer.innerHTML = `
       <div class="event-card">
         <h3>Keine Events geladen</h3>
-        <p>Öffne das Zahnrad und lade eine events.json hoch.</p>
+        <p>
+          Öffne das Zahnrad und lade
+          eine events.json hoch.
+        </p>
       </div>
     `;
 
-    dataStatus.textContent = "0 gespeicherte Events geladen.";
+    dataStatus.textContent =
+      "0 gespeicherte Events geladen.";
 
     return;
   }
@@ -169,11 +205,15 @@ function renderEvents(events) {
 
   uploadedEvents.forEach((event, index) => {
 
-    const card = document.createElement("div");
+    const card =
+      document.createElement("div");
+
     card.className = "event-card";
 
     card.innerHTML = `
-      <h3>${event.title || "Unbenanntes Event"}</h3>
+      <h3>
+        ${event.title || "Unbenanntes Event"}
+      </h3>
 
       <div class="meta">
         ${event.date || ""}
@@ -193,6 +233,7 @@ function renderEvents(events) {
       </p>
 
       <div class="event-actions">
+
         ${
           event.link
             ? `
@@ -219,16 +260,21 @@ function renderEvents(events) {
             `
             : ""
         }
+
       </div>
     `;
 
-    card.addEventListener("click", () => {
-      highlightEvent(index);
-    });
+    card.addEventListener(
+      "click",
+      () => {
+        highlightEvent(index);
+      }
+    );
 
     eventsContainer.appendChild(card);
 
-    const marker = createMarker(event, index);
+    const marker =
+      createMarker(event, index);
 
     if (marker) {
       mapMarkers.push(marker);
@@ -245,22 +291,28 @@ function renderEvents(events) {
 }
 
 function handleCardScroll() {
-  const cards = document.querySelectorAll(".event-card");
+
+  const cards =
+    document.querySelectorAll(".event-card");
 
   let bestIndex = 0;
   let bestDistance = Infinity;
 
   cards.forEach((card, index) => {
 
-    const rect = card.getBoundingClientRect();
+    const rect =
+      card.getBoundingClientRect();
 
     const center =
       rect.left + rect.width / 2;
 
     const distance =
-      Math.abs(center - window.innerWidth / 2);
+      Math.abs(
+        center - window.innerWidth / 2
+      );
 
     if (distance < bestDistance) {
+
       bestDistance = distance;
       bestIndex = index;
     }
@@ -274,13 +326,18 @@ async function loadStoredEvents() {
   try {
 
     const response =
-      await fetch("events.json?v=" + Date.now());
+      await fetch(
+        "events.json?v=" + Date.now()
+      );
 
     if (!response.ok) {
-      throw new Error("events.json nicht gefunden");
+      throw new Error(
+        "events.json nicht gefunden"
+      );
     }
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
     renderEvents(data);
 
@@ -297,13 +354,18 @@ async function loadPrompt() {
   try {
 
     const response =
-      await fetch("prompt.txt?v=" + Date.now());
+      await fetch(
+        "prompt.txt?v=" + Date.now()
+      );
 
     if (!response.ok) {
-      throw new Error("prompt.txt fehlt");
+      throw new Error(
+        "prompt.txt fehlt"
+      );
     }
 
-    const text = await response.text();
+    const text =
+      await response.text();
 
     promptTextarea.value = text;
 
@@ -329,7 +391,8 @@ saveEventsBtn.addEventListener(
   "click",
   async () => {
 
-    const file = jsonFileInput.files[0];
+    const file =
+      jsonFileInput.files[0];
 
     if (!file) {
 
@@ -344,13 +407,16 @@ saveEventsBtn.addEventListener(
 
     try {
 
-      const text = await file.text();
+      const text =
+        await file.text();
 
       JSON.parse(text);
 
       const blob = new Blob(
         [text],
-        { type: "application/json" }
+        {
+          type: "application/json"
+        }
       );
 
       const url =
@@ -372,7 +438,7 @@ saveEventsBtn.addEventListener(
 
       setStatus(
         adminStatus,
-        "Neue events.json gespeichert. Jetzt in GitHub hochladen und überschreiben.",
+        "Neue events.json gespeichert.",
         "ok"
       );
 
@@ -417,7 +483,9 @@ sharePromptBtn.addEventListener(
 
       } else {
 
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(
+          text
+        );
 
         alert("Suchtext kopiert.");
       }
@@ -449,7 +517,9 @@ updatePromptBtn.addEventListener(
 
     const blob = new Blob(
       [text],
-      { type: "text/plain" }
+      {
+        type: "text/plain"
+      }
     );
 
     const url =
@@ -471,7 +541,7 @@ updatePromptBtn.addEventListener(
 
     setStatus(
       promptStatus,
-      "Neue prompt.txt gespeichert. Jetzt in GitHub hochladen und überschreiben.",
+      "Neue prompt.txt gespeichert.",
       "ok"
     );
   }
