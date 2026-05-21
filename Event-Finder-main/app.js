@@ -12,15 +12,17 @@ L.tileLayer(
 
 const markersLayer = L.layerGroup().addTo(map);
 
+const activeLayer = L.layerGroup().addTo(map);
+
 L.circle(CENTER, {
   radius: RADIUS_METERS,
   color: "#007aff",
   fill: false,
-  weight: 4
+  weight: 3
 }).addTo(map);
 
 L.circleMarker(CENTER, {
-  radius: 7,
+  radius: 6,
   color: "#007aff",
   fillColor: "#007aff",
   fillOpacity: 1
@@ -59,6 +61,8 @@ let allEvents = [];
 
 let selectedEventsFileText = "";
 
+let activeMarker = null;
+
 fileInput?.addEventListener(
   "change",
   handleFileUpload
@@ -95,7 +99,7 @@ async function loadSavedEvents(){
     const response = await fetch(
       "events.json?v=" + Date.now(),
       {
-        cache: "no-store"
+        cache:"no-store"
       }
     );
 
@@ -203,11 +207,11 @@ async function saveEventsForEveryone(){
     const response = await fetch(
       "/api/save-events",
       {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
         },
-        body: selectedEventsFileText
+        body:selectedEventsFileText
       }
     );
 
@@ -223,7 +227,7 @@ async function saveEventsForEveryone(){
 
     setStatus(
       adminStatus,
-      "Events gespeichert. Seite gleich neu laden.",
+      "Events gespeichert. Seite lädt neu.",
       "ok"
     );
 
@@ -231,7 +235,7 @@ async function saveEventsForEveryone(){
 
       location.reload();
 
-    }, 3000);
+    }, 2500);
 
   }catch(error){
 
@@ -252,7 +256,7 @@ async function loadPrompt(){
     const response = await fetch(
       "prompt.txt?v=" + Date.now(),
       {
-        cache: "no-store"
+        cache:"no-store"
       }
     );
 
@@ -311,12 +315,12 @@ async function savePrompt(){
     const response = await fetch(
       "/api/save-prompt",
       {
-        method: "POST",
-        headers: {
+        method:"POST",
+        headers:{
           "Content-Type":
             "text/plain; charset=utf-8"
         },
-        body: text
+        body:text
       }
     );
 
@@ -369,13 +373,13 @@ async function sharePrompt(){
     if(navigator.share){
 
       await navigator.share({
-        title: "Suchanfrage Events",
-        text: text
+        title:"Eventsuche",
+        text:text
       });
 
       setStatus(
         promptStatus,
-        "ChatGPT Teilen geöffnet.",
+        "Teilen geöffnet.",
         "ok"
       );
 
@@ -386,7 +390,7 @@ async function sharePrompt(){
 
     setStatus(
       promptStatus,
-      "Teilen nicht möglich. Suchtext wurde kopiert.",
+      "Suchtext kopiert.",
       "ok"
     );
 
@@ -414,6 +418,8 @@ function renderEvents(events){
 
   markersLayer.clearLayers();
 
+  activeLayer.clearLayers();
+
   eventsContainer.innerHTML = "";
 
   if(
@@ -424,10 +430,6 @@ function renderEvents(events){
     eventsContainer.innerHTML = `
       <div class="event-card">
         <h3>Keine Events geladen</h3>
-        <p>
-          Öffne den Adminbereich und lade
-          eine events.json hoch.
-        </p>
       </div>
     `;
 
@@ -461,14 +463,20 @@ function renderEvents(events){
 
       marker.bindPopup(`
         <b>${escapeHtml(event.title || "")}</b><br>
-        ${escapeHtml(event.location || "")}<br>
-        ${escapeHtml(event.date || "")}
+        ${escapeHtml(event.location || "")}
       `);
+
+      marker.on("click", () => {
+
+        highlightEvent(event);
+      });
 
       bounds.push([
         event.lat,
         event.lng
       ]);
+
+      event._marker = marker;
     }
 
     renderEventCard(event);
@@ -477,7 +485,7 @@ function renderEvents(events){
   if(bounds.length > 0){
 
     map.fitBounds(bounds, {
-      padding:[40,40]
+      padding:[35,35]
     });
 
   }else{
@@ -492,6 +500,24 @@ function renderEventCard(event){
     document.createElement("div");
 
   card.className = "event-card";
+
+  card.addEventListener("click", () => {
+
+    highlightEvent(event);
+
+    if(hasCoords(event)){
+
+      map.flyTo(
+        [event.lat, event.lng],
+        14,
+        {
+          duration:0.8
+        }
+      );
+
+      event._marker?.openPopup();
+    }
+  });
 
   const hasPoint =
     hasCoords(event);
@@ -518,37 +544,70 @@ function renderEventCard(event){
       ${escapeHtml(event.description || "")}
     </p>
 
-    ${
-      hasPoint
-      ? `
-        <p class="meta">
-          ${event.lat},
-          ${event.lng}
-        </p>
-      `
-      : `
-        <p class="meta">
-          Kein Kartenpunkt vorhanden
-        </p>
-      `
-    }
+    <div class="event-actions">
 
-    ${
-      event.maps
-      ? `
-        <a
-          href="${escapeAttribute(event.maps)}"
-          target="_blank"
-          rel="noopener"
-        >
-          Karte öffnen
-        </a>
-      `
-      : ""
-    }
+      ${
+        event.maps
+        ? `
+          <a
+            href="${escapeAttribute(event.maps)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Karte
+          </a>
+        `
+        : ""
+      }
+
+      ${
+        event.url
+        ? `
+          <a
+            class="source-link"
+            href="${escapeAttribute(event.url)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Quelle
+          </a>
+        `
+        : ""
+      }
+
+    </div>
   `;
 
+  event._card = card;
+
   eventsContainer.appendChild(card);
+}
+
+function highlightEvent(event){
+
+  document
+    .querySelectorAll(".event-card")
+    .forEach(card => {
+      card.classList.remove("active");
+    });
+
+  event._card?.classList.add("active");
+
+  activeLayer.clearLayers();
+
+  if(hasCoords(event)){
+
+    activeMarker = L.circleMarker(
+      [event.lat, event.lng],
+      {
+        radius:12,
+        color:"#ff3b30",
+        fillColor:"#ff3b30",
+        fillOpacity:0.35,
+        weight:3
+      }
+    ).addTo(activeLayer);
+  }
 }
 
 function setStatus(
