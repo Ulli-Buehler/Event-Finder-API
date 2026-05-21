@@ -16,7 +16,7 @@
     body{
       margin:0;
       padding:0;
-      height:100%;
+      min-height:100%;
       font-family:Arial, sans-serif;
       background:#111;
       color:#fff;
@@ -37,11 +37,18 @@
       font-size:32px;
     }
 
+    h2{
+      margin:0 0 12px 0;
+      font-size:22px;
+    }
+
     .hint{
       opacity:0.75;
       margin-bottom:14px;
+      line-height:1.4;
     }
 
+    button,
     input[type="file"]{
       width:100%;
       box-sizing:border-box;
@@ -51,6 +58,64 @@
       background:#1e1e1e;
       color:#fff;
       font-size:16px;
+      margin:6px 0;
+    }
+
+    button{
+      background:#007aff;
+      border:none;
+      font-weight:bold;
+    }
+
+    button.secondary{
+      background:#333;
+    }
+
+    textarea{
+      width:100%;
+      min-height:260px;
+      box-sizing:border-box;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid #444;
+      background:#1e1e1e;
+      color:#fff;
+      font-size:14px;
+      line-height:1.45;
+      margin:8px 0;
+    }
+
+    details{
+      margin-top:14px;
+      background:#181818;
+      border:1px solid #333;
+      border-radius:16px;
+      padding:12px;
+    }
+
+    summary{
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .status{
+      margin-top:10px;
+      padding:10px;
+      border-radius:10px;
+      background:#222;
+      color:#ddd;
+      line-height:1.4;
+    }
+
+    .status.ok{
+      background:#133d1e;
+      color:#7dff9a;
+    }
+
+    .status.error{
+      background:#471717;
+      color:#ff9a9a;
     }
 
     #events{
@@ -103,30 +168,69 @@
   <div class="top">
     <h1>Lokalevents GPT</h1>
 
-    <div class="hint">
-      Lade hier die von ChatGPT erzeugte events.json hoch.
+    <div class="hint" id="dataStatus">
+      Lade gespeicherte Events…
     </div>
 
-    <input
-      id="jsonFile"
-      type="file"
-      accept=".json,application/json"
-    />
+    <details>
+      <summary>⚙️ Admin</summary>
+
+      <div class="hint">
+        Neue events.json auswählen, prüfen und für alle speichern.
+      </div>
+
+      <input
+        id="jsonFile"
+        type="file"
+        accept=".json,application/json"
+      />
+
+      <button id="saveEventsBtn" type="button">
+        Events für alle speichern
+      </button>
+
+      <div id="adminStatus" class="status">
+        Noch keine neue Datei ausgewählt.
+      </div>
+
+      <hr style="border-color:#333;margin:18px 0;">
+
+      <h2>Suchtext</h2>
+
+      <div class="hint">
+        Hier liegt der aktuelle Suchtext. Du kannst ihn kopieren, herunterladen oder ersetzen.
+      </div>
+
+      <textarea id="promptText"></textarea>
+
+      <button id="copyPromptBtn" type="button" class="secondary">
+        Suchtext kopieren
+      </button>
+
+      <button id="downloadPromptBtn" type="button" class="secondary">
+        Suchtext herunterladen
+      </button>
+
+      <button id="savePromptBtn" type="button">
+        Suchtext speichern
+      </button>
+
+      <div id="promptStatus" class="status">
+        Suchtext wird geladen…
+      </div>
+    </details>
   </div>
 
   <div id="map"></div>
 
   <div id="events">
     <div class="event-card">
-      <h3>Noch keine GPT-Events geladen</h3>
-      <p>
-        Wähle oben deine events.json aus.
-      </p>
+      <h3>Events werden geladen…</h3>
     </div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js?v=1"></script>
+  <script src="app.js?v=2"></script>
 
 </body>
 </html>
