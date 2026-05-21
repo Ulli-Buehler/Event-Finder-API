@@ -28,8 +28,11 @@ L.circleMarker(CENTER, {
 .addTo(map)
 .bindPopup("Dettingen unter Teck");
 
-const fileInput = document.getElementById("jsonFile");
-const saveEventsBtn = document.getElementById("saveEventsBtn");
+const fileInput =
+  document.getElementById("jsonFile");
+
+const saveEventsBtn =
+  document.getElementById("saveEventsBtn");
 
 const eventsContainer =
   document.getElementById("events");
@@ -46,19 +49,14 @@ const promptText =
 const sharePromptBtn =
   document.getElementById("sharePromptBtn");
 
-const copyPromptBtn =
-  document.getElementById("copyPromptBtn");
-
-const downloadPromptBtn =
-  document.getElementById("downloadPromptBtn");
-
-const savePromptBtn =
-  document.getElementById("savePromptBtn");
+const updatePromptBtn =
+  document.getElementById("updatePromptBtn");
 
 const promptStatus =
   document.getElementById("promptStatus");
 
 let allEvents = [];
+
 let selectedEventsFileText = "";
 
 fileInput?.addEventListener(
@@ -76,17 +74,7 @@ sharePromptBtn?.addEventListener(
   sharePrompt
 );
 
-copyPromptBtn?.addEventListener(
-  "click",
-  copyPrompt
-);
-
-downloadPromptBtn?.addEventListener(
-  "click",
-  downloadPrompt
-);
-
-savePromptBtn?.addEventListener(
+updatePromptBtn?.addEventListener(
   "click",
   savePrompt
 );
@@ -316,7 +304,7 @@ async function savePrompt(){
 
     setStatus(
       promptStatus,
-      "Speichere Suchtext…",
+      "Neue Suche wird übernommen…",
       ""
     );
 
@@ -344,7 +332,7 @@ async function savePrompt(){
 
     setStatus(
       promptStatus,
-      "Suchtext gespeichert.",
+      "Neue Suche gespeichert.",
       "ok"
     );
 
@@ -369,7 +357,7 @@ async function sharePrompt(){
 
     setStatus(
       promptStatus,
-      "Kein Suchtext zum Teilen vorhanden.",
+      "Kein Suchtext vorhanden.",
       "error"
     );
 
@@ -387,7 +375,7 @@ async function sharePrompt(){
 
       setStatus(
         promptStatus,
-        "Teilen-Menü geöffnet.",
+        "ChatGPT Teilen geöffnet.",
         "ok"
       );
 
@@ -398,44 +386,7 @@ async function sharePrompt(){
 
     setStatus(
       promptStatus,
-      "Teilen wird nicht unterstützt. Suchtext wurde kopiert.",
-      "ok"
-    );
-
-  }catch(error){
-
-    try{
-
-      await navigator.clipboard.writeText(text);
-
-      setStatus(
-        promptStatus,
-        "Teilen abgebrochen. Suchtext wurde kopiert.",
-        "ok"
-      );
-
-    }catch(copyError){
-
-      setStatus(
-        promptStatus,
-        "Teilen nicht möglich.",
-        "error"
-      );
-    }
-  }
-}
-
-async function copyPrompt(){
-
-  try{
-
-    await navigator.clipboard.writeText(
-      promptText.value || ""
-    );
-
-    setStatus(
-      promptStatus,
-      "Suchtext kopiert.",
+      "Teilen nicht möglich. Suchtext wurde kopiert.",
       "ok"
     );
 
@@ -443,35 +394,10 @@ async function copyPrompt(){
 
     setStatus(
       promptStatus,
-      "Kopieren nicht möglich.",
-      "error"
+      "Teilen abgebrochen.",
+      ""
     );
   }
-}
-
-function downloadPrompt(){
-
-  const blob = new Blob(
-    [promptText.value || ""],
-    {
-      type: "text/plain;charset=utf-8"
-    }
-  );
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const a =
-    document.createElement("a");
-
-  a.href = url;
-
-  a.download =
-    "search-prompt.txt";
-
-  a.click();
-
-  URL.revokeObjectURL(url);
 }
 
 function hasCoords(event){
