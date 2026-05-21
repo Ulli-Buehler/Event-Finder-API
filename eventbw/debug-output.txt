@@ -14,9 +14,9 @@ Zieldatum: 2026-05-24
 
 Counts:
 {
-  "pages": 232,
-  "rawCollectedIncludingDuplicates": 3217,
-  "rawUnique": 3217,
+  "pages": 233,
+  "rawCollectedIncludingDuplicates": 3221,
+  "rawUnique": 3221,
   "targetDateMatches": 42,
   "targetDateWithGeo": 41,
   "targetDateWithoutGeo": 1,
@@ -42,7 +42,7 @@ Counts:
   "targetDateBodenseeRegionGeoRecovered": 0,
   "nonRegionalTargetDateMatches": 38,
   "rawMaerkte": 137,
-  "rawFeste": 3080,
+  "rawFeste": 3084,
   "targetDateMaerkte": 4,
   "targetDateFeste": 38,
   "targetDateWithGeoMaerkte": 3,
@@ -145,15 +145,19 @@ Ortsstatistik vor Ortsfilter:
     "count": 3
   },
   {
-    "city": "Freiamt",
-    "count": 3
-  },
-  {
     "city": "Karlsruhe",
     "count": 3
   },
   {
+    "city": "Freiamt",
+    "count": 2
+  },
+  {
     "city": "Löwenstein",
+    "count": 2
+  },
+  {
+    "city": "Nagold",
     "count": 2
   },
   {
@@ -254,10 +258,6 @@ Ortsstatistik vor Ortsfilter:
   },
   {
     "city": "Uhldingen-Mühlhofen",
-    "count": 1
-  },
-  {
-    "city": "Ulm",
     "count": 1
   },
   {
@@ -372,7 +372,7 @@ Pages:
     "page": 1,
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/",
     "ok": true,
-    "reportedCount": 3080,
+    "reportedCount": 3084,
     "parsedCount": 14
   },
   {
@@ -2131,6 +2131,14 @@ Pages:
     "category": "feste",
     "page": 221,
     "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/221/",
+    "ok": true,
+    "reportedCount": null,
+    "parsedCount": 4
+  },
+  {
+    "category": "feste",
+    "page": 222,
+    "url": "https://www.veranstaltung-baden-wuerttemberg.de/kategorie/feste/page/222/",
     "ok": false,
     "error": "HTTP 404 Not Found"
   }
