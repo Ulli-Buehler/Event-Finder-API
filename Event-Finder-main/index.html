@@ -67,10 +67,6 @@
       font-weight:bold;
     }
 
-    button.secondary{
-      background:#333;
-    }
-
     textarea{
       width:100%;
       min-height:260px;
@@ -198,7 +194,7 @@
       <h2>Suchtext</h2>
 
       <div class="hint">
-        Hier liegt der aktuelle Suchtext. Du kannst ihn kopieren, mit ChatGPT teilen, herunterladen oder ersetzen.
+        Hier liegt der aktuelle Suchtext. Du kannst ihn mit ChatGPT teilen oder nach Bearbeitung als neue Suche übernehmen.
       </div>
 
       <textarea id="promptText"></textarea>
@@ -207,16 +203,8 @@
         🤖 Mit ChatGPT teilen
       </button>
 
-      <button id="copyPromptBtn" type="button" class="secondary">
-        📋 Suchtext kopieren
-      </button>
-
-      <button id="downloadPromptBtn" type="button" class="secondary">
-        ⬇️ Suchtext herunterladen
-      </button>
-
-      <button id="savePromptBtn" type="button">
-        Suchtext speichern
+      <button id="updatePromptBtn" type="button">
+        💾 Neue Suche übernehmen
       </button>
 
       <div id="promptStatus" class="status">
@@ -234,7 +222,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 
 </body>
 </html>
