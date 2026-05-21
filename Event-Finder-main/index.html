@@ -15,16 +15,12 @@
   />
 
   <style>
-    *{
-      box-sizing:border-box;
-    }
+    *{ box-sizing:border-box; }
 
-    html,
-    body{
+    html,body{
       margin:0;
       padding:0;
       width:100%;
-      max-width:100%;
       height:100%;
       overflow:hidden;
       background:#111;
@@ -39,7 +35,6 @@
 
     .top{
       flex:0 0 auto;
-      width:100%;
       padding:7px 10px 5px;
       background:#111;
       display:grid;
@@ -57,9 +52,8 @@
 
     .status-line{
       grid-column:1 / 2;
-      opacity:0.62;
+      opacity:0.65;
       font-size:12px;
-      line-height:1.2;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -90,10 +84,6 @@
       display:none;
     }
 
-    details[open] summary{
-      background:#292929;
-    }
-
     .admin-panel{
       position:absolute;
       right:0;
@@ -112,7 +102,6 @@
     button,
     input[type="file"]{
       width:100%;
-      max-width:100%;
       display:block;
       padding:11px;
       border-radius:11px;
@@ -133,13 +122,12 @@
     }
 
     .status{
-      width:100%;
       padding:9px;
       border-radius:9px;
       background:#222;
       color:#ddd;
-      line-height:1.3;
       font-size:12px;
+      line-height:1.3;
       overflow-wrap:break-word;
     }
 
@@ -157,6 +145,7 @@
       flex:1 1 auto;
       width:100%;
       min-height:0;
+      background:#ddd;
     }
 
     #events{
@@ -194,27 +183,20 @@
       margin:0 0 6px 0;
       font-size:17px;
       line-height:1.25;
-      overflow-wrap:break-word;
     }
 
-    .meta{
-      opacity:0.72;
-      margin-bottom:6px;
+    .meta,.distance{
       font-size:13px;
-      line-height:1.3;
+      margin-bottom:6px;
     }
 
-    .distance{
-      font-weight:bold;
-      margin-bottom:6px;
-      font-size:13px;
-    }
+    .meta{ opacity:0.72; }
+    .distance{ font-weight:bold; }
 
     .event-card p{
       margin:6px 0;
-      line-height:1.35;
       font-size:14px;
-      overflow-wrap:break-word;
+      line-height:1.35;
     }
 
     .event-actions{
@@ -225,14 +207,12 @@
     }
 
     .event-card a{
-      display:inline-block;
       color:#fff;
       background:#007aff;
       padding:8px 11px;
       border-radius:10px;
       text-decoration:none;
       font-size:13px;
-      max-width:100%;
     }
 
     .event-card a.source-link{
@@ -244,7 +224,6 @@
 <body>
 
   <div class="top">
-
     <h1>KI Eventfinder</h1>
 
     <div class="status-line" id="dataStatus">
@@ -252,18 +231,10 @@
     </div>
 
     <details>
-
-      <summary title="Einstellungen">
-        ⚙️
-      </summary>
+      <summary title="Einstellungen">⚙️</summary>
 
       <div class="admin-panel">
-
-        <input
-          id="jsonFile"
-          type="file"
-          accept=".json,application/json"
-        />
+        <input id="jsonFile" type="file" accept=".json,application/json" />
 
         <button id="saveEventsBtn" type="button">
           Events aktualisieren
@@ -284,13 +255,10 @@
         </div>
 
         <div id="promptStatus" class="status">
-          Suchtext geladen.
+          Suchtext wird geladen…
         </div>
-
       </div>
-
     </details>
-
   </div>
 
   <div id="map"></div>
@@ -302,8 +270,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
 
 </body>
 </html>
