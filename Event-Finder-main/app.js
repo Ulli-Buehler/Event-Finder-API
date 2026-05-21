@@ -43,6 +43,9 @@ const dataStatus =
 const promptText =
   document.getElementById("promptText");
 
+const sharePromptBtn =
+  document.getElementById("sharePromptBtn");
+
 const copyPromptBtn =
   document.getElementById("copyPromptBtn");
 
@@ -66,6 +69,11 @@ fileInput?.addEventListener(
 saveEventsBtn?.addEventListener(
   "click",
   saveEventsForEveryone
+);
+
+sharePromptBtn?.addEventListener(
+  "click",
+  sharePrompt
 );
 
 copyPromptBtn?.addEventListener(
@@ -349,6 +357,71 @@ async function savePrompt(){
     );
 
     console.error(error);
+  }
+}
+
+async function sharePrompt(){
+
+  const text =
+    promptText.value || "";
+
+  if(!text.trim()){
+
+    setStatus(
+      promptStatus,
+      "Kein Suchtext zum Teilen vorhanden.",
+      "error"
+    );
+
+    return;
+  }
+
+  try{
+
+    if(navigator.share){
+
+      await navigator.share({
+        title: "Suchanfrage Events",
+        text: text
+      });
+
+      setStatus(
+        promptStatus,
+        "Teilen-Menü geöffnet.",
+        "ok"
+      );
+
+      return;
+    }
+
+    await navigator.clipboard.writeText(text);
+
+    setStatus(
+      promptStatus,
+      "Teilen wird nicht unterstützt. Suchtext wurde kopiert.",
+      "ok"
+    );
+
+  }catch(error){
+
+    try{
+
+      await navigator.clipboard.writeText(text);
+
+      setStatus(
+        promptStatus,
+        "Teilen abgebrochen. Suchtext wurde kopiert.",
+        "ok"
+      );
+
+    }catch(copyError){
+
+      setStatus(
+        promptStatus,
+        "Teilen nicht möglich.",
+        "error"
+      );
+    }
   }
 }
 
