@@ -25,11 +25,9 @@ L.circleMarker(CENTER, {
   fillColor: "#008cff",
   fillOpacity: 1,
   weight: 2
-}).addTo(map);
-
-map.fitBounds(radiusCircle.getBounds(), {
-  padding: [15, 15]
-});
+})
+.addTo(map)
+.bindPopup("Dettingen unter Teck");
 
 const eventsContainer =
   document.getElementById("events");
@@ -64,19 +62,8 @@ let uploadedFileText = "";
 let events = [];
 
 window.addEventListener("load", () => {
-
   setTimeout(() => {
-
-    map.invalidateSize();
-
-    map.fitBounds(
-      radiusCircle.getBounds(),
-      {
-        padding: [15, 15],
-        animate: false
-      }
-    );
-
+    resetMapView();
   }, 300);
 });
 
@@ -103,10 +90,20 @@ updatePromptBtn.addEventListener(
 loadStoredEvents();
 loadPrompt();
 
+function resetMapView() {
+  map.invalidateSize();
+
+  map.fitBounds(
+    radiusCircle.getBounds(),
+    {
+      padding: [15, 15],
+      animate: false
+    }
+  );
+}
+
 async function loadStoredEvents() {
-
   try {
-
     const response =
       await fetch(
         "events.json?v=" + Date.now(),
@@ -135,7 +132,6 @@ async function loadStoredEvents() {
       `${events.length} gespeicherte Events geladen.`;
 
   } catch (error) {
-
     console.error(error);
 
     renderEvents([]);
@@ -146,9 +142,7 @@ async function loadStoredEvents() {
 }
 
 async function loadPrompt() {
-
   try {
-
     const response =
       await fetch(
         "prompt.txt?v=" + Date.now(),
@@ -175,7 +169,6 @@ async function loadPrompt() {
     );
 
   } catch (error) {
-
     console.error(error);
 
     setStatus(
@@ -187,7 +180,6 @@ async function loadPrompt() {
 }
 
 function handleFileSelection(event) {
-
   const file =
     event.target.files[0];
 
@@ -199,9 +191,7 @@ function handleFileSelection(event) {
     new FileReader();
 
   reader.onload = e => {
-
     try {
-
       uploadedFileText =
         String(
           e.target.result || ""
@@ -217,14 +207,16 @@ function handleFileSelection(event) {
 
       renderEvents(events);
 
+      dataStatus.textContent =
+        `${events.length} Events geladen.`;
+
       setStatus(
         adminStatus,
-        `${events.length} Events geladen.`,
+        `${events.length} Events geladen. Noch nicht zentral gespeichert.`,
         "ok"
       );
 
     } catch (error) {
-
       console.error(error);
 
       uploadedFileText = "";
@@ -241,9 +233,7 @@ function handleFileSelection(event) {
 }
 
 async function saveEvents() {
-
   if (!uploadedFileText) {
-
     setStatus(
       adminStatus,
       "Bitte zuerst eine events.json auswählen.",
@@ -254,7 +244,6 @@ async function saveEvents() {
   }
 
   try {
-
     setStatus(
       adminStatus,
       "Speichere Events zentral…"
@@ -277,7 +266,6 @@ async function saveEvents() {
       await response.json();
 
     if (!response.ok) {
-
       throw new Error(
         result.error ||
         "Fehler beim Speichern."
@@ -295,7 +283,6 @@ async function saveEvents() {
     }, 2000);
 
   } catch (error) {
-
     console.error(error);
 
     setStatus(
@@ -307,12 +294,10 @@ async function saveEvents() {
 }
 
 async function sharePrompt() {
-
   const text =
     promptTextarea.value.trim();
 
   if (!text) {
-
     setStatus(
       promptStatus,
       "Kein Suchtext vorhanden.",
@@ -323,9 +308,7 @@ async function sharePrompt() {
   }
 
   try {
-
     if (navigator.share) {
-
       await navigator.share({
         title: "KI Eventfinder",
         text
@@ -338,7 +321,6 @@ async function sharePrompt() {
       );
 
     } else {
-
       await navigator.clipboard.writeText(
         text
       );
@@ -351,18 +333,15 @@ async function sharePrompt() {
     }
 
   } catch (error) {
-
     console.error(error);
   }
 }
 
 async function savePrompt() {
-
   const text =
     promptTextarea.value.trim();
 
   if (!text) {
-
     setStatus(
       promptStatus,
       "Kein Suchtext vorhanden.",
@@ -373,7 +352,6 @@ async function savePrompt() {
   }
 
   try {
-
     setStatus(
       promptStatus,
       "Speichere neue Suche…"
@@ -386,7 +364,7 @@ async function savePrompt() {
           method: "POST",
           headers: {
             "Content-Type":
-              "text/plain"
+              "text/plain; charset=utf-8"
           },
           body: text
         }
@@ -396,7 +374,6 @@ async function savePrompt() {
       await response.json();
 
     if (!response.ok) {
-
       throw new Error(
         result.error ||
         "Fehler beim Speichern."
@@ -410,7 +387,6 @@ async function savePrompt() {
     );
 
   } catch (error) {
-
     console.error(error);
 
     setStatus(
@@ -422,7 +398,6 @@ async function savePrompt() {
 }
 
 function renderEvents(list) {
-
   clearMarkers();
 
   eventsContainer.innerHTML = "";
@@ -431,7 +406,6 @@ function renderEvents(list) {
     !Array.isArray(list) ||
     list.length === 0
   ) {
-
     eventsContainer.innerHTML = `
       <div class="event-card">
         <h3>Keine Events geladen</h3>
@@ -442,130 +416,119 @@ function renderEvents(list) {
       </div>
     `;
 
+    resetMapView();
+
     return;
   }
 
   list.forEach((event, index) => {
-
-    const card =
-      document.createElement("div");
-
-    card.className =
-      "event-card";
-
-    card.innerHTML = `
-      <h3>
-        ${escapeHtml(
-          event.title || ""
-        )}
-      </h3>
-
-      <div class="meta">
-        ${escapeHtml(
-          event.date || ""
-        )}
-        ${
-          event.time
-            ? " • " +
-              escapeHtml(event.time)
-            : ""
-        }
-      </div>
-
-      <div class="distance">
-        ${escapeHtml(
-          String(
-            event.distance_km || "?"
-          )
-        )} km
-      </div>
-
-      <p>
-        ${escapeHtml(
-          event.location || ""
-        )}
-      </p>
-
-      <p>
-        ${escapeHtml(
-          event.description || ""
-        )}
-      </p>
-
-      <div class="event-actions">
-
-        ${
-          event.maps
-            ? `
-              <a
-                href="${escapeAttribute(
-                  event.maps
-                )}"
-                target="_blank"
-              >
-                Karte
-              </a>
-            `
-            : ""
-        }
-
-        ${
-          event.source
-            ? `
-              <a
-                class="source-link"
-                href="${escapeAttribute(
-                  event.source
-                )}"
-                target="_blank"
-              >
-                Quelle
-              </a>
-            `
-            : ""
-        }
-
-      </div>
-    `;
-
-    card.addEventListener(
-      "click",
-      () => {
-        selectEvent(index);
-      }
-    );
-
-    eventsContainer.appendChild(card);
-
-    if (
-      typeof event.lat ===
-        "number" &&
-      typeof event.lng ===
-        "number"
-    ) {
-
-      const marker =
-        L.marker([
-          event.lat,
-          event.lng
-        ]).addTo(map);
-
-      marker.on(
-        "click",
-        () => {
-          selectEvent(index);
-        }
-      );
-
-      markers.push(marker);
-    }
+    createEventCard(event, index);
+    createEventMarker(event, index);
   });
 
   selectEvent(0);
+
+  resetMapView();
+}
+
+function createEventCard(event, index) {
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "event-card";
+
+  card.innerHTML = `
+    <h3>
+      ${escapeHtml(event.title || "Unbenanntes Event")}
+    </h3>
+
+    <div class="meta">
+      ${escapeHtml(event.date || "")}
+      ${
+        event.time
+          ? " • " + escapeHtml(event.time)
+          : ""
+      }
+    </div>
+
+    <div class="distance">
+      ${escapeHtml(String(event.distance_km ?? "?"))} km
+    </div>
+
+    <p>
+      ${escapeHtml(event.location || "")}
+    </p>
+
+    <p>
+      ${escapeHtml(event.description || "")}
+    </p>
+
+    <div class="event-actions">
+      ${
+        event.maps
+          ? `
+            <a
+              href="${escapeAttribute(event.maps)}"
+              target="_blank"
+              rel="noopener"
+            >
+              Karte
+            </a>
+          `
+          : ""
+      }
+
+      ${
+        event.source
+          ? `
+            <a
+              class="source-link"
+              href="${escapeAttribute(event.source)}"
+              target="_blank"
+              rel="noopener"
+            >
+              Quelle
+            </a>
+          `
+          : ""
+      }
+    </div>
+  `;
+
+  card.addEventListener(
+    "click",
+    () => {
+      selectEvent(index);
+    }
+  );
+
+  eventsContainer.appendChild(card);
+}
+
+function createEventMarker(event, index) {
+  const coords =
+    getCoords(event);
+
+  if (!coords) {
+    return;
+  }
+
+  const marker =
+    L.marker(coords)
+      .addTo(map);
+
+  marker.on(
+    "click",
+    () => {
+      selectEvent(index);
+    }
+  );
+
+  markers.push(marker);
 }
 
 function selectEvent(index) {
-
   const cards =
     document.querySelectorAll(
       ".event-card"
@@ -578,27 +541,18 @@ function selectEvent(index) {
   });
 
   if (cards[index]) {
-
     cards[index].classList.add(
       "active"
     );
-
-    cards[index].scrollIntoView({
-      behavior: "smooth",
-      block: "nearest"
-    });
   }
 
   const event =
     events[index];
 
-  if (
-    !event ||
-    typeof event.lat !==
-      "number" ||
-    typeof event.lng !==
-      "number"
-  ) {
+  const coords =
+    getCoords(event);
+
+  if (!coords) {
     return;
   }
 
@@ -610,10 +564,7 @@ function selectEvent(index) {
 
   activeMarker =
     L.circleMarker(
-      [
-        event.lat,
-        event.lng
-      ],
+      coords,
       {
         radius: 12,
         color: "#ff3b30",
@@ -624,8 +575,28 @@ function selectEvent(index) {
     ).addTo(map);
 }
 
-function clearMarkers() {
+function getCoords(event) {
+  if (!event) {
+    return null;
+  }
 
+  const lat =
+    Number(event.lat);
+
+  const lng =
+    Number(event.lng);
+
+  if (
+    Number.isFinite(lat) &&
+    Number.isFinite(lng)
+  ) {
+    return [lat, lng];
+  }
+
+  return null;
+}
+
+function clearMarkers() {
   markers.forEach(marker => {
     map.removeLayer(marker);
   });
@@ -633,7 +604,6 @@ function clearMarkers() {
   markers = [];
 
   if (activeMarker) {
-
     map.removeLayer(
       activeMarker
     );
@@ -647,7 +617,6 @@ function setStatus(
   text,
   type = ""
 ) {
-
   if (!element) {
     return;
   }
@@ -662,30 +631,12 @@ function setStatus(
 }
 
 function escapeHtml(value) {
-
-  return String(
-    value || ""
-  )
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      "\"",
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll("\"", "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function escapeAttribute(value) {
