@@ -37,11 +37,6 @@
       font-size:32px;
     }
 
-    h2{
-      margin:0 0 12px 0;
-      font-size:22px;
-    }
-
     .hint{
       opacity:0.75;
       margin-bottom:14px;
@@ -82,17 +77,19 @@
     }
 
     details{
-      margin-top:14px;
+      margin-top:10px;
       background:#181818;
-      border:1px solid #333;
-      border-radius:16px;
-      padding:12px;
+      border:1px solid #2b2b2b;
+      border-radius:14px;
+      padding:10px;
     }
 
     summary{
-      font-size:18px;
+      font-size:15px;
       font-weight:bold;
       cursor:pointer;
+      opacity:0.72;
+      user-select:none;
     }
 
     .status{
@@ -102,6 +99,7 @@
       background:#222;
       color:#ddd;
       line-height:1.4;
+      font-size:14px;
     }
 
     .status.ok{
@@ -162,6 +160,7 @@
 <body>
 
   <div class="top">
+
     <h1>Lokalevents GPT</h1>
 
     <div class="hint" id="dataStatus">
@@ -169,48 +168,54 @@
     </div>
 
     <details>
-      <summary>⚙️ Admin</summary>
 
-      <div class="hint">
-        Neue events.json auswählen, prüfen und für alle speichern.
+      <summary>
+        ⚙️ Admin
+      </summary>
+
+      <div
+        style="
+          margin-top:12px;
+          display:grid;
+          gap:8px;
+        "
+      >
+
+        <input
+          id="jsonFile"
+          type="file"
+          accept=".json,application/json"
+        />
+
+        <button id="saveEventsBtn" type="button">
+          Events für alle speichern
+        </button>
+
+        <button id="sharePromptBtn" type="button">
+          🤖 Suche mit ChatGPT öffnen
+        </button>
+
+        <button id="updatePromptBtn" type="button">
+          💾 Neue Suche übernehmen
+        </button>
+
+        <textarea
+          id="promptText"
+          style="display:none;"
+        ></textarea>
+
+        <div id="adminStatus" class="status">
+          Noch keine neue Datei ausgewählt.
+        </div>
+
+        <div id="promptStatus" class="status">
+          Suchtext geladen.
+        </div>
+
       </div>
 
-      <input
-        id="jsonFile"
-        type="file"
-        accept=".json,application/json"
-      />
-
-      <button id="saveEventsBtn" type="button">
-        Events für alle speichern
-      </button>
-
-      <div id="adminStatus" class="status">
-        Noch keine neue Datei ausgewählt.
-      </div>
-
-      <hr style="border-color:#333;margin:18px 0;">
-
-      <h2>Suchtext</h2>
-
-      <div class="hint">
-        Hier liegt der aktuelle Suchtext. Du kannst ihn mit ChatGPT teilen oder nach Bearbeitung als neue Suche übernehmen.
-      </div>
-
-      <textarea id="promptText"></textarea>
-
-      <button id="sharePromptBtn" type="button">
-        🤖 Mit ChatGPT teilen
-      </button>
-
-      <button id="updatePromptBtn" type="button">
-        💾 Neue Suche übernehmen
-      </button>
-
-      <div id="promptStatus" class="status">
-        Suchtext wird geladen…
-      </div>
     </details>
+
   </div>
 
   <div id="map"></div>
@@ -222,7 +227,8 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js?v=4"></script>
+
+  <script src="app.js?v=5"></script>
 
 </body>
 </html>
