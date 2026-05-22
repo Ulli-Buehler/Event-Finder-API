@@ -23,10 +23,11 @@ L.circle(CENTER, {
 }).addTo(map);
 
 L.circleMarker(CENTER, {
-  radius: 7,
+  radius: 8,
   color: DEFAULT_MARKER_COLOR,
   fillColor: DEFAULT_MARKER_COLOR,
-  fillOpacity: 1
+  fillOpacity: 1,
+  weight: 3
 })
 .addTo(map)
 .bindPopup("Dettingen unter Teck");
@@ -370,14 +371,10 @@ function renderEvents(events){
 
 function createMarker(event){
 
-  const marker = L.circleMarker(
+  const marker = L.marker(
     [event.lat, event.lng],
     {
-      radius: 8,
-      color: DEFAULT_MARKER_COLOR,
-      fillColor: DEFAULT_MARKER_COLOR,
-      fillOpacity: 1,
-      weight: 2
+      icon: createEventIcon(false)
     }
   ).addTo(markersLayer);
 
@@ -390,6 +387,54 @@ function createMarker(event){
   eventMarkers.push(marker);
 
   return marker;
+}
+
+function createEventIcon(active){
+
+  const color =
+    active
+    ? ACTIVE_MARKER_COLOR
+    : DEFAULT_MARKER_COLOR;
+
+  const size =
+    active
+    ? 42
+    : 34;
+
+  const anchorX =
+    size / 2;
+
+  const anchorY =
+    size;
+
+  return L.divIcon({
+    className: "",
+    iconSize: [size, size],
+    iconAnchor: [anchorX, anchorY],
+    popupAnchor: [0, -anchorY + 6],
+    html: `
+      <svg
+        width="${size}"
+        height="${size}"
+        viewBox="0 0 34 34"
+        xmlns="http://www.w3.org/2000/svg"
+        style="display:block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));"
+      >
+        <path
+          d="M17 1.8C10.6 1.8 5.4 7 5.4 13.4C5.4 22.2 17 32.2 17 32.2C17 32.2 28.6 22.2 28.6 13.4C28.6 7 23.4 1.8 17 1.8Z"
+          fill="${color}"
+          stroke="#ffffff"
+          stroke-width="2"
+        />
+        <circle
+          cx="17"
+          cy="13.4"
+          r="4.8"
+          fill="#ffffff"
+        />
+      </svg>
+    `
+  });
 }
 
 function renderEventCard(event, marker){
@@ -519,26 +564,16 @@ function highlightVisibleMarker(card){
       const active =
         index === activeIndex;
 
-      marker.setStyle({
-        color:
-          active
-          ? ACTIVE_MARKER_COLOR
-          : DEFAULT_MARKER_COLOR,
-
-        fillColor:
-          active
-          ? ACTIVE_MARKER_COLOR
-          : DEFAULT_MARKER_COLOR,
-
-        radius:
-          active
-          ? 11
-          : 8
-      });
+      marker.setIcon(
+        createEventIcon(active)
+      );
 
       if(active){
 
-        marker.bringToFront();
+        marker.setZIndexOffset(1000);
+      }else{
+
+        marker.setZIndexOffset(0);
       }
     }
   );
