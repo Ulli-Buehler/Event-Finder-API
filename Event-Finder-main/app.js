@@ -601,9 +601,26 @@ function createMarkerPopup(group){
       group.events[0]?.location || ""
     );
 
+  const list =
+    group.events
+      .slice(0, 6)
+      .map(event => {
+        return `
+          <div>
+            ${escapeHtml(event.title || "")}
+          </div>
+        `;
+      })
+      .join("");
+
   return `
     <b>${title}</b><br>
     ${location}
+    ${
+      group.events.length > 1
+      ? `<hr>${list}`
+      : `<br>${escapeHtml(group.events[0]?.date || "")}`
+    }
   `;
 }
 
@@ -740,79 +757,41 @@ function renderEventCard(
       ${escapeHtml(event.location || "")}
     </p>
 
-    <p class="event-description">
+    <p>
       ${escapeHtml(event.description || "")}
     </p>
 
     ${
       hasPoint
       ? `
-        <p class="meta coords">
+        <p class="meta">
           ${event.lat},
           ${event.lng}
         </p>
       `
-      : ""
+      : `
+        <p class="meta">
+          Kein Kartenpunkt vorhanden
+        </p>
+      `
     }
 
-    <div class="event-actions">
-
-      ${
-        event.maps
-        ? `
-          <a
-            href="${escapeAttribute(event.maps)}"
-            target="_blank"
-            rel="noopener"
-          >
-            Karte öffnen
-          </a>
-        `
-        : ""
-      }
-
-      ${
-        event.source
-        ? `
-          <a
-            class="source-link"
-            href="#"
-            onclick="copySourceLink(event, '${escapeAttribute(event.source)}')"
-          >
-            Quelle kopieren
-          </a>
-        `
-        : ""
-      }
-
-    </div>
+    ${
+      event.maps
+      ? `
+        <a
+          href="${escapeAttribute(event.maps)}"
+          target="_blank"
+          rel="noopener"
+        >
+          Karte öffnen
+        </a>
+      `
+      : ""
+    }
   `;
 
   eventsContainer.appendChild(card);
-}
-
-function copySourceLink(event, url){
-
-  event.preventDefault();
-
-  navigator.clipboard
-    .writeText(url)
-    .then(() => {
-
-      setStatus(
-        adminStatus,
-        "Quelllink kopiert.",
-        "ok"
-      );
-    })
-    .catch(() => {
-
-      setStatus(
-        adminStatus,
-        "Quelllink konnte nicht kopiert werden.",
-        "error"
-      );
-    });
 }
 
 function setupVisibleCardTracking(){
