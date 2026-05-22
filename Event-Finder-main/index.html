@@ -131,7 +131,7 @@
     #events{
       flex:1 1 auto;
       min-height:0;
-      padding:10px 12px 14px;
+      padding:8px 12px 14px;
       display:block;
       overflow-y:auto;
       overflow-x:hidden;
@@ -150,16 +150,16 @@
       background:#1e1e1e;
       border:1px solid #333;
       border-radius:14px;
-      padding:14px;
+      padding:12px;
       overflow:hidden;
-      display:flex;
-      flex-direction:column;
+      display:grid;
+      grid-template-rows:auto auto auto auto 1fr auto;
     }
 
     .event-card h3{
-      margin:0 0 6px 0;
-      font-size:18px;
-      line-height:1.25;
+      margin:0 0 5px 0;
+      font-size:16px;
+      line-height:1.18;
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
@@ -168,20 +168,22 @@
 
     .meta{
       opacity:0.72;
-      margin-bottom:5px;
-      font-size:13px;
+      margin-bottom:4px;
+      font-size:12px;
+      line-height:1.2;
     }
 
     .distance{
       font-weight:bold;
-      margin-bottom:5px;
-      font-size:15px;
+      margin-bottom:4px;
+      font-size:14px;
+      line-height:1.2;
     }
 
     .event-card p{
-      margin:5px 0;
-      line-height:1.32;
-      font-size:14px;
+      margin:4px 0;
+      line-height:1.24;
+      font-size:13px;
     }
 
     .event-card p:nth-of-type(2){
@@ -197,14 +199,14 @@
 
     .event-card a{
       display:inline-block;
-      align-self:flex-start;
-      margin-top:auto;
+      justify-self:start;
       color:#fff;
       background:#007aff;
-      padding:9px 12px;
+      padding:8px 12px;
       border-radius:10px;
       text-decoration:none;
-      font-size:14px;
+      font-size:13px;
+      font-weight:700;
     }
   </style>
 </head>
