@@ -384,6 +384,28 @@ function createMarker(event){
     ${escapeHtml(event.date || "")}
   `);
 
+  marker.on("click", () => {
+
+    const index =
+      eventMarkers.indexOf(marker);
+
+    const card =
+      eventsContainer.querySelector(
+        `[data-marker-index="${index}"]`
+      );
+
+    if(!card){
+      return;
+    }
+
+    card.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    highlightVisibleMarker(card);
+  });
+
   eventMarkers.push(marker);
 
   return marker;
