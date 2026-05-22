@@ -601,26 +601,9 @@ function createMarkerPopup(group){
       group.events[0]?.location || ""
     );
 
-  const list =
-    group.events
-      .slice(0, 6)
-      .map(event => {
-        return `
-          <div>
-            ${escapeHtml(event.title || "")}
-          </div>
-        `;
-      })
-      .join("");
-
   return `
     <b>${title}</b><br>
     ${location}
-    ${
-      group.events.length > 1
-      ? `<hr>${list}`
-      : `<br>${escapeHtml(group.events[0]?.date || "")}`
-    }
   `;
 }
 
@@ -793,11 +776,10 @@ function renderEventCard(
         ? `
           <a
             class="source-link"
-            href="${escapeAttribute(event.source)}"
-            target="_blank"
-            rel="noopener"
+            href="#"
+            onclick="copySourceLink(event, '${escapeAttribute(event.source)}')"
           >
-            Quelle
+            Quelle kopieren
           </a>
         `
         : ""
@@ -807,6 +789,30 @@ function renderEventCard(
   `;
 
   eventsContainer.appendChild(card);
+}
+
+function copySourceLink(event, url){
+
+  event.preventDefault();
+
+  navigator.clipboard
+    .writeText(url)
+    .then(() => {
+
+      setStatus(
+        adminStatus,
+        "Quelllink kopiert.",
+        "ok"
+      );
+    })
+    .catch(() => {
+
+      setStatus(
+        adminStatus,
+        "Quelllink konnte nicht kopiert werden.",
+        "error"
+      );
+    });
 }
 
 function setupVisibleCardTracking(){
