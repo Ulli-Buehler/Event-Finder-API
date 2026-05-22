@@ -1,7 +1,9 @@
 const CENTER = [48.616, 9.45];
 const RADIUS_METERS = 50000;
 
-const map = L.map("map").setView(CENTER, 9);
+const map = L.map("map", {
+  zoomControl: true
+});
 
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -12,7 +14,7 @@ L.tileLayer(
 
 const markersLayer = L.layerGroup().addTo(map);
 
-L.circle(CENTER, {
+const searchCircle = L.circle(CENTER, {
   radius: RADIUS_METERS,
   color: "#007aff",
   fill: false,
@@ -27,6 +29,20 @@ L.circleMarker(CENTER, {
 })
 .addTo(map)
 .bindPopup("Dettingen unter Teck");
+
+setTimeout(() => {
+
+  map.invalidateSize();
+
+  map.fitBounds(
+    searchCircle.getBounds(),
+    {
+      padding:[8,8],
+      animate:false
+    }
+  );
+
+}, 200);
 
 const fileInput =
   document.getElementById("jsonFile");
@@ -431,12 +447,8 @@ function renderEvents(events){
       </div>
     `;
 
-    map.setView(CENTER, 9);
-
     return;
   }
-
-  const bounds = [];
 
   const sortedEvents =
     [...events].sort((a, b) => {
@@ -464,25 +476,9 @@ function renderEvents(events){
         ${escapeHtml(event.location || "")}<br>
         ${escapeHtml(event.date || "")}
       `);
-
-      bounds.push([
-        event.lat,
-        event.lng
-      ]);
     }
 
     renderEventCard(event);
-  }
-
-  if(bounds.length > 0){
-
-    map.fitBounds(bounds, {
-      padding:[40,40]
-    });
-
-  }else{
-
-    map.setView(CENTER, 9);
   }
 }
 
