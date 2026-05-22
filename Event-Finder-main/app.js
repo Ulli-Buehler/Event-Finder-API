@@ -1,286 +1,583 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+const CENTER = [48.616, 9.45];
+const RADIUS_METERS = 50000;
 
-  <title>KI Eventfinder</title>
+const map = L.map("map").setView(CENTER, 9);
 
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    attribution: "&copy; OpenStreetMap"
+  }
+).addTo(map);
 
-  <style>
-    *{
-      box-sizing:border-box;
+const markersLayer = L.layerGroup().addTo(map);
+
+L.circle(CENTER, {
+  radius: RADIUS_METERS,
+  color: "#007aff",
+  fill: false,
+  weight: 4
+}).addTo(map);
+
+L.circleMarker(CENTER, {
+  radius: 7,
+  color: "#007aff",
+  fillColor: "#007aff",
+  fillOpacity: 1
+})
+.addTo(map)
+.bindPopup("Dettingen unter Teck");
+
+const fileInput =
+  document.getElementById("jsonFile");
+
+const saveEventsBtn =
+  document.getElementById("saveEventsBtn");
+
+const eventsContainer =
+  document.getElementById("events");
+
+const adminStatus =
+  document.getElementById("adminStatus");
+
+const dataStatus =
+  document.getElementById("dataStatus");
+
+const promptText =
+  document.getElementById("promptText");
+
+const sharePromptBtn =
+  document.getElementById("sharePromptBtn");
+
+const updatePromptBtn =
+  document.getElementById("updatePromptBtn");
+
+const promptStatus =
+  document.getElementById("promptStatus");
+
+let allEvents = [];
+
+let selectedEventsFileText = "";
+
+fileInput?.addEventListener(
+  "change",
+  handleFileUpload
+);
+
+saveEventsBtn?.addEventListener(
+  "click",
+  saveEventsForEveryone
+);
+
+sharePromptBtn?.addEventListener(
+  "click",
+  sharePrompt
+);
+
+updatePromptBtn?.addEventListener(
+  "click",
+  savePrompt
+);
+
+init();
+
+async function init(){
+
+  await loadSavedEvents();
+
+  await loadPrompt();
+}
+
+async function loadSavedEvents(){
+
+  try{
+
+    const response = await fetch(
+      "events.json?v=" + Date.now(),
+      {
+        cache: "no-store"
+      }
+    );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Keine gespeicherte events.json gefunden"
+      );
     }
 
-    html,
-    body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      overflow:hidden;
-      font-family:Arial, sans-serif;
-      background:#111;
-      color:#fff;
+    const data = await response.json();
+
+    allEvents =
+      Array.isArray(data)
+      ? data
+      : [];
+
+    renderEvents(allEvents);
+
+    dataStatus.textContent =
+      allEvents.length +
+      " gespeicherte Events geladen.";
+
+  }catch(error){
+
+    console.warn(error);
+
+    dataStatus.textContent =
+      "Noch keine gespeicherten Events vorhanden.";
+
+    renderEvents([]);
+  }
+}
+
+function handleFileUpload(event){
+
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = e => {
+
+    try{
+
+      selectedEventsFileText =
+        String(e.target.result || "");
+
+      const data =
+        JSON.parse(selectedEventsFileText);
+
+      allEvents =
+        Array.isArray(data)
+        ? data
+        : [];
+
+      renderEvents(allEvents);
+
+      setStatus(
+        adminStatus,
+        allEvents.length +
+        " Events geladen. Noch nicht gespeichert.",
+        "ok"
+      );
+
+    }catch(error){
+
+      selectedEventsFileText = "";
+
+      setStatus(
+        adminStatus,
+        "JSON-Datei konnte nicht gelesen werden.",
+        "error"
+      );
+
+      console.error(error);
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+async function saveEventsForEveryone(){
+
+  if(!selectedEventsFileText){
+
+    setStatus(
+      adminStatus,
+      "Bitte zuerst eine events.json auswählen.",
+      "error"
+    );
+
+    return;
+  }
+
+  try{
+
+    setStatus(
+      adminStatus,
+      "Speichere Events zentral…",
+      ""
+    );
+
+    const response = await fetch(
+      "/api/save-events",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: selectedEventsFileText
+      }
+    );
+
+    const result = await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        result.error ||
+        "Speichern fehlgeschlagen"
+      );
     }
 
-    body{
-      display:flex;
-      flex-direction:column;
+    setStatus(
+      adminStatus,
+      "Events gespeichert. Seite gleich neu laden.",
+      "ok"
+    );
+
+    setTimeout(() => {
+
+      location.reload();
+
+    }, 3000);
+
+  }catch(error){
+
+    setStatus(
+      adminStatus,
+      error.message,
+      "error"
+    );
+
+    console.error(error);
+  }
+}
+
+async function loadPrompt(){
+
+  try{
+
+    const response = await fetch(
+      "prompt.txt?v=" + Date.now(),
+      {
+        cache: "no-store"
+      }
+    );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Noch kein prompt.txt vorhanden"
+      );
     }
 
-    .top{
-      flex:0 0 auto;
-      padding:8px 12px 5px;
-      background:#111;
-      display:grid;
-      grid-template-columns:1fr auto;
-      align-items:start;
-      gap:8px;
-      z-index:1000;
+    promptText.value =
+      await response.text();
+
+    setStatus(
+      promptStatus,
+      "Suchtext geladen.",
+      "ok"
+    );
+
+  }catch(error){
+
+    promptText.value = "";
+
+    setStatus(
+      promptStatus,
+      "Noch kein Suchtext gespeichert.",
+      ""
+    );
+  }
+}
+
+async function savePrompt(){
+
+  try{
+
+    const text =
+      promptText.value || "";
+
+    if(!text.trim()){
+
+      setStatus(
+        promptStatus,
+        "Suchtext ist leer.",
+        "error"
+      );
+
+      return;
     }
 
-    .title-block{
-      min-width:0;
+    setStatus(
+      promptStatus,
+      "Neue Suche wird übernommen…",
+      ""
+    );
+
+    const response = await fetch(
+      "/api/save-prompt",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "text/plain; charset=utf-8"
+        },
+        body: text
+      }
+    );
+
+    const result = await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        result.error ||
+        "Suchtext konnte nicht gespeichert werden"
+      );
     }
 
-    h1{
-      margin:0 0 3px 0;
-      font-size:21px;
-      font-weight:700;
-      letter-spacing:0.2px;
+    setStatus(
+      promptStatus,
+      "Neue Suche gespeichert.",
+      "ok"
+    );
+
+  }catch(error){
+
+    setStatus(
+      promptStatus,
+      error.message,
+      "error"
+    );
+
+    console.error(error);
+  }
+}
+
+async function sharePrompt(){
+
+  const text =
+    promptText.value || "";
+
+  if(!text.trim()){
+
+    setStatus(
+      promptStatus,
+      "Kein Suchtext vorhanden.",
+      "error"
+    );
+
+    return;
+  }
+
+  try{
+
+    if(navigator.share){
+
+      await navigator.share({
+        title: "Suchanfrage Events",
+        text: text
+      });
+
+      setStatus(
+        promptStatus,
+        "ChatGPT Teilen geöffnet.",
+        "ok"
+      );
+
+      return;
     }
 
-    .hint{
-      opacity:0.65;
-      margin:0;
-      line-height:1.25;
-      font-size:12px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
+    await navigator.clipboard.writeText(text);
 
-    details{
-      position:relative;
-      margin:0;
-    }
+    setStatus(
+      promptStatus,
+      "Teilen nicht möglich. Suchtext wurde kopiert.",
+      "ok"
+    );
 
-    summary{
-      width:32px;
-      height:32px;
-      border-radius:50%;
-      background:#1e1e1e;
-      border:1px solid #333;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      list-style:none;
-      user-select:none;
-      font-size:17px;
-      opacity:0.85;
-    }
+  }catch(error){
 
-    summary::-webkit-details-marker{
-      display:none;
-    }
+    setStatus(
+      promptStatus,
+      "Teilen abgebrochen.",
+      ""
+    );
+  }
+}
 
-    .admin-panel{
-      position:absolute;
-      right:0;
-      top:40px;
-      width:min(340px, calc(100vw - 24px));
-      z-index:2000;
-      background:#181818;
-      border:1px solid #333;
-      border-radius:14px;
-      padding:10px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.55);
-      display:grid;
-      gap:8px;
-    }
+function hasCoords(event){
 
-    button,
-    input[type="file"]{
-      width:100%;
-      box-sizing:border-box;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid #444;
-      background:#1e1e1e;
-      color:#fff;
-      font-size:15px;
-      margin:4px 0;
-    }
+  return (
+    typeof event.lat === "number" &&
+    typeof event.lng === "number" &&
+    Number.isFinite(event.lat) &&
+    Number.isFinite(event.lng)
+  );
+}
 
-    button{
-      background:#007aff;
-      border:none;
-      font-weight:600;
-    }
+function renderEvents(events){
 
-    textarea{
-      display:none;
-    }
+  markersLayer.clearLayers();
 
-    .status{
-      margin-top:8px;
-      padding:10px;
-      border-radius:10px;
-      background:#222;
-      color:#ddd;
-      line-height:1.35;
-      font-size:13px;
-    }
+  eventsContainer.innerHTML = "";
 
-    .status.ok{
-      background:#133d1e;
-      color:#7dff9a;
-    }
+  if(
+    !Array.isArray(events) ||
+    events.length === 0
+  ){
 
-    .status.error{
-      background:#471717;
-      color:#ff9a9a;
-    }
-
-    #map{
-      flex:0 0 55vh;
-      width:100%;
-      min-height:0;
-    }
-
-    #events{
-      flex:1 1 auto;
-      min-height:0;
-      padding:10px 12px 14px;
-      display:block;
-      overflow-y:auto;
-      overflow-x:hidden;
-      scroll-snap-type:y mandatory;
-      -webkit-overflow-scrolling:touch;
-      background:#111;
-      border-top:1px solid #222;
-    }
-
-    .event-card{
-      width:100%;
-      min-height:calc(45vh - 76px);
-      margin-bottom:12px;
-      scroll-snap-align:start;
-      background:#1e1e1e;
-      border:1px solid #333;
-      border-radius:14px;
-      padding:14px;
-      overflow:hidden;
-    }
-
-    .event-card h3{
-      margin:0 0 6px 0;
-      font-size:18px;
-      line-height:1.25;
-    }
-
-    .meta{
-      opacity:0.72;
-      margin-bottom:6px;
-      font-size:14px;
-    }
-
-    .distance{
-      font-weight:bold;
-      margin-bottom:6px;
-      font-size:14px;
-    }
-
-    .event-card p{
-      margin:6px 0;
-      line-height:1.35;
-      font-size:14px;
-    }
-
-    .event-card a{
-      display:inline-block;
-      margin-top:8px;
-      color:#fff;
-      background:#007aff;
-      padding:9px 12px;
-      border-radius:10px;
-      text-decoration:none;
-      font-size:14px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="top">
-
-    <div class="title-block">
-      <h1>KI Eventfinder</h1>
-
-      <div class="hint" id="dataStatus">
-        Lade gespeicherte Events…
+    eventsContainer.innerHTML = `
+      <div class="event-card">
+        <h3>Keine Events geladen</h3>
+        <p>
+          Öffne den Adminbereich und lade
+          eine events.json hoch.
+        </p>
       </div>
+    `;
+
+    map.setView(CENTER, 9);
+
+    return;
+  }
+
+  const bounds = [];
+
+  const sortedEvents =
+    [...events].sort((a, b) => {
+
+      const da =
+        Number(a.distance_km ?? 9999);
+
+      const db =
+        Number(b.distance_km ?? 9999);
+
+      return da - db;
+    });
+
+  for(const event of sortedEvents){
+
+    if(hasCoords(event)){
+
+      const marker = L.marker([
+        event.lat,
+        event.lng
+      ]).addTo(markersLayer);
+
+      marker.bindPopup(`
+        <b>${escapeHtml(event.title || "")}</b><br>
+        ${escapeHtml(event.location || "")}<br>
+        ${escapeHtml(event.date || "")}
+      `);
+
+      bounds.push([
+        event.lat,
+        event.lng
+      ]);
+    }
+
+    renderEventCard(event);
+  }
+
+  if(bounds.length > 0){
+
+    map.fitBounds(bounds, {
+      padding:[40,40]
+    });
+
+  }else{
+
+    map.setView(CENTER, 9);
+  }
+}
+
+function renderEventCard(event){
+
+  const card =
+    document.createElement("div");
+
+  card.className = "event-card";
+
+  const hasPoint =
+    hasCoords(event);
+
+  card.innerHTML = `
+    <h3>
+      ${escapeHtml(event.title || "")}
+    </h3>
+
+    <div class="meta">
+      ${escapeHtml(event.date || "")}
+      ${escapeHtml(event.time || "")}
     </div>
 
-    <details>
-
-      <summary title="Einstellungen">
-        ⚙️
-      </summary>
-
-      <div class="admin-panel">
-
-        <input
-          id="jsonFile"
-          type="file"
-          accept=".json,application/json"
-        />
-
-        <button id="saveEventsBtn" type="button">
-          Events aktualisieren
-        </button>
-
-        <button id="sharePromptBtn" type="button">
-          🤖 GPT öffnen
-        </button>
-
-        <button id="updatePromptBtn" type="button">
-          💾 Neue Suche speichern
-        </button>
-
-        <textarea id="promptText"></textarea>
-
-        <div id="adminStatus" class="status">
-          Noch keine neue Datei ausgewählt.
-        </div>
-
-        <div id="promptStatus" class="status">
-          Suchtext geladen.
-        </div>
-
-      </div>
-
-    </details>
-
-  </div>
-
-  <div id="map"></div>
-
-  <div id="events">
-    <div class="event-card">
-      <h3>Events werden geladen…</h3>
+    <div class="distance">
+      ${event.distance_km ?? "?"} km
     </div>
-  </div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <p>
+      ${escapeHtml(event.location || "")}
+    </p>
 
-  <script src="app.js?v=9"></script>
+    <p>
+      ${escapeHtml(event.description || "")}
+    </p>
 
-</body>
-</html>
+    ${
+      hasPoint
+      ? `
+        <p class="meta">
+          ${event.lat},
+          ${event.lng}
+        </p>
+      `
+      : `
+        <p class="meta">
+          Kein Kartenpunkt vorhanden
+        </p>
+      `
+    }
+
+    ${
+      event.maps
+      ? `
+        <a
+          href="${escapeAttribute(event.maps)}"
+          target="_blank"
+          rel="noopener"
+        >
+          Karte öffnen
+        </a>
+      `
+      : ""
+    }
+  `;
+
+  eventsContainer.appendChild(card);
+}
+
+function setStatus(
+  element,
+  text,
+  type
+){
+
+  element.textContent = text;
+
+  element.className = "status";
+
+  if(type){
+
+    element.classList.add(type);
+  }
+}
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function escapeAttribute(value){
+
+  return escapeHtml(value);
+}
