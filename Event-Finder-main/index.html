@@ -1,41 +1,298 @@
-<p class="admin-title">
-  Daten
-</p>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<label
-  class="file-button"
-  for="eventsFileInput"
->
-  Events importieren
-</label>
+  <title>KI Eventfinder</title>
 
-<input
-  id="eventsFileInput"
-  type="file"
-  accept=".json,application/json"
-/>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
 
-<p class="admin-title">
-  Suchtext
-</p>
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-<label
-  class="file-button"
-  for="promptFileInput"
->
-  Suchtext importieren
-</label>
+    html,
+    body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      font-family:Arial, sans-serif;
+      background:#111;
+      color:#fff;
+    }
 
-<input
-  id="promptFileInput"
-  type="file"
-  accept=".txt,text/plain"
-/>
+    body{
+      display:flex;
+      flex-direction:column;
+    }
 
-<button
-  id="exportPromptBtn"
-  class="secondary-button"
-  type="button"
->
-  Suchtext exportieren
-</button>
+    .top{
+      flex:0 0 auto;
+      padding:8px 12px 5px;
+      background:#111;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:start;
+      gap:8px;
+      z-index:1000;
+    }
+
+    .title-block{
+      min-width:0;
+    }
+
+    h1{
+      margin:0 0 3px 0;
+      font-size:21px;
+      font-weight:700;
+      letter-spacing:0.2px;
+    }
+
+    .hint{
+      opacity:0.65;
+      margin:0;
+      line-height:1.25;
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    details{
+      position:relative;
+      margin:0;
+    }
+
+    summary{
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      background:#1e1e1e;
+      border:1px solid #333;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      list-style:none;
+      user-select:none;
+      font-size:17px;
+      opacity:0.85;
+    }
+
+    summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .admin-panel{
+      position:absolute;
+      right:0;
+      top:40px;
+      width:min(340px, calc(100vw - 24px));
+      z-index:2000;
+      background:#181818;
+      border:1px solid #333;
+      border-radius:14px;
+      padding:12px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.55);
+      display:grid;
+      gap:10px;
+    }
+
+    button,
+    .file-button{
+      width:100%;
+      box-sizing:border-box;
+      padding:13px 12px;
+      border-radius:12px;
+      border:none;
+      background:#007aff;
+      color:#fff;
+      font-size:15px;
+      font-weight:700;
+      text-align:center;
+      cursor:pointer;
+      display:block;
+    }
+
+    input[type="file"]{
+      display:none;
+    }
+
+    textarea{
+      display:none;
+    }
+
+    .status{
+      padding:10px;
+      border-radius:10px;
+      background:#222;
+      color:#ddd;
+      line-height:1.35;
+      font-size:13px;
+      overflow-wrap:break-word;
+    }
+
+    .status.ok{
+      background:#133d1e;
+      color:#7dff9a;
+    }
+
+    .status.error{
+      background:#471717;
+      color:#ff9a9a;
+    }
+
+    #map{
+      flex:0 0 55vh;
+      width:100%;
+      min-height:0;
+    }
+
+    #events{
+      flex:1 1 auto;
+      min-height:0;
+      padding:10px 12px 14px;
+      display:block;
+      overflow-y:auto;
+      overflow-x:hidden;
+      scroll-snap-type:y mandatory;
+      -webkit-overflow-scrolling:touch;
+      background:#111;
+      border-top:1px solid #222;
+    }
+
+    .event-card{
+      width:100%;
+      min-height:calc(45vh - 76px);
+      margin-bottom:12px;
+      scroll-snap-align:start;
+      background:#1e1e1e;
+      border:1px solid #333;
+      border-radius:14px;
+      padding:14px;
+      overflow:hidden;
+    }
+
+    .event-card h3{
+      margin:0 0 6px 0;
+      font-size:18px;
+      line-height:1.25;
+    }
+
+    .meta{
+      opacity:0.72;
+      margin-bottom:6px;
+      font-size:14px;
+    }
+
+    .distance{
+      font-weight:bold;
+      margin-bottom:6px;
+      font-size:14px;
+    }
+
+    .event-card p{
+      margin:6px 0;
+      line-height:1.35;
+      font-size:14px;
+    }
+
+    .event-card a{
+      display:inline-block;
+      margin-top:8px;
+      color:#fff;
+      background:#007aff;
+      padding:9px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top">
+
+    <div class="title-block">
+      <h1>KI Eventfinder</h1>
+
+      <div class="hint" id="dataStatus">
+        Lade gespeicherte Events…
+      </div>
+    </div>
+
+    <details>
+
+      <summary title="Einstellungen">
+        ⚙️
+      </summary>
+
+      <div class="admin-panel">
+
+        <label
+          class="file-button"
+          for="eventsFileInput"
+        >
+          Events importieren
+        </label>
+
+        <input
+          id="eventsFileInput"
+          type="file"
+          accept=".json,application/json"
+        />
+
+        <label
+          class="file-button"
+          for="promptFileInput"
+        >
+          Suchtext importieren
+        </label>
+
+        <input
+          id="promptFileInput"
+          type="file"
+          accept=".txt,text/plain"
+        />
+
+        <button
+          id="exportPromptBtn"
+          type="button"
+        >
+          Suchtext exportieren
+        </button>
+
+        <textarea id="promptText"></textarea>
+
+        <div id="adminStatus" class="status">
+          Bereit.
+        </div>
+
+      </div>
+
+    </details>
+
+  </div>
+
+  <div id="map"></div>
+
+  <div id="events">
+    <div class="event-card">
+      <h3>Events werden geladen…</h3>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="app.js?v=9"></script>
+
+</body>
+</html>
