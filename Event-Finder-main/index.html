@@ -99,29 +99,48 @@
       background:#181818;
       border:1px solid #333;
       border-radius:14px;
-      padding:10px;
+      padding:12px;
       box-shadow:0 10px 30px rgba(0,0,0,0.55);
       display:grid;
-      gap:8px;
+      gap:10px;
+    }
+
+    .admin-title{
+      margin:0 0 2px 0;
+      font-size:14px;
+      opacity:0.75;
+      font-weight:bold;
+    }
+
+    .admin-note{
+      margin:0 0 4px 0;
+      font-size:12px;
+      line-height:1.35;
+      opacity:0.6;
     }
 
     button,
-    input[type="file"]{
+    .file-button{
       width:100%;
       box-sizing:border-box;
-      padding:12px;
+      padding:13px 12px;
       border-radius:12px;
-      border:1px solid #444;
-      background:#1e1e1e;
+      border:none;
+      background:#007aff;
       color:#fff;
       font-size:15px;
-      margin:4px 0;
+      font-weight:700;
+      text-align:center;
+      cursor:pointer;
+      display:block;
     }
 
-    button{
-      background:#007aff;
-      border:none;
-      font-weight:600;
+    .secondary-button{
+      background:#2b2b2b;
+    }
+
+    input[type="file"]{
+      display:none;
     }
 
     textarea{
@@ -129,13 +148,13 @@
     }
 
     .status{
-      margin-top:8px;
       padding:10px;
       border-radius:10px;
       background:#222;
       color:#ddd;
       line-height:1.35;
       font-size:13px;
+      overflow-wrap:break-word;
     }
 
     .status.ok{
@@ -236,32 +255,52 @@
 
       <div class="admin-panel">
 
+        <p class="admin-title">
+          Daten
+        </p>
+
+        <label
+          class="file-button"
+          for="eventsFileInput"
+        >
+          Events importieren
+        </label>
+
         <input
-          id="jsonFile"
+          id="eventsFileInput"
           type="file"
           accept=".json,application/json"
         />
 
-        <button id="saveEventsBtn" type="button">
-          Events aktualisieren
-        </button>
+        <p class="admin-title">
+          Suchtext
+        </p>
 
-        <button id="sharePromptBtn" type="button">
-          🤖 GPT öffnen
-        </button>
+        <label
+          class="file-button"
+          for="promptFileInput"
+        >
+          Suchtext importieren
+        </label>
 
-        <button id="updatePromptBtn" type="button">
-          💾 Neue Suche speichern
+        <input
+          id="promptFileInput"
+          type="file"
+          accept=".txt,text/plain"
+        />
+
+        <button
+          id="exportPromptBtn"
+          class="secondary-button"
+          type="button"
+        >
+          Suchtext exportieren
         </button>
 
         <textarea id="promptText"></textarea>
 
         <div id="adminStatus" class="status">
-          Noch keine neue Datei ausgewählt.
-        </div>
-
-        <div id="promptStatus" class="status">
-          Suchtext geladen.
+          Bereit.
         </div>
 
       </div>
@@ -280,7 +319,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 
 </body>
 </html>
