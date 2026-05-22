@@ -776,19 +776,44 @@ function renderEventCard(
       `
     }
 
-    ${
-      event.maps
-      ? `
-        <a
-          href="${escapeAttribute(event.maps)}"
-          target="_blank"
-          rel="noopener"
-        >
-          Karte öffnen
-        </a>
-      `
-      : ""
-    }
+    <div
+      style="
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        margin-top:8px;
+      "
+    >
+
+      ${
+        event.maps
+        ? `
+          <a
+            href="${escapeAttribute(event.maps)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Karte öffnen
+          </a>
+        `
+        : ""
+      }
+
+      ${
+        event.source
+        ? `
+          <a
+            href="${escapeAttribute(event.source)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Quelle
+          </a>
+        `
+        : ""
+      }
+
+    </div>
   `;
 
   eventsContainer.appendChild(card);
