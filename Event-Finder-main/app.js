@@ -57,6 +57,10 @@ const eventMarkers = [];
 
 let allEvents = [];
 
+let sortedEvents = [];
+
+let currentActiveEventIndex = null;
+
 let selectedEventsFileText = "";
 
 fileInput?.addEventListener(
@@ -72,6 +76,11 @@ promptFileInput?.addEventListener(
 sharePromptBtn?.addEventListener(
   "click",
   sharePrompt
+);
+
+map.on(
+  "zoomend",
+  rebuildMarkersForCurrentZoom
 );
 
 init();
@@ -314,12 +323,16 @@ function renderEvents(events){
 
   eventMarkers.length = 0;
 
+  currentActiveEventIndex = null;
+
   eventsContainer.innerHTML = "";
 
   if(
     !Array.isArray(events) ||
     events.length === 0
   ){
+
+    sortedEvents = [];
 
     eventsContainer.innerHTML = `
       <div class="event-card">
@@ -332,9 +345,7 @@ function renderEvents(events){
     return;
   }
 
-  const bounds = [];
-
-  const sortedEvents =
+  sortedEvents =
     [...events].sort((a, b) => {
 
       const da =
@@ -346,56 +357,25 @@ function renderEvents(events){
       return da - db;
     });
 
-  const groups =
-    createEventGroups(sortedEvents);
+  const bounds = [];
 
-  const markerByKey =
-    new Map();
+  sortedEvents.forEach(
+    (event, eventIndex) => {
 
-  for(const event of sortedEvents){
-
-    let markerIndex = null;
-
-    if(hasCoords(event)){
-
-      const key =
-        getCoordKey(event);
-
-      if(!markerByKey.has(key)){
-
-        const group =
-          groups.get(key);
-
-        const marker =
-          createMarker(group);
-
-        markerIndex =
-          eventMarkers.length;
-
-        markerByKey.set(
-          key,
-          markerIndex
-        );
-
-        eventMarkers.push(marker);
+      if(hasCoords(event)){
 
         bounds.push([
-          group.lat,
-          group.lng
+          event.lat,
+          event.lng
         ]);
-
-      }else{
-
-        markerIndex =
-          markerByKey.get(key);
       }
-    }
 
-    renderEventCard(
-      event,
-      markerIndex
-    );
-  }
+      renderEventCard(
+        event,
+        eventIndex
+      );
+    }
+  );
 
   setupVisibleCardTracking();
 
@@ -409,39 +389,154 @@ function renderEvents(events){
 
     map.setView(CENTER, 9);
   }
+
+  rebuildMarkersForCurrentZoom();
 }
 
-function createEventGroups(events){
+function rebuildMarkersForCurrentZoom(){
+
+  markersLayer.clearLayers();
+
+  eventMarkers.length = 0;
+
+  if(
+    !Array.isArray(sortedEvents) ||
+    sortedEvents.length === 0
+  ){
+    return;
+  }
+
+  const groups =
+    createZoomGroups();
+
+  groups.forEach(group => {
+
+    const marker =
+      createMarker(group);
+
+    eventMarkers.push(marker);
+  });
+
+  updateCardsMarkerIndex(groups);
+
+  highlightActiveEventMarker();
+}
+
+function createZoomGroups(){
+
+  const zoom =
+    map.getZoom();
+
+  const clusterSize =
+    getClusterPixelSize(zoom);
 
   const groups =
     new Map();
 
-  for(const event of events){
+  sortedEvents.forEach(
+    (event, eventIndex) => {
 
-    if(!hasCoords(event)){
-      continue;
+      if(!hasCoords(event)){
+        return;
+      }
+
+      const point =
+        map.latLngToLayerPoint([
+          event.lat,
+          event.lng
+        ]);
+
+      const key =
+        clusterSize > 0
+        ? [
+            Math.round(point.x / clusterSize),
+            Math.round(point.y / clusterSize)
+          ].join(",")
+        : getCoordKey(event);
+
+      if(!groups.has(key)){
+
+        groups.set(
+          key,
+          {
+            key: key,
+            lat: event.lat,
+            lng: event.lng,
+            events: [],
+            eventIndexes: []
+          }
+        );
+      }
+
+      const group =
+        groups.get(key);
+
+      group.events.push(event);
+
+      group.eventIndexes.push(eventIndex);
+
+      group.lat =
+        group.events.reduce(
+          (sum, item) => sum + item.lat,
+          0
+        ) / group.events.length;
+
+      group.lng =
+        group.events.reduce(
+          (sum, item) => sum + item.lng,
+          0
+        ) / group.events.length;
     }
+  );
 
-    const key =
-      getCoordKey(event);
+  return Array.from(
+    groups.values()
+  );
+}
 
-    if(!groups.has(key)){
+function getClusterPixelSize(zoom){
 
-      groups.set(
-        key,
-        {
-          key: key,
-          lat: event.lat,
-          lng: event.lng,
-          events: []
+  if(zoom <= 9){
+    return 78;
+  }
+
+  if(zoom === 10){
+    return 64;
+  }
+
+  if(zoom === 11){
+    return 50;
+  }
+
+  if(zoom === 12){
+    return 36;
+  }
+
+  return 0;
+}
+
+function updateCardsMarkerIndex(groups){
+
+  groups.forEach(
+    (group, markerIndex) => {
+
+      group.eventIndexes.forEach(
+        eventIndex => {
+
+          const card =
+            eventsContainer.querySelector(
+              `[data-event-index="${eventIndex}"]`
+            );
+
+          if(card){
+
+            card.dataset.markerIndex =
+              String(markerIndex);
+          }
         }
       );
     }
-
-    groups.get(key).events.push(event);
-  }
-
-  return groups;
+  );
 }
 
 function createMarker(group){
@@ -456,18 +551,24 @@ function createMarker(group){
     }
   ).addTo(markersLayer);
 
+  marker.groupEventIndexes =
+    group.eventIndexes;
+
+  marker.groupCount =
+    group.events.length;
+
   marker.bindPopup(
     createMarkerPopup(group)
   );
 
   marker.on("click", () => {
 
-    const index =
-      eventMarkers.indexOf(marker);
+    const firstEventIndex =
+      marker.groupEventIndexes[0];
 
     const card =
       eventsContainer.querySelector(
-        `[data-marker-index="${index}"]`
+        `[data-event-index="${firstEventIndex}"]`
       );
 
     if(!card){
@@ -479,7 +580,10 @@ function createMarker(group){
       block: "start"
     });
 
-    highlightVisibleMarker(card);
+    currentActiveEventIndex =
+      firstEventIndex;
+
+    highlightActiveEventMarker();
   });
 
   return marker;
@@ -490,7 +594,7 @@ function createMarkerPopup(group){
   const title =
     group.events.length === 1
     ? escapeHtml(group.events[0].title || "")
-    : group.events.length + " Events an diesem Ort";
+    : group.events.length + " Events in der Nähe";
 
   const location =
     escapeHtml(
@@ -499,7 +603,7 @@ function createMarkerPopup(group){
 
   const list =
     group.events
-      .slice(0, 5)
+      .slice(0, 6)
       .map(event => {
         return `
           <div>
@@ -535,8 +639,8 @@ function createEventIcon(
 
   const size =
     active
-    ? 46
-    : 38;
+    ? 48
+    : 40;
 
   const anchorX =
     size / 2;
@@ -553,12 +657,12 @@ function createEventIcon(
       <svg
         width="${size}"
         height="${size}"
-        viewBox="0 0 38 38"
+        viewBox="0 0 40 40"
         xmlns="http://www.w3.org/2000/svg"
         style="display:block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));"
       >
         <path
-          d="M19 2C11.8 2 6 7.8 6 15C6 24.8 19 36 19 36C19 36 32 24.8 32 15C32 7.8 26.2 2 19 2Z"
+          d="M20 2C12.4 2 6.2 8.2 6.2 15.8C6.2 26.2 20 38 20 38C20 38 33.8 26.2 33.8 15.8C33.8 8.2 27.6 2 20 2Z"
           fill="${color}"
           stroke="#ffffff"
           stroke-width="2"
@@ -568,17 +672,17 @@ function createEventIcon(
           hasCount
           ? `
             <circle
-              cx="19"
-              cy="15"
-              r="9"
+              cx="20"
+              cy="15.8"
+              r="10"
               fill="#ffffff"
             />
 
             <text
-              x="19"
-              y="18.5"
+              x="20"
+              y="19.4"
               text-anchor="middle"
-              font-size="10"
+              font-size="11"
               font-weight="800"
               font-family="Arial, sans-serif"
               fill="${color}"
@@ -588,9 +692,9 @@ function createEventIcon(
           `
           : `
             <circle
-              cx="19"
-              cy="15"
-              r="5"
+              cx="20"
+              cy="15.8"
+              r="5.5"
               fill="#ffffff"
             />
           `
@@ -602,7 +706,7 @@ function createEventIcon(
 
 function renderEventCard(
   event,
-  markerIndex
+  eventIndex
 ){
 
   const card =
@@ -610,11 +714,8 @@ function renderEventCard(
 
   card.className = "event-card";
 
-  if(markerIndex !== null){
-
-    card.dataset.markerIndex =
-      String(markerIndex);
-  }
+  card.dataset.eventIndex =
+    String(eventIndex);
 
   const hasPoint =
     hasCoords(event);
@@ -704,9 +805,16 @@ function setupVisibleCardTracking(){
           return;
         }
 
-        highlightVisibleMarker(
-          bestEntry.target
-        );
+        const eventIndex =
+          Number(bestEntry.target.dataset.eventIndex);
+
+        if(Number.isFinite(eventIndex)){
+
+          currentActiveEventIndex =
+            eventIndex;
+
+          highlightActiveEventMarker();
+        }
       },
       {
         root: eventsContainer,
@@ -719,67 +827,31 @@ function setupVisibleCardTracking(){
   });
 }
 
-function highlightVisibleMarker(card){
+function highlightActiveEventMarker(){
 
-  const activeIndex =
-    Number(card.dataset.markerIndex);
+  eventMarkers.forEach(marker => {
 
-  eventMarkers.forEach(
-    (marker, index) => {
-
-      const active =
-        index === activeIndex;
-
-      const popup =
-        marker.getPopup();
-
-      const groupCount =
-        getMarkerGroupCount(marker);
-
-      marker.setIcon(
-        createEventIcon(
-          active,
-          groupCount
-        )
+    const active =
+      Array.isArray(marker.groupEventIndexes) &&
+      marker.groupEventIndexes.includes(
+        currentActiveEventIndex
       );
 
-      if(popup){
-        marker.bindPopup(popup.getContent());
-      }
-
-      if(active){
-
-        marker.setZIndexOffset(1000);
-      }else{
-
-        marker.setZIndexOffset(0);
-      }
-    }
-  );
-}
-
-function getMarkerGroupCount(marker){
-
-  const popup =
-    marker.getPopup();
-
-  if(!popup){
-    return 1;
-  }
-
-  const content =
-    popup.getContent();
-
-  const match =
-    String(content).match(
-      /<b>(\d+) Events an diesem Ort<\/b>/
+    marker.setIcon(
+      createEventIcon(
+        active,
+        marker.groupCount || 1
+      )
     );
 
-  if(match){
-    return Number(match[1]);
-  }
+    if(active){
 
-  return 1;
+      marker.setZIndexOffset(1000);
+    }else{
+
+      marker.setZIndexOffset(0);
+    }
+  });
 }
 
 function setStatus(
