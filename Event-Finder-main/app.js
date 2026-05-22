@@ -300,6 +300,14 @@ function hasCoords(event){
   );
 }
 
+function getCoordKey(event){
+
+  return [
+    Number(event.lat).toFixed(5),
+    Number(event.lng).toFixed(5)
+  ].join(",");
+}
+
 function renderEvents(events){
 
   markersLayer.clearLayers();
@@ -338,21 +346,55 @@ function renderEvents(events){
       return da - db;
     });
 
+  const groups =
+    createEventGroups(sortedEvents);
+
+  const markerByKey =
+    new Map();
+
   for(const event of sortedEvents){
 
-    let marker = null;
+    let markerIndex = null;
 
     if(hasCoords(event)){
 
-      marker = createMarker(event);
+      const key =
+        getCoordKey(event);
 
-      bounds.push([
-        event.lat,
-        event.lng
-      ]);
+      if(!markerByKey.has(key)){
+
+        const group =
+          groups.get(key);
+
+        const marker =
+          createMarker(group);
+
+        markerIndex =
+          eventMarkers.length;
+
+        markerByKey.set(
+          key,
+          markerIndex
+        );
+
+        eventMarkers.push(marker);
+
+        bounds.push([
+          group.lat,
+          group.lng
+        ]);
+
+      }else{
+
+        markerIndex =
+          markerByKey.get(key);
+      }
     }
 
-    renderEventCard(event, marker);
+    renderEventCard(
+      event,
+      markerIndex
+    );
   }
 
   setupVisibleCardTracking();
@@ -369,20 +411,54 @@ function renderEvents(events){
   }
 }
 
-function createMarker(event){
+function createEventGroups(events){
+
+  const groups =
+    new Map();
+
+  for(const event of events){
+
+    if(!hasCoords(event)){
+      continue;
+    }
+
+    const key =
+      getCoordKey(event);
+
+    if(!groups.has(key)){
+
+      groups.set(
+        key,
+        {
+          key: key,
+          lat: event.lat,
+          lng: event.lng,
+          events: []
+        }
+      );
+    }
+
+    groups.get(key).events.push(event);
+  }
+
+  return groups;
+}
+
+function createMarker(group){
 
   const marker = L.marker(
-    [event.lat, event.lng],
+    [group.lat, group.lng],
     {
-      icon: createEventIcon(false)
+      icon: createEventIcon(
+        false,
+        group.events.length
+      )
     }
   ).addTo(markersLayer);
 
-  marker.bindPopup(`
-    <b>${escapeHtml(event.title || "")}</b><br>
-    ${escapeHtml(event.location || "")}<br>
-    ${escapeHtml(event.date || "")}
-  `);
+  marker.bindPopup(
+    createMarkerPopup(group)
+  );
 
   marker.on("click", () => {
 
@@ -406,22 +482,61 @@ function createMarker(event){
     highlightVisibleMarker(card);
   });
 
-  eventMarkers.push(marker);
-
   return marker;
 }
 
-function createEventIcon(active){
+function createMarkerPopup(group){
+
+  const title =
+    group.events.length === 1
+    ? escapeHtml(group.events[0].title || "")
+    : group.events.length + " Events an diesem Ort";
+
+  const location =
+    escapeHtml(
+      group.events[0]?.location || ""
+    );
+
+  const list =
+    group.events
+      .slice(0, 5)
+      .map(event => {
+        return `
+          <div>
+            ${escapeHtml(event.title || "")}
+          </div>
+        `;
+      })
+      .join("");
+
+  return `
+    <b>${title}</b><br>
+    ${location}
+    ${
+      group.events.length > 1
+      ? `<hr>${list}`
+      : `<br>${escapeHtml(group.events[0]?.date || "")}`
+    }
+  `;
+}
+
+function createEventIcon(
+  active,
+  count
+){
 
   const color =
     active
     ? ACTIVE_MARKER_COLOR
     : DEFAULT_MARKER_COLOR;
 
+  const hasCount =
+    Number(count) > 1;
+
   const size =
     active
-    ? 42
-    : 34;
+    ? 46
+    : 38;
 
   const anchorX =
     size / 2;
@@ -438,38 +553,67 @@ function createEventIcon(active){
       <svg
         width="${size}"
         height="${size}"
-        viewBox="0 0 34 34"
+        viewBox="0 0 38 38"
         xmlns="http://www.w3.org/2000/svg"
         style="display:block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));"
       >
         <path
-          d="M17 1.8C10.6 1.8 5.4 7 5.4 13.4C5.4 22.2 17 32.2 17 32.2C17 32.2 28.6 22.2 28.6 13.4C28.6 7 23.4 1.8 17 1.8Z"
+          d="M19 2C11.8 2 6 7.8 6 15C6 24.8 19 36 19 36C19 36 32 24.8 32 15C32 7.8 26.2 2 19 2Z"
           fill="${color}"
           stroke="#ffffff"
           stroke-width="2"
         />
-        <circle
-          cx="17"
-          cy="13.4"
-          r="4.8"
-          fill="#ffffff"
-        />
+
+        ${
+          hasCount
+          ? `
+            <circle
+              cx="19"
+              cy="15"
+              r="9"
+              fill="#ffffff"
+            />
+
+            <text
+              x="19"
+              y="18.5"
+              text-anchor="middle"
+              font-size="10"
+              font-weight="800"
+              font-family="Arial, sans-serif"
+              fill="${color}"
+            >
+              ${count}
+            </text>
+          `
+          : `
+            <circle
+              cx="19"
+              cy="15"
+              r="5"
+              fill="#ffffff"
+            />
+          `
+        }
       </svg>
     `
   });
 }
 
-function renderEventCard(event, marker){
+function renderEventCard(
+  event,
+  markerIndex
+){
 
   const card =
     document.createElement("div");
 
   card.className = "event-card";
 
-  if(marker){
+  if(markerIndex !== null){
 
     card.dataset.markerIndex =
-      String(eventMarkers.indexOf(marker));
+      String(markerIndex);
   }
 
   const hasPoint =
@@ -586,9 +730,22 @@ function highlightVisibleMarker(card){
       const active =
         index === activeIndex;
 
+      const popup =
+        marker.getPopup();
+
+      const groupCount =
+        getMarkerGroupCount(marker);
+
       marker.setIcon(
-        createEventIcon(active)
+        createEventIcon(
+          active,
+          groupCount
+        )
       );
+
+      if(popup){
+        marker.bindPopup(popup.getContent());
+      }
 
       if(active){
 
@@ -599,6 +756,30 @@ function highlightVisibleMarker(card){
       }
     }
   );
+}
+
+function getMarkerGroupCount(marker){
+
+  const popup =
+    marker.getPopup();
+
+  if(!popup){
+    return 1;
+  }
+
+  const content =
+    popup.getContent();
+
+  const match =
+    String(content).match(
+      /<b>(\d+) Events an diesem Ort<\/b>/
+    );
+
+  if(match){
+    return Number(match[1]);
+  }
+
+  return 1;
 }
 
 function setStatus(
