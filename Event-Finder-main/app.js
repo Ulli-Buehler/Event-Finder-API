@@ -757,38 +757,53 @@ function renderEventCard(
       ${escapeHtml(event.location || "")}
     </p>
 
-    <p>
+    <p class="event-description">
       ${escapeHtml(event.description || "")}
     </p>
 
     ${
       hasPoint
       ? `
-        <p class="meta">
+        <p class="meta coords">
           ${event.lat},
           ${event.lng}
         </p>
       `
-      : `
-        <p class="meta">
-          Kein Kartenpunkt vorhanden
-        </p>
-      `
-    }
-
-    ${
-      event.maps
-      ? `
-        <a
-          href="${escapeAttribute(event.maps)}"
-          target="_blank"
-          rel="noopener"
-        >
-          Karte öffnen
-        </a>
-      `
       : ""
     }
+
+    <div class="event-actions">
+
+      ${
+        event.maps
+        ? `
+          <a
+            href="${escapeAttribute(event.maps)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Karte öffnen
+          </a>
+        `
+        : ""
+      }
+
+      ${
+        event.source
+        ? `
+          <a
+            class="source-link"
+            href="${escapeAttribute(event.source)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Quelle
+          </a>
+        `
+        : ""
+      }
+
+    </div>
   `;
 
   eventsContainer.appendChild(card);
