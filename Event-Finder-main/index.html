@@ -135,23 +135,14 @@
       border-radius:14px;
       padding:12px;
       overflow:hidden;
-
-      display:grid;
-      grid-template-rows:
-        46px
-        24px
-        48px
-        48px;
-
-      gap:8px;
     }
 
     .event-card h3{
-      margin:0;
-      height:46px;
+      margin:0 0 10px 0;
+      min-height:44px;
 
       font-size:17px;
-      line-height:23px;
+      line-height:22px;
       font-weight:700;
 
       display:-webkit-box;
@@ -165,15 +156,12 @@
     }
 
     .distance{
+      display:inline-block;
       margin:0;
-      height:24px;
-      line-height:24px;
 
       font-size:15px;
       font-weight:700;
-
-      white-space:nowrap;
-      overflow:hidden;
+      line-height:22px;
     }
 
     .event-card p{
@@ -182,23 +170,24 @@
     }
 
     .event-card p:nth-of-type(1){
-      margin-top:-24px;
-      margin-left:62px;
-
-      height:24px;
-      line-height:24px;
+      display:inline-block;
+      margin-left:18px;
 
       font-size:15px;
+      line-height:22px;
 
       white-space:nowrap;
       text-overflow:ellipsis;
+      max-width:70%;
+      vertical-align:top;
     }
 
     .event-card p:nth-of-type(2){
-      height:48px;
+      margin-top:8px;
+      min-height:44px;
 
       font-size:16px;
-      line-height:24px;
+      line-height:22px;
 
       display:-webkit-box;
       -webkit-line-clamp:2;
@@ -211,14 +200,15 @@
     }
 
     .event-card > div[style]{
-      height:48px;
+      margin-top:12px !important;
       display:flex !important;
       gap:10px !important;
-      margin:0 !important;
     }
 
     .event-card a{
       flex:1;
+      height:48px;
+
       display:flex;
       align-items:center;
       justify-content:center;
@@ -268,7 +258,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=12"></script>
+<script src="app.js?v=13"></script>
 
 </body>
 </html>
