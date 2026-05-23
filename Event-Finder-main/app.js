@@ -4,7 +4,9 @@ const RADIUS_METERS = 50000;
 const DEFAULT_MARKER_COLOR = "#007aff";
 const ACTIVE_MARKER_COLOR = "#ff3b30";
 
-const map = L.map("map").setView(CENTER, 9);
+const map = L.map("map", {
+  zoomControl: true
+});
 
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -15,7 +17,7 @@ L.tileLayer(
 
 const markersLayer = L.layerGroup().addTo(map);
 
-L.circle(CENTER, {
+const radiusCircle = L.circle(CENTER, {
   radius: RADIUS_METERS,
   color: DEFAULT_MARKER_COLOR,
   fill: false,
@@ -83,6 +85,8 @@ map.on(
   rebuildMarkersForCurrentZoom
 );
 
+fitMapToSearchRadius();
+
 init();
 
 async function init(){
@@ -90,6 +94,25 @@ async function init(){
   await loadSavedEvents();
 
   await loadPrompt();
+}
+
+function fitMapToSearchRadius(){
+
+  map.fitBounds(
+    radiusCircle.getBounds(),
+    {
+      padding: [8, 8],
+      maxZoom: 10,
+      animate: false
+    }
+  );
+
+  map.panTo(
+    CENTER,
+    {
+      animate: false
+    }
+  );
 }
 
 async function loadSavedEvents(){
@@ -142,7 +165,7 @@ function handleFileUpload(event){
 
   const reader = new FileReader();
 
-  reader.onload = async e => {
+  reader.onload = e => {
 
     try{
 
@@ -152,32 +175,16 @@ function handleFileUpload(event){
       const data =
         JSON.parse(selectedEventsFileText);
 
-      if(!Array.isArray(data)){
-
-        throw new Error(
-          "Die Datei enthält keine gültige Event-Liste."
-        );
-      }
-
-      allEvents = data;
+      allEvents =
+        Array.isArray(data)
+        ? data
+        : [];
 
       renderEvents(allEvents);
 
-      dataStatus.textContent =
-        allEvents.length +
-        " gespeicherte Events geladen.";
-
       setStatus(
         adminStatus,
-        "Events importiert. Speichere automatisch…",
-        ""
-      );
-
-      await saveEventsToGitHub(allEvents);
-
-      setStatus(
-        adminStatus,
-        "Events importiert und dauerhaft gespeichert.",
+        "Events importiert.",
         "ok"
       );
 
@@ -187,7 +194,7 @@ function handleFileUpload(event){
 
       setStatus(
         adminStatus,
-        "Events konnten nicht gespeichert werden: " + error.message,
+        "JSON-Datei konnte nicht gelesen werden.",
         "error"
       );
 
@@ -196,41 +203,6 @@ function handleFileUpload(event){
   };
 
   reader.readAsText(file);
-}
-
-async function saveEventsToGitHub(events){
-
-  const response = await fetch(
-    "/api/save-events",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(events)
-    }
-  );
-
-  let result = null;
-
-  try{
-
-    result = await response.json();
-
-  }catch(error){
-
-    result = null;
-  }
-
-  if(!response.ok){
-
-    throw new Error(
-      result?.error ||
-      "Server konnte events.json nicht speichern."
-    );
-  }
-
-  return result;
 }
 
 function handlePromptImport(event){
@@ -391,7 +363,7 @@ function renderEvents(events){
       </div>
     `;
 
-    map.setView(CENTER, 9);
+    fitMapToSearchRadius();
 
     return;
   }
@@ -408,18 +380,8 @@ function renderEvents(events){
       return da - db;
     });
 
-  const bounds = [];
-
   sortedEvents.forEach(
     (event, eventIndex) => {
-
-      if(hasCoords(event)){
-
-        bounds.push([
-          event.lat,
-          event.lng
-        ]);
-      }
 
       renderEventCard(
         event,
@@ -430,16 +392,7 @@ function renderEvents(events){
 
   setupVisibleCardTracking();
 
-  if(bounds.length > 0){
-
-    map.fitBounds(bounds, {
-      padding:[40,40]
-    });
-
-  }else{
-
-    map.setView(CENTER, 9);
-  }
+  fitMapToSearchRadius();
 
   rebuildMarkersForCurrentZoom();
 }
