@@ -139,7 +139,9 @@
 
     .event-card h3{
       margin:0 0 10px 0;
-      min-height:48px;
+      padding-bottom:9px;
+      border-bottom:1px solid rgba(255,255,255,.14);
+      min-height:57px;
 
       font-size:20px;
       line-height:24px;
@@ -156,22 +158,12 @@
     }
 
     .distance{
-      display:inline-flex;
-      align-items:center;
+      display:inline-block;
       margin:0;
 
       font-size:17px;
       font-weight:700;
       line-height:24px;
-    }
-
-    .distance::before{
-      content:"📍";
-      margin-right:8px;
-      font-size:20px;
-      line-height:1;
-      opacity:.75;
-      filter:grayscale(1);
     }
 
     .event-card p{
@@ -181,29 +173,27 @@
 
     .event-card p:nth-of-type(1){
       display:inline-block;
-      margin-left:12px;
+      margin-left:18px;
 
       font-size:17px;
       line-height:24px;
 
       white-space:nowrap;
       text-overflow:ellipsis;
-      max-width:60%;
+      max-width:68%;
       vertical-align:top;
     }
 
     .event-card p:nth-of-type(1)::before{
       content:"•";
-      margin-right:12px;
+      margin-right:18px;
       font-weight:700;
-      opacity:.8;
+      opacity:.75;
     }
 
     .event-card p:nth-of-type(2){
-      margin-top:10px;
-      padding-top:10px;
-      min-height:56px;
-      border-top:1px solid rgba(255,255,255,.14);
+      margin-top:9px;
+      min-height:44px;
 
       font-size:16px;
       line-height:22px;
@@ -219,14 +209,15 @@
     }
 
     .event-card > div[style]{
-      margin-top:12px !important;
+      margin-top:11px !important;
       display:flex !important;
       gap:10px !important;
+      flex-wrap:nowrap !important;
     }
 
     .event-card a{
       flex:1;
-      height:48px;
+      height:46px;
 
       display:flex;
       align-items:center;
@@ -277,7 +268,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=14"></script>
+<script src="app.js?v=16"></script>
 
 </body>
 </html>
