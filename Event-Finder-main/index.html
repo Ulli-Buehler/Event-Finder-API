@@ -25,7 +25,10 @@
       color:#fff;
     }
 
-    body{ display:flex; flex-direction:column; }
+    body{
+      display:flex;
+      flex-direction:column;
+    }
 
     .top{
       flex:0 0 auto;
@@ -38,8 +41,6 @@
       z-index:1000;
     }
 
-    .title-block{ min-width:0; }
-
     h1{
       margin:0 0 3px 0;
       font-size:21px;
@@ -47,16 +48,11 @@
     }
 
     .hint{
-      opacity:0.65;
-      margin:0;
-      line-height:1.25;
+      opacity:.65;
       font-size:12px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
     }
 
-    details{ position:relative; margin:0; }
+    details{ position:relative; }
 
     summary{
       width:32px;
@@ -69,12 +65,12 @@
       justify-content:center;
       cursor:pointer;
       list-style:none;
-      user-select:none;
       font-size:17px;
-      opacity:0.85;
     }
 
-    summary::-webkit-details-marker{ display:none; }
+    summary::-webkit-details-marker{
+      display:none;
+    }
 
     .admin-panel{
       position:absolute;
@@ -86,7 +82,7 @@
       border:1px solid #333;
       border-radius:14px;
       padding:12px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.55);
+      box-shadow:0 10px 30px rgba(0,0,0,.55);
       display:grid;
       gap:10px;
     }
@@ -106,21 +102,10 @@
       display:block;
     }
 
-    input[type="file"]{ display:none; }
-    textarea{ display:none; }
-
-    .status{
-      padding:10px;
-      border-radius:10px;
-      background:#222;
-      color:#ddd;
-      line-height:1.35;
-      font-size:13px;
-      overflow-wrap:break-word;
+    input[type="file"],
+    textarea{
+      display:none;
     }
-
-    .status.ok{ background:#133d1e; color:#7dff9a; }
-    .status.error{ background:#471717; color:#ff9a9a; }
 
     #map{
       flex:0 0 55vh;
@@ -132,11 +117,9 @@
       flex:1 1 auto;
       min-height:0;
       padding:0 12px 14px;
-      display:block;
       overflow-y:auto;
       overflow-x:hidden;
       scroll-snap-type:y mandatory;
-      scroll-padding-top:0;
       -webkit-overflow-scrolling:touch;
       background:#111;
       border-top:1px solid #222;
@@ -144,27 +127,33 @@
 
     .event-card{
       width:100%;
-      height:100%;
       min-height:100%;
       margin:0 0 12px;
       scroll-snap-align:start;
-      scroll-snap-stop:always;
       background:#1e1e1e;
       border:1px solid #333;
       border-radius:14px;
       padding:12px;
       overflow:hidden;
+
       display:grid;
-      grid-template-rows:44px 24px 44px 44px;
+      grid-template-rows:
+        46px
+        24px
+        48px
+        48px;
+
       gap:8px;
-      align-content:start;
     }
 
     .event-card h3{
       margin:0;
-      height:44px;
-      font-size:18px;
-      line-height:22px;
+      height:46px;
+
+      font-size:17px;
+      line-height:23px;
+      font-weight:700;
+
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
@@ -176,35 +165,41 @@
     }
 
     .distance{
-      grid-row:2;
-      font-weight:bold;
       margin:0;
-      font-size:15px;
-      line-height:24px;
       height:24px;
-      overflow:hidden;
+      line-height:24px;
+
+      font-size:15px;
+      font-weight:700;
+
       white-space:nowrap;
+      overflow:hidden;
     }
 
     .event-card p{
       margin:0;
-      line-height:22px;
-      font-size:16px;
       overflow:hidden;
     }
 
     .event-card p:nth-of-type(1){
-      grid-row:2;
+      margin-top:-24px;
+      margin-left:62px;
+
       height:24px;
-      padding-left:58px;
       line-height:24px;
+
+      font-size:15px;
+
       white-space:nowrap;
       text-overflow:ellipsis;
     }
 
     .event-card p:nth-of-type(2){
-      grid-row:3;
-      height:44px;
+      height:48px;
+
+      font-size:16px;
+      line-height:24px;
+
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
@@ -216,69 +211,64 @@
     }
 
     .event-card > div[style]{
-      grid-row:4;
-      height:44px;
-      margin-top:0 !important;
+      height:48px;
       display:flex !important;
-      gap:8px !important;
-      flex-wrap:nowrap !important;
-      align-items:stretch;
+      gap:10px !important;
+      margin:0 !important;
     }
 
     .event-card a{
-      flex:1 1 0;
-      min-width:0;
+      flex:1;
       display:flex;
       align-items:center;
       justify-content:center;
-      margin-top:0;
-      color:#fff;
+
+      border-radius:12px;
       background:#007aff;
-      padding:0 12px;
-      border-radius:10px;
+      color:#fff;
+
       text-decoration:none;
       font-size:14px;
       font-weight:700;
-      white-space:nowrap;
     }
   </style>
 </head>
 
 <body>
-  <div class="top">
-    <div class="title-block">
-      <h1>KI Eventfinder</h1>
-      <div class="hint" id="dataStatus">Lade gespeicherte Events…</div>
-    </div>
 
-    <details>
-      <summary title="Einstellungen">⚙️</summary>
-
-      <div class="admin-panel">
-        <label class="file-button" for="eventsFileInput">Events importieren</label>
-        <input id="eventsFileInput" type="file" accept=".json,application/json" />
-
-        <label class="file-button" for="promptFileInput">Suchtext importieren</label>
-        <input id="promptFileInput" type="file" accept=".txt,text/plain" />
-
-        <button id="exportPromptBtn" type="button">Suchtext exportieren</button>
-
-        <textarea id="promptText"></textarea>
-
-        <div id="adminStatus" class="status">Bereit.</div>
-      </div>
-    </details>
+<div class="top">
+  <div>
+    <h1>KI Eventfinder</h1>
+    <div class="hint" id="dataStatus">Lade gespeicherte Events.</div>
   </div>
 
-  <div id="map"></div>
+  <details>
+    <summary>⚙️</summary>
 
-  <div id="events">
-    <div class="event-card">
-      <h3>Events werden geladen…</h3>
+    <div class="admin-panel">
+      <label class="file-button" for="eventsFileInput">Events importieren</label>
+      <input id="eventsFileInput" type="file" accept=".json,application/json" />
+
+      <label class="file-button" for="promptFileInput">Suchtext importieren</label>
+      <input id="promptFileInput" type="file" accept=".txt,text/plain" />
+
+      <button id="exportPromptBtn" type="button">Suchtext exportieren</button>
+
+      <textarea id="promptText"></textarea>
     </div>
-  </div>
+  </details>
+</div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js?v=11"></script>
+<div id="map"></div>
+
+<div id="events">
+  <div class="event-card">
+    <h3>Events werden geladen…</h3>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js?v=12"></script>
+
 </body>
 </html>
