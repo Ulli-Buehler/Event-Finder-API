@@ -212,7 +212,7 @@
     .event-card p:nth-of-type(2){
       margin-top:8px;
       padding-top:8px;
-      min-height:52px;
+      min-height:48px;
       border-top:1px solid rgba(255,255,255,.14);
 
       font-size:16px;
@@ -229,7 +229,7 @@
     }
 
     .event-card > div[style]{
-      margin-top:8px !important;
+      margin-top:6px !important;
       display:flex !important;
       gap:10px !important;
       flex-wrap:nowrap !important;
@@ -237,11 +237,12 @@
 
     .event-card a{
       flex:1;
-      height:42px;
+      height:44px;
 
       display:flex;
       align-items:center;
       justify-content:center;
+      gap:8px;
 
       border-radius:12px;
       background:#007aff;
@@ -250,6 +251,62 @@
       text-decoration:none;
       font-size:14px;
       font-weight:700;
+    }
+
+    .event-card a::before{
+      content:"";
+      width:20px;
+      height:20px;
+      background:currentColor;
+      opacity:.95;
+      flex:0 0 auto;
+    }
+
+    .event-card a:first-child::before{
+      -webkit-mask:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9A.5.5 0 0 0 3 5.38V21l6-2.33L15 21l5.64-1.9a.5.5 0 0 0 .36-.48V3.5a.5.5 0 0 0-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zM5 6.46l3-1.01v11.68l-3 1.17V6.46zm14 11.08l-3 1.01V6.87l3-1.17v11.84z'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+      mask:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9A.5.5 0 0 0 3 5.38V21l6-2.33L15 21l5.64-1.9a.5.5 0 0 0 .36-.48V3.5a.5.5 0 0 0-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zM5 6.46l3-1.01v11.68l-3 1.17V6.46zm14 11.08l-3 1.01V6.87l3-1.17v11.84z'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+    }
+
+    .event-card a:nth-child(2)::before{
+      -webkit-mask:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+      mask:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+    }
+
+    @media (max-width:380px){
+      #map{
+        flex-basis:53vh;
+      }
+
+      .event-card h3{
+        font-size:18px;
+        line-height:22px;
+        min-height:53px;
+      }
+
+      .distance,
+      .event-card p:nth-of-type(1){
+        font-size:14px;
+        line-height:20px;
+      }
+
+      .event-card p:nth-of-type(2){
+        font-size:15px;
+        line-height:20px;
+        min-height:44px;
+      }
+
+      .event-card a{
+        height:42px;
+        font-size:13px;
+      }
     }
   </style>
 </head>
@@ -288,7 +345,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=18"></script>
+<script src="app.js?v=19"></script>
 
 </body>
 </html>
