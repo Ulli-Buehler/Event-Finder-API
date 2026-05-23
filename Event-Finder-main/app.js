@@ -4,15 +4,14 @@ const RADIUS_METERS = 50000;
 const DEFAULT_MARKER_COLOR = "#007aff";
 const ACTIVE_MARKER_COLOR = "#ff3b30";
 
-const map = L.map("map").setView(CENTER, 9);
+const map = L.map("map", {
+  zoomControl: true,
+  preferCanvas: true
+});
 
-setTimeout(() => {
-  map.panTo(CENTER, {
-    animate: false
-  });
-
-  map.invalidateSize();
-}, 300);
+map.setView(CENTER, 9, {
+  animate: false
+});
 
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
