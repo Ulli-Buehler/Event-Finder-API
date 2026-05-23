@@ -4,9 +4,7 @@ const RADIUS_METERS = 50000;
 const DEFAULT_MARKER_COLOR = "#007aff";
 const ACTIVE_MARKER_COLOR = "#ff3b30";
 
-const map = L.map("map", {
-  zoomControl: true
-});
+const map = L.map("map").setView(CENTER, 9);
 
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -17,7 +15,7 @@ L.tileLayer(
 
 const markersLayer = L.layerGroup().addTo(map);
 
-const radiusCircle = L.circle(CENTER, {
+L.circle(CENTER, {
   radius: RADIUS_METERS,
   color: DEFAULT_MARKER_COLOR,
   fill: false,
@@ -85,8 +83,6 @@ map.on(
   rebuildMarkersForCurrentZoom
 );
 
-fitMapToSearchRadius();
-
 init();
 
 async function init(){
@@ -94,25 +90,6 @@ async function init(){
   await loadSavedEvents();
 
   await loadPrompt();
-}
-
-function fitMapToSearchRadius(){
-
-  map.fitBounds(
-    radiusCircle.getBounds(),
-    {
-      padding: [8, 8],
-      maxZoom: 10,
-      animate: false
-    }
-  );
-
-  map.panTo(
-    CENTER,
-    {
-      animate: false
-    }
-  );
 }
 
 async function loadSavedEvents(){
@@ -363,7 +340,7 @@ function renderEvents(events){
       </div>
     `;
 
-    fitMapToSearchRadius();
+    map.setView(CENTER, 9);
 
     return;
   }
@@ -380,8 +357,18 @@ function renderEvents(events){
       return da - db;
     });
 
+  const bounds = [];
+
   sortedEvents.forEach(
     (event, eventIndex) => {
+
+      if(hasCoords(event)){
+
+        bounds.push([
+          event.lat,
+          event.lng
+        ]);
+      }
 
       renderEventCard(
         event,
@@ -392,7 +379,16 @@ function renderEvents(events){
 
   setupVisibleCardTracking();
 
-  fitMapToSearchRadius();
+  if(bounds.length > 0){
+
+    map.fitBounds(bounds, {
+      padding:[40,40]
+    });
+
+  }else{
+
+    map.setView(CENTER, 9);
+  }
 
   rebuildMarkersForCurrentZoom();
 }
