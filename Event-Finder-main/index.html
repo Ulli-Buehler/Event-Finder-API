@@ -156,12 +156,22 @@
     }
 
     .distance{
-      display:inline-block;
+      display:inline-flex;
+      align-items:center;
       margin:0;
 
-      font-size:15px;
+      font-size:17px;
       font-weight:700;
-      line-height:22px;
+      line-height:24px;
+    }
+
+    .distance::before{
+      content:"📍";
+      margin-right:8px;
+      font-size:20px;
+      line-height:1;
+      opacity:.75;
+      filter:grayscale(1);
     }
 
     .event-card p{
@@ -171,20 +181,29 @@
 
     .event-card p:nth-of-type(1){
       display:inline-block;
-      margin-left:18px;
+      margin-left:12px;
 
-      font-size:15px;
-      line-height:22px;
+      font-size:17px;
+      line-height:24px;
 
       white-space:nowrap;
       text-overflow:ellipsis;
-      max-width:70%;
+      max-width:60%;
       vertical-align:top;
     }
 
+    .event-card p:nth-of-type(1)::before{
+      content:"•";
+      margin-right:12px;
+      font-weight:700;
+      opacity:.8;
+    }
+
     .event-card p:nth-of-type(2){
-      margin-top:8px;
-      min-height:44px;
+      margin-top:10px;
+      padding-top:10px;
+      min-height:56px;
+      border-top:1px solid rgba(255,255,255,.14);
 
       font-size:16px;
       line-height:22px;
@@ -258,7 +277,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=13"></script>
+<script src="app.js?v=14"></script>
 
 </body>
 </html>
