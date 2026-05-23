@@ -138,7 +138,10 @@
     }
 
     .event-card h3{
-      margin:0 0 10px 0;
+      margin:0 0 12px 0;
+      padding-bottom:12px;
+      border-bottom:1px solid rgba(255,255,255,.14);
+
       min-height:48px;
 
       font-size:20px;
@@ -156,8 +159,7 @@
     }
 
     .distance{
-      display:inline-flex;
-      align-items:center;
+      display:inline-block;
       margin:0;
 
       font-size:17px;
@@ -166,12 +168,9 @@
     }
 
     .distance::before{
-      content:"📍";
-      margin-right:8px;
-      font-size:20px;
-      line-height:1;
-      opacity:.75;
-      filter:grayscale(1);
+      content:"•";
+      margin-right:12px;
+      opacity:.7;
     }
 
     .event-card p{
@@ -188,22 +187,13 @@
 
       white-space:nowrap;
       text-overflow:ellipsis;
-      max-width:60%;
+      max-width:65%;
       vertical-align:top;
     }
 
-    .event-card p:nth-of-type(1)::before{
-      content:"•";
-      margin-right:12px;
-      font-weight:700;
-      opacity:.8;
-    }
-
     .event-card p:nth-of-type(2){
-      margin-top:10px;
-      padding-top:10px;
+      margin-top:12px;
       min-height:56px;
-      border-top:1px solid rgba(255,255,255,.14);
 
       font-size:16px;
       line-height:22px;
@@ -219,7 +209,7 @@
     }
 
     .event-card > div[style]{
-      margin-top:12px !important;
+      margin-top:14px !important;
       display:flex !important;
       gap:10px !important;
     }
@@ -277,7 +267,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=14"></script>
+<script src="app.js?v=15"></script>
 
 </body>
 </html>
