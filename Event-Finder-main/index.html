@@ -154,11 +154,15 @@
       border-radius:14px;
       padding:12px;
       overflow:hidden;
-      display:block;
+      display:grid;
+      grid-template-rows:48px 0 22px 22px 44px 44px;
+      gap:6px;
+      align-content:start;
     }
 
     .event-card h3{
-      margin:0 0 6px 0;
+      margin:0;
+      height:48px;
       font-size:18px;
       line-height:1.22;
       display:-webkit-box;
@@ -168,26 +172,34 @@
     }
 
     .meta{
-      opacity:0.72;
-      margin-bottom:5px;
-      font-size:14px;
-      line-height:1.25;
+      display:none;
     }
 
     .distance{
       font-weight:bold;
-      margin-bottom:5px;
+      margin:0;
       font-size:15px;
-      line-height:1.25;
+      line-height:22px;
+      height:22px;
+      overflow:hidden;
     }
 
     .event-card p{
-      margin:5px 0;
-      line-height:1.3;
-      font-size:14px;
+      margin:0;
+      line-height:1.35;
+      font-size:16px;
+      overflow:hidden;
+    }
+
+    .event-card p:nth-of-type(1){
+      height:22px;
+      line-height:22px;
+      white-space:nowrap;
+      text-overflow:ellipsis;
     }
 
     .event-card p:nth-of-type(2){
+      height:44px;
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
@@ -198,16 +210,30 @@
       display:none;
     }
 
+    .event-card > div[style]{
+      height:44px;
+      margin-top:0 !important;
+      display:flex !important;
+      gap:8px !important;
+      flex-wrap:nowrap !important;
+      align-items:stretch;
+    }
+
     .event-card a{
-      display:inline-block;
-      margin-top:8px;
+      flex:1 1 0;
+      min-width:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:0;
       color:#fff;
       background:#007aff;
-      padding:9px 12px;
+      padding:0 12px;
       border-radius:10px;
       text-decoration:none;
       font-size:14px;
       font-weight:700;
+      white-space:nowrap;
     }
   </style>
 </head>
@@ -247,6 +273,6 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>
