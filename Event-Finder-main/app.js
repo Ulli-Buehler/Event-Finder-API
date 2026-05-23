@@ -6,6 +6,14 @@ const ACTIVE_MARKER_COLOR = "#ff3b30";
 
 const map = L.map("map").setView(CENTER, 9);
 
+setTimeout(() => {
+  map.panTo(CENTER, {
+    animate: false
+  });
+
+  map.invalidateSize();
+}, 300);
+
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   {
